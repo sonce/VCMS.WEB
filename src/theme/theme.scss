@@ -1,0 +1,42 @@
+/*
+ * Global application theme.
+ * Framework overrides and customization goes here.
+ */
+@import "config/imports";
+
+@import "./base/topbar";
+@import "./base/scroll";
+
+@include media-breakpoint-up(lg) {
+  .separator {
+    background-color: $separator-color;
+    background-image: -webkit-linear-gradient($separator-color 60%, #ededed);
+    background-image: linear-gradient($separator-color 60%, #ededed);
+    display: inline-block;
+    height: 100%;
+    min-height: 25px;
+    width: 1px;
+    vertical-align: middle;
+  }
+}
+
+.dropdown-item {
+  &.disabled,
+  &:disabled {
+    color: $dropdown-link-disabled-color !important;
+    pointer-events: none;
+    background-color: transparent;
+    // Remove CSS gradients if they're enabled
+    @if $enable-gradients {
+      background-image: none;
+    }
+  }
+}
+
+.popover-body {
+  padding:0;
+}
+
+.ng-touched.ng-invalid {
+  @extend .is-invalid;
+}

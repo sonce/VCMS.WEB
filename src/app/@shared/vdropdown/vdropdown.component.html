@@ -1,0 +1,21 @@
+<div ngbDropdown #vDrop="ngbDropdown" [autoClose]="autoClose">
+  <button class="btn" ngbDropdownToggle>
+    <span class="text-muted font-weight-bold d-inline float-left">Pages:</span>
+    <span class="v-dropdown-selectedtitle d-inline-block text-truncate"
+      [innerText]="!selectedText?('No Selected Item'|translate):selectedText"></span>
+    <i class="iconfont float-right" [class]="vDrop.isOpen() ? 'icon-chevron-up' : 'icon-chevron-down'"></i>
+  </button>
+  <div ngbDropdownMenu>
+    <ng-container *ngIf="!dropdownFullTemplate">
+      <ng-content *ngIf="!dropdownContentTemplate"></ng-content>
+      <ng-container [ngTemplateOutlet]="dropdownContentTemplate">
+      </ng-container>
+      <ng-content select="dropdownfooter" class="footer input-group justify-content-center">
+      </ng-content>
+    </ng-container>
+
+    <ng-container [ngTemplateOutlet]="dropdownFullTemplate">
+    </ng-container>
+  </div>
+
+</div>

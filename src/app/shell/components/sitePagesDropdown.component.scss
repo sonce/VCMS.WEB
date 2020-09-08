@@ -1,0 +1,90 @@
+@import "~@fortawesome/fontawesome-free/scss/_variables";
+@import "~@fortawesome/fontawesome-free/scss/_mixins";
+:host ::ng-deep .angular-tree-component {
+  padding: 0 8px 8px 8px;
+}
+:host ::ng-deep tree-node-expander {
+  margin-left: -7px;
+  z-index: 1;
+  .toggle-children-wrapper {
+    .toggle-children {
+      font-family: "Font Awesome 5 Free";
+      background-image: none;
+      transform: none;
+      @include fa-icon();
+      font-weight: 900;
+    }
+    &.toggle-children-wrapper-expanded {
+      .toggle-children {
+        &:before {
+          content: fa-content($fa-var-minus-circle);
+        }
+      }
+    }
+    &.toggle-children-wrapper-collapsed {
+      .toggle-children:before {
+        content: fa-content($fa-var-plus-circle);
+      }
+    }
+  }
+}
+:host ::ng-deep .tree-node {
+  &:not(.tree-node-leaf):not(.tree-node-expanded) {
+    margin-bottom: 6px;
+    .node-content-wrapper {
+      box-shadow: 0 0 0 1px #b1ddf8, 0 3px 0 #fff, 0 4px 0 #b1ddf8, 0 6px 0 #fff, 0 7px 0 #b1ddf8;
+
+      &:hover,
+      &.node-content-wrapper-active,
+      &.node-content-wrapper-focused {
+        box-shadow: 0 0 0 1px #b1ddf8, 0 3px 0 #d3edff, 0 4px 0 #b1ddf8, 0 6px 0 #d3edff, 0 7px 0 #b1ddf8;
+      }
+    }
+  }
+}
+::ng-deep .sitePageDropdownPopoverMenu{
+  min-width: 180px;
+}
+.node-content-wrapper {
+  margin: 4px 0 0;
+  position: relative;
+  cursor: pointer;
+
+  background-color: #fff;
+  border: 1px solid #b1ddf8;
+  position: relative;
+  border-radius: 7px;
+  box-sizing: border-box;
+  color: #2b5672;
+  height: 39px;
+  width: 100%;
+
+  .symbol-dragPage {
+    cursor: move;
+  }
+
+  .symbol-dragPage,
+  .context-menu-button {
+    visibility: hidden;
+  }
+
+  // .node-content-wrapper-active,
+  // .node-content-wrapper-focused,
+  // .node-content-wrapper:hover {
+  //   box-shadow: none;
+  // }
+
+  &:hover,
+  &.node-content-wrapper-active,
+  &.node-content-wrapper.node-content-wrapper-active:hover,
+  &.node-content-wrapper-active.node-content-wrapper-focused {
+    // background: none;
+    // background-color: #d3edff;
+    border-color: #b1ddf8;
+
+    .symbol-dragPage,
+    .context-menu-button {
+      visibility: visible;
+    }
+  }
+}

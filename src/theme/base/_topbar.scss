@@ -1,0 +1,29 @@
+@import "~bootstrap/scss/_mixins";
+#navbar-menu {
+  height: 100%;
+  .navbar-nav {
+    height: 100%;
+
+    .topbarbtn {
+      border-radius: 0;
+      background-color: transparent !important;
+      -webkit-box-shadow: none !important;
+      -moz-box-shadow: none !important;
+      box-shadow: none !important;
+      // padding-top: $nav-link-padding-y;
+      @include hover-focus() {
+        // border: none;
+        color: $navbar-light-hover-color;
+        svg {
+          fill: $navbar-light-hover-color;
+        }
+      }
+      &.active {
+        border-bottom: 3px solid $navbar-light-hover-color;
+        svg {
+          fill: $navbar-light-hover-color !important;
+        }
+      }
+    }
+  }
+}

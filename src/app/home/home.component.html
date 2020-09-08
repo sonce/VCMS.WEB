@@ -1,0 +1,127 @@
+<div class="container-fluid">
+
+  <div class="jumbotron text-center">
+    <h1>
+      <img class="logo" src="assets/v-logo.png" alt="angular logo" />
+      <span translate>Hello world !</span>
+    </h1>
+    <v-dropdown>
+      <button ngbDropdownItem>Action - 1</button>
+      <button ngbDropdownItem>Another Action</button>
+      <button ngbDropdownItem>Something else is here</button>
+    </v-dropdown>
+
+    <ng-template #popTitle let-haha="haha">Fancy <b>content!!</b>{{haha}}</ng-template>
+
+    <ng-template #popContent let-haha="haha">
+      <nav class="nav flex-column" style="width:150px;">
+        <li class="nav-item">
+          <a class="nav-link active" href="#" (click)="test(haha)">{{haha}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+        <li class="nav-item hasSubItem">
+          <a class="nav-link" href="#"> More items </a>
+          <ul class="nav">
+            <li class="nav-item"><a class="nav-link" href="#"> Submenu item 1</a></li>
+            <li class="nav-item hasSubItem"><a class="nav-link" href="#"> Submenu item 2 </a>
+              <ul class="nav">
+                <li class="nav-item"><a class="nav-link" href="#"> Submenu item 1</a></li>
+                <li class="nav-item"><a class="nav-link" href="#"> Submenu item 2 </a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </nav>
+    </ng-template>
+    <!--
+    <button type="button" class="btn btn-outline-secondary" triggers="manual" #p1="ngbPopover"
+      (click)="p1.open({haha:'Button 1'})" [popoverTitle]="popTitle" [ngbPopover]="popContent">
+      Button 1
+    </button>
+
+    <button type="button" class="btn btn-outline-secondary" triggers="manual" #p2="ngbPopover"
+      (click)="p2.open({haha:'Button 2'})" [popoverTitle]="popTitle" [ngbPopover]="popContent">
+      Button 2
+    </button>
+
+    <nav class="nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">a</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+      <li class="nav-item hasSubItem">
+        <a class="nav-link" href="#"> More items </a>
+        <ul class="nav">
+          <li class="nav-item"><a class="nav-link" href="#"> Submenu item 1</a></li>
+          <li class="nav-item hasSubItem"><a class="nav-link" href="#"> Submenu item 2 </a>
+            <ul class="nav">
+              <li class="nav-item"><a class="nav-link" href="#"> Submenu item 1</a></li>
+              <li class="nav-item"><a class="nav-link" href="#"> Submenu item 2 </a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </nav> -->
+    <app-multilevelnav [isVertical]="false" [item]="data">
+      <ng-template multiLevelNavItem [subMenu]="cchild" [enabled]="false">ccc</ng-template>
+      <app-multilevelnavchild #cchild>
+        <ng-template multiLevelNavItem>c1</ng-template>
+        <ng-template multiLevelNavItem [divider]="true">c2</ng-template>
+        <ng-template multiLevelNavItem>c3</ng-template>
+      </app-multilevelnavchild>
+      <ng-template multiLevelNavItem [subMenu]="dchild">ddd</ng-template>
+      <app-multilevelnavchild #dchild>
+        <ng-template multiLevelNavItem (execute)="testExcute($event)">D1</ng-template>
+        <ng-template multiLevelNavItem [subMenu]="dtchild">D2</ng-template>
+        <app-multilevelnavchild #dtchild>
+          <ng-template multiLevelNavItem>D2-1</ng-template>
+          <ng-template multiLevelNavItem>D2-2</ng-template>
+        </app-multilevelnavchild>
+      </app-multilevelnavchild>
+    </app-multilevelnav>
+
+    <v-radiogroup [name]="'aaa'" [value]="'a2'" [skin]="'bottomline'">
+      <v-radiogroup-item [value]="'a1'">
+        <i>
+          <svg width="24" height="18" viewBox="0 0 24 18">
+            <defs>
+              <path id="top-bar-desktop-icon-a"
+                d="M18 2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h12zm0 1H6c-.551 0-1 .449-1 1v8c0 .551.449 1 1 1h12c.551 0 1-.449 1-1V4c0-.551-.449-1-1-1zm-4.207 13l1.208 1.037H9L10.257 16h3.537zM5 11v-1h14v1H5z">
+              </path>
+            </defs>
+            <use fill-rule="evenodd" xlink:href="#top-bar-desktop-icon-a"></use>
+          </svg>
+        </i>
+      </v-radiogroup-item>
+      <v-radiogroup-item [value]="'a2'">
+        <i>
+          <svg width="24" height="18" viewBox="0 0 24 18" class="symbol symbol-topBarNewMobile btn-symbol">
+            <defs>
+              <path id="top-bar-mobile-icon-a"
+                d="M15 0c1.1 0 2 .9 2 2v13c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2V2c0-1.1.9-2 2-2h6zm1 15V2c0-.55-.45-1-1-1H9c-.55 0-1 .45-1 1v13c0 .55.45 1 1 1h6c.55 0 1-.45 1-1zm-8-1v-1h8v1H8z">
+              </path>
+            </defs>
+            <use fill-rule="evenodd" xlink:href="#top-bar-mobile-icon-a"></use>
+          </svg>
+        </i>
+      </v-radiogroup-item>
+    </v-radiogroup>
+    <q>{{ quote }}</q>
+  </div>
+</div>

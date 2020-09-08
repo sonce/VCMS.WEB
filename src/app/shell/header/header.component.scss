@@ -1,0 +1,44 @@
+@import "./src/theme/theme-variables.scss";
+@import "~bootstrap/scss/mixins/_hover";
+
+.navbar {
+  margin-bottom: $spacer;
+  box-shadow: 0 0 15px 0 rgba(22, 45, 61, 0.5);
+  height: 55px;
+
+  app-multilevelnav {
+    ::ng-deep .nav-link {
+      cursor: pointer;
+    }
+    ::ng-deep .nav-link.active,
+    ::ng-deep .show > .nav-link {
+      color: blue;
+      background: unset;
+    }
+  }
+}
+
+v-radiogroup {
+  >::ng-deep .btn-group {
+    height: 100%;
+  }
+}
+
+sitepages-dropdown {
+  width: 300px;
+  ::ng-deep .dropdown {
+    border: none;
+  }
+
+  ::ng-deep .v-dropdown-selectedtitle {
+    max-width: 60%;
+  }
+
+  ::ng-deep .dropdown-menu {
+    border-color: $separator-color !important;
+  }
+
+  ::ng-deep tree-viewport {
+    max-height: 400px;
+  }
+}
