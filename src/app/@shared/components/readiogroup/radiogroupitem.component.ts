@@ -23,9 +23,9 @@ import { RadioGroupOption } from './radiogroupitemoptions';
 export class RadiogroupItemComponent {
   @ViewChild('childComponentTemplate') childComponentTemplate: TemplateRef<any>;
   // name: string;
-  @Input() value: string;
+  @Input() value: any;
 
-  @Output() public onToggleCheck: EventEmitter<{ source: RadiogroupItemComponent, value: string }> = new EventEmitter();
+  @Output() public onToggleCheck: EventEmitter<{ source: RadiogroupItemComponent, value: any }> = new EventEmitter();
 
   constructor() {
   }

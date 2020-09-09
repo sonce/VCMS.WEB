@@ -12,6 +12,7 @@ import { SitePage } from '@app/@core/models';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+
   menuHidden = true;
   constructor(
     private router: Router,
@@ -36,7 +37,12 @@ export class HeaderComponent implements OnInit {
     return credentials ? credentials.username : null;
   }
 
-  SelectPageChanged(sitePage:SitePage){
-    this.router.navigate(['/design/'+sitePage.id])
+  SelectPageChanged(sitePage: SitePage) {
+    this.router.navigate(['/design/' + sitePage.id])
+  }
+
+  changeViewMode(val: any) {
+    debugger
+    this.designerService.IsMobile = val;
   }
 }

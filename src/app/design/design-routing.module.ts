@@ -10,7 +10,7 @@ const routes: Routes = [
   Shell.childRoutes([
     {
       path: 'design/:slug', component: DesignComponent, resolve: {
-        article: DesignResolver
+        page: DesignResolver
       }
     }
   ]),

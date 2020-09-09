@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ContentChildren, QueryList, ContentChild, TemplateRef, ElementRef, Renderer2, ViewChildren, AfterViewInit, ChangeDetectionStrategy, AfterContentInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ContentChildren, QueryList, ContentChild, TemplateRef, ElementRef, Renderer2, ViewChildren, AfterViewInit, ChangeDetectionStrategy, AfterContentInit, OnDestroy, ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
 import { NgbDropdown, NgbDropdownItem, NgbDropdownMenu } from '@ng-bootstrap/ng-bootstrap';
 import { Button } from 'protractor';
 import { fromEvent, Observable, BehaviorSubject, Subject } from 'rxjs';
@@ -20,18 +20,20 @@ type RadiogroupSkin = "bg" | "bg-radius"|"bottomline";
   styleUrls: ['./radiogroup.component.scss'],
 })
 export class RadiogroupComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+  @Output() public onToggleCheck: EventEmitter<any> = new EventEmitter();
+
   @ContentChildren(RadiogroupItemComponent) radios: QueryList<RadiogroupItemComponent> = null
 
   @Input() name: string;
-  @Input() value: string;
+  @Input() value: any;
 
   @Input() set skin(val: RadiogroupSkin) {
-    this.spinnerObservable.next(val);
+    this.skinObservable.next(val);
   }
   get skin(): RadiogroupSkin {
-    return this.spinnerObservable.value;
+    return this.skinObservable.value;
   }
-  private spinnerObservable = new BehaviorSubject<RadiogroupSkin>('bg');
+  private skinObservable = new BehaviorSubject<RadiogroupSkin>('bg');
   classes: string[];
   /**
  * Unsubscribe from spinner's observable
@@ -48,7 +50,6 @@ export class RadiogroupComponent implements OnInit, AfterContentInit, AfterViewI
   ngOnInit() {
     this.getClasses().pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((x: string[]) => {
-        debugger
         this.classes = x;
         this.changeDetector.markForCheck();
       })
@@ -63,11 +64,13 @@ export class RadiogroupComponent implements OnInit, AfterContentInit, AfterViewI
   }
 
   private getClasses(): Observable<string[]> {
-    return this.spinnerObservable.asObservable().pipe(map(x => x.split('-')));
+    return this.skinObservable.asObservable().pipe(map(x => x.split('-')));
   }
 
-  toggleCheck(data: { groupItem: RadiogroupItemComponent, value: string }) {
+  toggleCheck(data: { groupItem: RadiogroupItemComponent, value: any }) {
+    debugger
     this.value = data.value;
+    this.onToggleCheck.emit(this.value);
   }
 
   ngOnDestroy() {

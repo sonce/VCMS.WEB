@@ -23,8 +23,8 @@ export class DesignResolver implements Resolve<SitePage> {
       .pipe(tap(x => {
         if (_.isNil(x))
           throw new Error('No the page!');
-        else
-          this.titleService.setTitle(x.name);
+        else{
+          this.titleService.setTitle(x.name);}
       }))
       .pipe(catchError((err: Error) => this.router.navigateByUrl('/home')));
   }

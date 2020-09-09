@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white" [class.mb-0]="designerService.HeaderNoMarginBottom">
     <a class="navbar-brand" href="#" translate>
       <img src="/assets/v-logo.svg" width="30" height="30" alt="" />
       APP_NAME
@@ -11,10 +11,11 @@
     <span class="separator"></span>
     <div id="navbar-menu" class="collapse navbar-collapse float-xs-none" [ngbCollapse]="menuHidden">
       <div class="navbar-nav">
-        <sitepages-dropdown class="align-self-center" [SelectedPageId]="designerService.CurrentPageId" [Editable]="true" (OnSelectChange)="SelectPageChanged($event)">
+        <sitepages-dropdown class="align-self-center" [SelectedPageId]="designerService.CurrentPageId" [Editable]="true"
+          (OnSelectChange)="SelectPageChanged($event)">
         </sitepages-dropdown>
         <span class="separator"></span>
-        <v-radiogroup [name]="'designmode'" [value]="designerService.IsMobile" [skin]="'bottomline'">
+        <v-radiogroup [name]="'designmode'" [value]="designerService.IsMobile" (onToggleCheck)="changeViewMode($event)" [skin]="'bottomline'">
           <v-radiogroup-item [value]="false">
             <i>
               <svg width="24" height="18" viewBox="0 0 24 18">

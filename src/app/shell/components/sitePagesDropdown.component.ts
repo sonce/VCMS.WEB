@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, TemplateRef, OnInit, ViewChild, ContentChild, HostListener, ElementRef, AfterViewInit, Renderer2, EventEmitter, Output } from '@angular/core';
+import { Component, Input, ViewEncapsulation, TemplateRef, OnInit, ViewChild, ContentChild, HostListener, ElementRef, AfterViewInit, Renderer2, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { SitePageService } from '@app/@core/services';
 import { SitePage, SitePageType } from '@app/@core/models';
 import { TreeNode, TreeModel, TreeComponent, TreeViewportComponent, TREE_ACTIONS, ITreeOptions } from '@circlon/angular-tree-component';
@@ -11,6 +11,7 @@ import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'sitepages-dropdown',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./sitePagesDropdown.component.scss'],
   template: `
   <v-dropdown [selectedText]="!currentPage?undefined:currentPage.name" [autoClose]="false">
@@ -157,9 +158,6 @@ export class SitePagesDropdownComponent implements OnInit {
    */
   @Output() OnSelectChange = new EventEmitter<SitePage>();
 
-
-
-
   //所有的页面
   nodes: SitePage[];
   SitePageType = SitePageType;
@@ -253,11 +251,12 @@ export class SitePagesDropdownComponent implements OnInit {
   }
   ngOnInit() {
     this.spinner.show(this.dropdownpagesLoader);
-    this.sitepageService.getPagesTree(1).subscribe(data => {
+    this.sitepageService.getPagesTree().subscribe(data => {
       this.nodes = data;
-      // this.currentPage = this.sitepageService.AllPages.find(x => x.id == this.SelectedPageId);
       this.spinner.hide(this.dropdownpagesLoader);
     })
+    if (!_.isNil(this.SelectedPageId))
+      this.sitepageService.AllPages.subscribe(x => this.currentPage = x.find(p => p.id == this.SelectedPageId));
   }
 
   onPageActive(event: { eventName: string, node: TreeNode, treeModel: TreeModel }) {

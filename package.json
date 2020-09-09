@@ -38,6 +38,7 @@
     "lodash-es": "^4.17.15",
     "ngx-bootstrap-spinner": "^10.0.5",
     "ngx-sortablejs": "^3.1.4",
+    "postmate": "^1.5.2",
     "rxjs": "^6.6.2",
     "sortablejs": "^1.10.2",
     "tslib": "^2.0.0",

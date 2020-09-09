@@ -1,0 +1,12 @@
+<div *ngIf="url" class="preview-frame-cover" [class.mobile-editor]="IsMobile" style="min-width:980px;">
+  <div class="frame d-flex flex-column">
+    <div class="frame-top"></div>
+    <div class="frame-content flex-grow">
+      <iframe frameborder="0" allowfullscreen [src]="url|safe:'resourceUrl'"></iframe>
+    </div>
+    <div class="frame-bottom"></div>
+  </div>
+  <!-- <div class="preview-container"> -->
+    <!-- <iframe frameborder="0" allowfullscreen [src]="url|safe:'resourceUrl'"></iframe> -->
+  <!-- </div> -->
+</div>

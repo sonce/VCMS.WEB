@@ -9,6 +9,7 @@ import { NgxSpinnerModule } from 'ngx-bootstrap-spinner'
 import { DesignComponent } from './design.component';
 import { DesignRoutingModule } from './design-routing.module';
 import { DesignResolver } from './design-resolver.service';
+
 @NgModule({
   imports: [CommonModule, TranslateModule, CoreModule, NgbModule, SharedModule, DesignRoutingModule, NgxSpinnerModule],
   declarations: [DesignComponent],

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, Renderer2 } from '@angular/core';
 
 import { DesignerService } from '@app/@core/services';
 import _ from 'lodash-es';
@@ -8,18 +8,29 @@ import { SitePage } from '@app/@core/models';
 
 @Component({
   selector: 'app-home',
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './design.component.html',
   styleUrls: ['./design.component.scss'],
 })
-export class DesignComponent implements OnInit {
+export class DesignComponent implements OnInit, OnDestroy {
   constructor(
     private spinner: NgxSpinnerService,
-    private designService: DesignerService,
-    private route: ActivatedRoute
+    public designService: DesignerService,
+    private route: ActivatedRoute,
+    private render:Renderer2
   ) { }
 
   ngOnInit() {
-    this.route.data.subscribe((x: SitePage) => { this.designService.CurrentPageId = x.id; })
+    this.designService.HeaderNoMarginBottom = true;
+    // this.render.addClass(document.body,"overflow-hidden");
+    this.route.data.subscribe((x: any) => {
+      this.designService.CurrentPage = x.page as SitePage;
+    })
     // this.spinner.show();
+  }
+
+  ngOnDestroy() {
+    this.designService.HeaderNoMarginBottom = false;
+    // this.render.removeClass(document.body,"overflow-hidden");
   }
 }

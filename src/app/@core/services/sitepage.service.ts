@@ -6,6 +6,7 @@ import { ApiService, IResponseBody } from './api.service';
 import { JwtService } from './jwt.service';
 import { tap, map, share, shareReplay, switchMap, filter } from 'rxjs/operators';
 import _ from 'lodash-es';
+import { DesignerService } from './designer.service';
 
 @Injectable()
 export class SitePageService {
@@ -18,7 +19,7 @@ export class SitePageService {
   private cacheSitePages$: Observable<Array<SitePage>>;
   get AllPages() {
     if (!this.cacheSitePages$) {
-      this.cacheSitePages$ = this.getPages(1)
+      this.cacheSitePages$ = this.getPages(this.designService.SiteId)
         .pipe(shareReplay(1));
 
     }
@@ -28,6 +29,7 @@ export class SitePageService {
   constructor(
     private apiService: ApiService,
     private http: HttpClient,
+    private designService: DesignerService,
     private jwtService: JwtService
   ) {
 
@@ -37,7 +39,7 @@ export class SitePageService {
  * 获取网站页面
  * @param siteId 网站ID
  */
-  private getPages(siteId: number): Observable<SitePage[]> {
+  private getPages(siteId: string): Observable<SitePage[]> {
     return this.apiService
       .get<SitePage[]>(
         '/sites/getpages',
@@ -47,7 +49,7 @@ export class SitePageService {
       }));
   }
 
-  getPagesTree(siteId: number): Observable<SitePage[]> {
+  getPagesTree(): Observable<SitePage[]> {
     return this.AllPages.pipe(map(pages => {
       let sortByOrder = _.sortBy<SitePage>(pages, page => page.Order);
       let groupResult = _.groupBy<SitePage>(sortByOrder, page => page.ParentId);
