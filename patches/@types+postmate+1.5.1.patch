@@ -1,0 +1,231 @@
+diff --git a/node_modules/@types/postmate/index.d.ts b/node_modules/@types/postmate/index.d.ts
+index 1baaf04..11ad005 100644
+--- a/node_modules/@types/postmate/index.d.ts
++++ b/node_modules/@types/postmate/index.d.ts
+@@ -8,121 +8,132 @@
+  * child. Returns a Promise that signals when the handshake is complete and communication is ready to begin.
+  */
+ declare class Postmate extends Promise<Postmate.ParentAPI> {
++  /**
++   * Set to true to enable logging of additional information. Default: false
++   */
++  static debug: boolean;
++
++  /**
++   * Replace the Promise API that Postmate uses. Default: window.Promise
++   */
++  static Promise: Promise<any>;
++
++  /**
++   * Initializes a new instance of Postmate
++   *
++   * @param options configuration options
++   */
++  constructor(options: Postmate.PostmateOptions);
++}
++
++declare namespace Postmate {
++  /**
++   * Options passed to the Postmate constructor
++   */
++  interface PostmateOptions {
++    /**
++     * An element to append the iFrame to. Default: document.body
++     */
++    container?: HTMLElement | null;
++
++    /**
++     * An object literal to represent the default values of the child's model
++     */
++    model?: any;
++
++    /**
++     * A URL to load in the iFrame. The origin of this URL will also be used for securing message transport
++     */
++    url: string;
++
+     /**
+-     * Set to true to enable logging of additional information. Default: false
++     * An Array to add classes to the iFrame. Useful for styling
+      */
+-    static debug: boolean;
++    classListArray?: string[];
+ 
+     /**
+-     * Replace the Promise API that Postmate uses. Default: window.Promise
++     * A name which is used for the name attribute of the created iFrame
+      */
+-    static Promise: Promise<any>;
++    name?: string;
++    /** iframe的selector,如果设置此属性，则不创建iframe元素 */
++    iframeOrSelector?: string | HTMLIFrameElement
++  }
++
++  /**
++   * Composes an API to be used by the parent
++   */
++  interface ParentAPI {
++    /**
++     * The iFrame Element that the parent is communicating with
++     */
++    frame: HTMLIFrameElement;
+ 
+     /**
+-     * Initializes a new instance of Postmate
++     * Retrieves a value by property name from the child's model object.
+      *
+-     * @param options configuration options
++     * @param key The string property to lookup in the child's model
++     * @returns child model property value
+      */
+-    constructor(options: Postmate.PostmateOptions);
+-}
++    get(key: string): Promise<any>;
++
++    /**
++* Retrieves a value by property name from the child's model object.
++*
++* @param key The string property to lookup in the child's model
++* @param data if method ,the data is parameters
++* @returns child model property value
++*/
++    get(key: string, ...data: any[]): Promise<any>;
+ 
+-declare namespace Postmate {
+     /**
+-     * Options passed to the Postmate constructor
++     * Calls a function on the child's model
++     *
++     * @param key The string property to lookup in the child's model
++     * @param data The optional data to send to the child function
+      */
+-    interface PostmateOptions {
+-        /**
+-         * An element to append the iFrame to. Default: document.body
+-         */
+-        container?: HTMLElement | null;
+-
+-        /**
+-         * An object literal to represent the default values of the child's model
+-         */
+-        model?: any;
+-
+-        /**
+-         * A URL to load in the iFrame. The origin of this URL will also be used for securing message transport
+-         */
+-        url: string;
+-
+-        /**
+-         * An Array to add classes to the iFrame. Useful for styling
+-         */
+-        classListArray?: string[];
+-
+-        /**
+-         * A name which is used for the name attribute of the created iFrame
+-         */
+-        name?: string;
+-    }
++    call(key: string, data?: any): void;
+ 
+     /**
+-     * Composes an API to be used by the parent
++     * Listen to a particular event from the child
++     *
++     * @param eventName the name of the event
++     * @param callback the event handler function
+      */
+-    interface ParentAPI {
+-        /**
+-         * The iFrame Element that the parent is communicating with
+-         */
+-        frame: HTMLIFrameElement;
+-
+-        /**
+-         * Retrieves a value by property name from the child's model object.
+-         *
+-         * @param key The string property to lookup in the child's model
+-         * @returns child model property value
+-         */
+-        get(key: string): Promise<any>;
+-
+-        /**
+-         * Calls a function on the child's model
+-         *
+-         * @param key The string property to lookup in the child's model
+-         * @param data The optional data to send to the child function
+-         */
+-        call(key: string, data?: any): void;
+-
+-        /**
+-         * Listen to a particular event from the child
+-         *
+-         * @param eventName the name of the event
+-         * @param callback the event handler function
+-         */
+-        on(eventName: string, callback: (data?: any) => void): void;
+-
+-        /**
+-         * Removes the iFrame element and destroys any message event listeners
+-         */
+-        destroy(): void;
+-    }
++    on(eventName: string, callback: (data?: any) => void): void;
+ 
+     /**
+-     * Composes an API to be used by the child
++     * Removes the iFrame element and destroys any message event listeners
+      */
+-    interface ChildAPI {
+-        /**
+-         * Emits an event to the parent
+-         *
+-         * @param name the name of the event
+-         * @param data event data
+-         */
+-        emit(name: string, data?: any): void;
+-    }
++    destroy(): void;
++  }
+ 
++  /**
++   * Composes an API to be used by the child
++   */
++  interface ChildAPI {
++    /**
++     * Emits an event to the parent
++     *
++     * @param name the name of the event
++     * @param data event data
++     */
++    emit(name: string, data?: any): void;
++  }
++
++  /**
++   * This is written in the child page. Calling Postmate.Model initiates a handshake request listener from the
++   * Child. Once the handshake is complete, an event listener is bound to receive requests from the Parent. The
++   * Child model is extended from the model provided by the Parent.
++   */
++  class Model extends Promise<ChildAPI> {
+     /**
+-     * This is written in the child page. Calling Postmate.Model initiates a handshake request listener from the
+-     * Child. Once the handshake is complete, an event listener is bound to receive requests from the Parent. The
+-     * Child model is extended from the model provided by the Parent.
++     * Initializes a new instance of Model
++     *
++     * @param model An object of gettable properties to expose to the parent. Value types may be anything
++     * accepted in postMessage. Promises may also be set as values or returned from functions. Default: {}
+      */
+-    class Model extends Promise<ChildAPI> {
+-        /**
+-         * Initializes a new instance of Model
+-         *
+-         * @param model An object of gettable properties to expose to the parent. Value types may be anything
+-         * accepted in postMessage. Promises may also be set as values or returned from functions. Default: {}
+-         */
+-        constructor(model: any);
+-    }
++    constructor(model: any);
++  }
+ }
+ 
+ /**

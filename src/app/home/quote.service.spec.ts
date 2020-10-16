@@ -26,14 +26,14 @@ describe('QuoteService', () => {
   describe('getRandomQuote', () => {
     it('should return a random Chuck Norris quote', () => {
       // Arrange
-      const mockQuote = { value: 'a random quote' };
+      const mockQuote = { data: 'a random quote' };
 
       // Act
       const randomQuoteSubscription = quoteService.getRandomQuote({ category: 'toto' });
 
       // Assert
       randomQuoteSubscription.subscribe((quote: string) => {
-        expect(quote).toEqual(mockQuote.value);
+        expect(quote).toEqual(mockQuote.data);
       });
       httpMock.expectOne({}).flush(mockQuote);
     });

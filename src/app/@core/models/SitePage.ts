@@ -1,12 +1,13 @@
-import { SitePageType } from './SitePageType'
+import { SitePageType } from './SitePageType';
 
 /**
  * 网站页面
  */
 export class SitePage {
-  constructor(/**
-        * 网站页面ID
-        */
+  constructor(
+    /**
+     * 网站页面ID
+     */
     public id: string,
     /**
      * 网站页面标题
@@ -19,7 +20,7 @@ export class SitePage {
     /**
      * 父页面Id
      */
-    public ParentId: string = "0",
+    public ParentId: string = '0',
     /**
      * 显示顺序
      */
@@ -35,23 +36,22 @@ export class SitePage {
 
     /** 子页面 */
     public children: SitePage[] = []
-  ) {
-  }
+  ) {}
   /**
-* 是否隐藏
-*/
-  public Hidden: boolean = false
+   * 是否隐藏
+   */
+  public Hidden: boolean = false;
 
   /** 打开的目标 */
-  public Target: "_blank" | "_self" | string = "_self"
+  public Target: '_blank' | '_self' | string = '_self';
 
   public ParentPage: SitePage;
 
   /** 更新时间 */
-  UpdateDateTime: Date
+  UpdateDateTime: Date;
 
   /** 自定义数据 */
-  public customData?: string
+  public customData?: string;
 
   // /** 页面模板ID */
   // PageTemplateId?: string

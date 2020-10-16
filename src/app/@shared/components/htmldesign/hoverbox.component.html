@@ -1,0 +1,121 @@
+<div
+  class="root-container-hover-box"
+  *ngIf="InHover && RootContainerInfo"
+  [ngStyle]="{
+    left: RootContainerInfo.pos.left + 'px',
+    top: RootContainerInfo.pos.top + 'px',
+    width: RootContainerInfo.pos.width + 'px',
+    height: RootContainerInfo.pos.height + 'px'
+  }"
+>
+  <div class="control-button-wrapper rootContainer" data-bind="visible:shown">
+    <div class="control-buttons">
+      <div
+        class="icon-page-section-control-button iconfont icon-exit"
+        data-bind="click:handle.bind($data,event,$root),clickBubble: false,visible:shown,attr: {title: tip },css:icon"
+        title="退出"
+        style="display: none;"
+      ></div>
+
+      <div
+        class="icon-page-section-control-button iconfont icon-edit"
+        data-bind="click:handle.bind($data,event,$root),clickBubble: false,visible:shown,attr: {title: tip },css:icon"
+        title="编辑"
+      ></div>
+
+      <div
+        class="icon-page-section-control-button iconfont icon-level-up"
+        data-bind="click:handle.bind($data,event,$root),clickBubble: false,visible:shown,attr: {title: tip },css:icon"
+        title="向上移"
+      ></div>
+
+      <div
+        class="icon-page-section-control-button iconfont icon-leveldown"
+        data-bind="click:handle.bind($data,event,$root),clickBubble: false,visible:shown,attr: {title: tip },css:icon"
+        title="向下移"
+      ></div>
+
+      <div
+        class="icon-page-section-control-button iconfont icon-del"
+        data-bind="click:handle.bind($data,event,$root),clickBubble: false,visible:shown,attr: {title: tip },css:icon"
+        title="删除容器100%"
+      ></div>
+    </div>
+  </div>
+
+  <div
+    class="container-hover-box"
+    data-bind="visible:inHover,style:{left:left,top:top,width:width,height:height},css:{draggable:canDrag,dragging:dragging}"
+  ></div>
+
+  <div class="container-resizers" data-bind="foreach:resizers">
+    <div
+      class="v-resizer"
+      data-bind="style:{left:left,top:top,height:height},event: { mouseover: $root.hoverResizer.bind($data,event)}"
+    >
+      <div class="line"></div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="hover-box components-background-color components-ui-color-orange"
+  *ngIf="InHover && ContainerInfo"
+  [ngStyle]="{
+    left: ContainerInfo.pos.left + 'px',
+    top: ContainerInfo.pos.top + 'px',
+    width: ContainerInfo.pos.width + 'px',
+    height: ContainerInfo.pos.height + 'px'
+  }"
+  [ngClass]="{ draggable: CurrentElementInfo.addon.CanDrag }"
+  data-bind="css:{resizable:canResize}"
+>
+  <span
+    class="component-labels label-small label-top"
+    data-bind="css:{dragable:canDrag,'label-top':labelIsTop,'label-bottom':!labelIsTop()}"
+  >
+    <span style="width: 130px; word-wrap: break-word; display: block;" class="text-truncate text-center text-capitalize"
+      >{{ CurrentElementInfo.type }}
+    </span>
+    <div class="card-actions">
+      <a
+        (click)="delElement($event, CurrentElementInfo, true)"
+        class="card-action iconfont icon-del"
+        *ngIf="CurrentElementInfo.addon.CanDel"
+        title="{{ ('Del' | translate) + CurrentElementInfo.addon.Name }}"
+      ></a>
+    </div>
+  </span>
+
+  <span class="top-resize top-resize-cursor handle handle-resize-side top" data-bind="visible:resizeTop"></span>
+  <span
+    class="bottom-resize bottom-resize-cursor handle handle-resize-side bottom"
+    data-bind="visible:resizeBottom"
+  ></span>
+  <span class="left-resize left-resize-cursor handle handle-resize-side left" data-bind="visible:resizeLeft"></span>
+  <span class="right-resize right-resize-cursor handle handle-resize-side right" data-bind="visible:resizeRight"></span>
+
+  <span
+    class="top-resize left-resize top-left-resize-cursor handle handle-resize-corner top left"
+    data-bind="visible:resizeTopLeft"
+  ></span>
+  <span
+    class="top-resize right-resize top-right-resize-cursor handle handle-resize-corner top right"
+    data-bind="visible:resizeTopRight"
+  ></span>
+  <span
+    class="bottom-resize left-resize bottom-left-resize-cursor handle handle-resize-corner bottom left"
+    data-bind="visible:resizeBottomLeft"
+  ></span>
+  <span
+    class="bottom-resize right-resize bottom-right-resize-cursor handle handle-resize-corner bottom right"
+    data-bind="visible:resizeBottomRight"
+  ></span>
+
+  <ng-container *ngIf="CurrentElementInfo.addon.CanDrag">
+    <div class="dragHandle top"></div>
+    <div class="dragHandle bottom"></div>
+    <div class="dragHandle left"></div>
+    <div class="dragHandle right"></div>
+  </ng-container>
+</div>

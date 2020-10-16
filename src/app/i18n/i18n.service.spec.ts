@@ -30,26 +30,40 @@ describe('I18nService', () => {
   let i18nService: I18nService;
   let translateService: TranslateService;
   let onLangChangeSpy: jasmine.Spy;
+  const oldResetTestingModule = TestBed.resetTestingModule;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [I18nService, { provide: TranslateService, useClass: MockTranslateService }],
-    });
+  beforeAll((done) =>
+    (async () => {
+      TestBed.resetTestingModule();
 
-    i18nService = TestBed.inject(I18nService);
-    translateService = TestBed.inject(TranslateService);
+      TestBed.configureTestingModule({
+        providers: [I18nService, { provide: TranslateService, useClass: MockTranslateService }],
+      });
 
-    // Create spies
-    onLangChangeSpy = jasmine.createSpy('onLangChangeSpy');
-    translateService.onLangChange.subscribe((event: LangChangeEvent) => {
-      onLangChangeSpy(event.lang);
-    });
-    spyOn(translateService, 'use').and.callThrough();
-  });
+      i18nService = TestBed.inject(I18nService);
+      translateService = TestBed.inject(TranslateService);
+
+      // Create spies
+      onLangChangeSpy = jasmine.createSpy('onLangChangeSpy');
+      translateService.onLangChange.subscribe((event: LangChangeEvent) => {
+        onLangChangeSpy(event.lang);
+      });
+      spyOn(translateService, 'use').and.callThrough();
+
+      TestBed.resetTestingModule = () => TestBed;
+    })()
+      .then(done)
+      .catch(done.fail)
+  );
 
   afterEach(() => {
     // Cleanup
     localStorage.removeItem('language');
+  });
+
+  afterAll(() => {
+    TestBed.resetTestingModule = oldResetTestingModule;
+    TestBed.resetTestingModule();
   });
 
   describe('extract', () => {

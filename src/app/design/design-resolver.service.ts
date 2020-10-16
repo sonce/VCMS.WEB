@@ -9,23 +9,18 @@ import { Title } from '@angular/platform-browser';
 
 @Injectable()
 export class DesignResolver implements Resolve<SitePage> {
-  constructor(
-    private router: Router,
-    private pageServiceService: SitePageService,
-    private titleService: Title
-  ) { }
+  constructor(private router: Router, private pageServiceService: SitePageService, private titleService: Title) {}
 
-  resolve(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<any> {
-    return this.pageServiceService.AllPages.pipe(map(x => x.find(x => x.id == route.params['slug'])))
-      .pipe(tap(x => {
-        if (_.isNil(x))
-          throw new Error('No the page!');
-        else{
-          this.titleService.setTitle(x.name);}
-      }))
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
+    return this.pageServiceService.AllPages.pipe(map((x) => x.find((x) => x.id == route.params['slug'])))
+      .pipe(
+        tap((x) => {
+          if (_.isNil(x)) throw new Error('No the page!');
+          else {
+            this.titleService.setTitle(x.name);
+          }
+        })
+      )
       .pipe(catchError((err: Error) => this.router.navigateByUrl('/home')));
   }
 }

@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, Injector, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { finalize, tap, map } from 'rxjs/operators';
 
 import { QuoteService } from './quote.service';
-import { SitePageService } from '@app/@core/services';
 import { SitePage } from '@app/@core/models';
-import _ from 'lodash';
 import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { MultiLevelNavitemDirective } from '@app/@shared';
 import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
+import { PluginLoaderService } from '@app/services/plugin-loader/plugin-loader.service';
 
 @Component({
   selector: 'app-home',
@@ -17,12 +16,19 @@ import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
 export class HomeComponent implements OnInit {
   quote: string | undefined;
 
-  SitePages: SitePage[]
-  constructor(private quoteService: QuoteService,
-    private spinner: NgxSpinnerService
-  ) { }
+  SitePages: SitePage[];
+  @ViewChild('targetRef', { read: ViewContainerRef, static: true })
+  vcRef: ViewContainerRef;
 
-  data = { name: 'love' }
+  constructor(
+    private quoteService: QuoteService,
+    private spinner: NgxSpinnerService,
+    private injector: Injector,
+    private pluginLoader: PluginLoaderService,
+    private cfr: ComponentFactoryResolver
+  ) {}
+
+  data = { name: 'love' };
 
   ngOnInit() {
     this.spinner.show();
@@ -50,8 +56,15 @@ export class HomeComponent implements OnInit {
     alert(info);
   }
 
+  testExcute(event: { event: MouseEvent | KeyboardEvent; item: any; menuItem: MultiLevelNavitemDirective }) {
+    console.log('Hi, ' + event.item.name);
+  }
 
-  testExcute(event: { event: MouseEvent | KeyboardEvent, item: any, menuItem: MultiLevelNavitemDirective }) {
-    console.log('Hi, ' + event.item.name)
+  loadPlugin(pluginName: string) {
+    this.pluginLoader.load(pluginName).then((moduleType: any) => {
+      const entry = moduleType.entry;
+      const componentFactory = this.cfr.resolveComponentFactory(entry);
+      this.vcRef.createComponent(componentFactory, undefined, this.injector);
+    });
   }
 }

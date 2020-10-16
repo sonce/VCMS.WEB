@@ -1,30 +1,42 @@
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpRequest } from '@angular/common/http';
 
 import { environment } from '@env/environment';
 import { ApiPrefixInterceptor } from './api-prefix.interceptor';
+import { JwtService } from '../services';
 
 describe('ApiPrefixInterceptor', () => {
   let http: HttpClient;
   let httpMock: HttpTestingController;
+  const oldResetTestingModule = TestBed.resetTestingModule;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
-        {
-          provide: HTTP_INTERCEPTORS,
-          useClass: ApiPrefixInterceptor,
-          multi: true,
-        },
-      ],
-    });
+  beforeAll((done) =>
+    (async () => {
+      TestBed.resetTestingModule();
 
-    http = TestBed.inject(HttpClient);
-    httpMock = TestBed.inject(HttpTestingController as Type<HttpTestingController>);
-  });
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule],
+        providers: [
+          JwtService,
+          {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ApiPrefixInterceptor,
+            multi: true,
+          },
+        ],
+      });
+
+      http = TestBed.inject(HttpClient);
+      httpMock = TestBed.inject(HttpTestingController as Type<HttpTestingController>);
+
+      // prevent Angular from resetting testing module
+      TestBed.resetTestingModule = () => TestBed;
+    })()
+      .then(done)
+      .catch(done.fail)
+  );
 
   afterEach(() => {
     httpMock.verify();
@@ -33,7 +45,6 @@ describe('ApiPrefixInterceptor', () => {
   it('should prepend environment.serverUrl to the request url', () => {
     // Act
     http.get('/toto').subscribe();
-
     // Assert
     httpMock.expectOne({ url: environment.serverUrl + '/toto' });
   });
@@ -43,6 +54,11 @@ describe('ApiPrefixInterceptor', () => {
     http.get('hTtPs://domain.com/toto').subscribe();
 
     // Assert
-    httpMock.expectOne({ url: 'hTtPs://domain.com/toto' });
+    httpMock.expectOne((req: HttpRequest<any>) => req.url.includes('hTtPs://domain.com/toto'));
+  });
+
+  afterAll(() => {
+    TestBed.resetTestingModule = oldResetTestingModule;
+    TestBed.resetTestingModule();
   });
 });

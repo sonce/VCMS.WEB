@@ -1,28 +1,44 @@
-import { Component, OnInit, Input, ViewChild, ContentChildren, QueryList, ContentChild, TemplateRef, ElementRef, Renderer2, ViewChildren, AfterViewInit, ChangeDetectionStrategy, AfterContentInit, OnDestroy, ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
-import { NgbDropdown, NgbDropdownItem, NgbDropdownMenu } from '@ng-bootstrap/ng-bootstrap';
-import { Button } from 'protractor';
-import { fromEvent, Observable, BehaviorSubject, Subject } from 'rxjs';
+import {
+  Component,
+  OnInit,
+  Input,
+  ContentChildren,
+  QueryList,
+  AfterViewInit,
+  AfterContentInit,
+  OnDestroy,
+  ChangeDetectorRef,
+  EventEmitter,
+  Output,
+} from '@angular/core';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { RadiogroupItemComponent } from './radiogroupitem.component';
-import { RadioGroupOption } from './radiogroupitemoptions';
-import _ from 'lodash-es';
 import { map, takeUntil } from 'rxjs/operators';
 
-type RadiogroupSkin = "bg" | "bg-radius"|"bottomline";
+type RadiogroupSkin = 'bg' | 'bg-radius' | 'bottomline';
 @Component({
   selector: 'v-radiogroup',
   template: `
-            <div class="btn-group btn-group-toggle radio-toggle-group d-flex" [ngClass]="classes" data-toggle="buttons" *ngIf="isInit">
-              <ng-template *ngFor="let r of radios; let i = index" [ngTemplateOutlet]="r.childComponentTemplate"
-                [ngTemplateOutletContext]="{ $implicit: {name:name,value:value}}">
-              </ng-template>
-            </div>
-              `,
+    <div
+      class="btn-group btn-group-toggle radio-toggle-group d-flex"
+      [ngClass]="classes"
+      data-toggle="buttons"
+      *ngIf="isInit"
+    >
+      <ng-template
+        *ngFor="let r of radios; let i = index"
+        [ngTemplateOutlet]="r.childComponentTemplate"
+        [ngTemplateOutletContext]="{ $implicit: { name: name, value: value } }"
+      >
+      </ng-template>
+    </div>
+  `,
   styleUrls: ['./radiogroup.component.scss'],
 })
 export class RadiogroupComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
   @Output() public onToggleCheck: EventEmitter<any> = new EventEmitter();
 
-  @ContentChildren(RadiogroupItemComponent) radios: QueryList<RadiogroupItemComponent> = null
+  @ContentChildren(RadiogroupItemComponent) radios: QueryList<RadiogroupItemComponent> = null;
 
   @Input() name: string;
   @Input() value: any;
@@ -36,39 +52,36 @@ export class RadiogroupComponent implements OnInit, AfterContentInit, AfterViewI
   private skinObservable = new BehaviorSubject<RadiogroupSkin>('bg');
   classes: string[];
   /**
- * Unsubscribe from spinner's observable
- *
- * @memberof NgxSpinnerComponent
-**/
+   * Unsubscribe from spinner's observable
+   *
+   * @memberof NgxSpinnerComponent
+   **/
   ngUnsubscribe: Subject<void> = new Subject();
 
   isInit: boolean = false;
-  constructor(private changeDetector: ChangeDetectorRef) {
-
-  }
+  constructor(private changeDetector: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.getClasses().pipe(takeUntil(this.ngUnsubscribe))
+    this.getClasses()
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((x: string[]) => {
         this.classes = x;
         this.changeDetector.markForCheck();
-      })
+      });
   }
 
-  ngAfterContentInit() {
-  }
+  ngAfterContentInit() {}
 
   ngAfterViewInit() {
-    Promise.resolve(null).then(() => this.isInit = true);
-    this.radios.forEach(x => x.onToggleCheck.subscribe(this.toggleCheck.bind(this)));
+    Promise.resolve(null).then(() => (this.isInit = true));
+    this.radios.forEach((x) => x.onToggleCheck.subscribe(this.toggleCheck.bind(this)));
   }
 
   private getClasses(): Observable<string[]> {
-    return this.skinObservable.asObservable().pipe(map(x => x.split('-')));
+    return this.skinObservable.asObservable().pipe(map((x) => x.split('-')));
   }
 
-  toggleCheck(data: { groupItem: RadiogroupItemComponent, value: any }) {
-    debugger
+  toggleCheck(data: { groupItem: RadiogroupItemComponent; value: any }) {
     this.value = data.value;
     this.onToggleCheck.emit(this.value);
   }

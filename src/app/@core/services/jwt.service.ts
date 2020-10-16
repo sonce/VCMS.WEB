@@ -13,9 +13,9 @@ export class JwtService {
   private _credentials: Credentials | null = null;
 
   /**
- * Checks is the user is authenticated.
- * @return True if the user is authenticated.
- */
+   * Checks is the user is authenticated.
+   * @return True if the user is authenticated.
+   */
   isAuthenticated(): boolean {
     return !!this.credentials;
   }
@@ -28,7 +28,7 @@ export class JwtService {
   }
 
   getToken(): string {
-    return this.isAuthenticated() ? this._credentials.token : "";
+    return this.isAuthenticated() ? this._credentials.token : '';
   }
 
   /**
@@ -53,5 +53,4 @@ export class JwtService {
   destroyToken() {
     this.saveToken();
   }
-
 }

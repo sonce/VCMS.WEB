@@ -5,6 +5,7 @@ import { CoreModule } from '@core';
 import { SharedModule } from '@shared';
 import { HomeComponent } from './home.component';
 import { QuoteService } from './quote.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -12,7 +13,7 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [CoreModule, SharedModule, HttpClientTestingModule],
+      imports: [CoreModule, SharedModule, HttpClientTestingModule, TranslateModule.forRoot()],
       declarations: [HomeComponent],
       providers: [QuoteService],
     }).compileComponents();

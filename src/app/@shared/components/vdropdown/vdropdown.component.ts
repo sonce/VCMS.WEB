@@ -1,7 +1,16 @@
-import { Component, OnInit, Input, ViewChild, ContentChildren, QueryList, ContentChild, TemplateRef, ElementRef, Renderer2 } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  ContentChildren,
+  QueryList,
+  ContentChild,
+  TemplateRef,
+  ElementRef,
+  Renderer2,
+} from '@angular/core';
 import { NgbDropdown, NgbDropdownItem, NgbDropdownMenu } from '@ng-bootstrap/ng-bootstrap';
-import { Button } from 'protractor';
-import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'v-dropdown',
@@ -11,38 +20,45 @@ import { fromEvent } from 'rxjs';
 })
 export class VDropdownComponent implements OnInit {
   @ViewChild('vDrop') private input: NgbDropdown;
-  @ViewChild(NgbDropdownMenu, { read: ElementRef }) private dropdownMenu: ElementRef;
-
-  @ContentChildren(NgbDropdownItem) childs: QueryList<NgbDropdownItem>;
-
-  @ContentChild('dropdownContentTemplate', { static: false }) dropdownContentTemplate: TemplateRef<any>;
-  @ContentChild('dropdownFullTemplate', { static: false }) dropdownFullTemplate: TemplateRef<any>;
 
   /**
- * Indicates whether the dropdown should be closed when clicking one of dropdown items or pressing ESC.
- *
- * * `true` - the dropdown will close on both outside and inside (menu) clicks.
- * * `false` - the dropdown can only be closed manually via `close()` or `toggle()` methods.
- * * `"inside"` - the dropdown will close on inside menu clicks, but not outside clicks.
- * * `"outside"` - the dropdown will close only on the outside clicks and not on menu clicks.
- */
+   * 所有的下拉选项
+   */
+  @ContentChildren(NgbDropdownItem) childs: QueryList<NgbDropdownItem>;
+
+  /**
+   * 下拉框完整的内容模板
+   */
+  @ContentChild('dropdownFullTemplate', { static: false }) dropdownFullTemplate: TemplateRef<any>;
+  /**
+   * 下拉选项的模板
+   */
+  @ContentChild('dropdownContentTemplate', { static: false }) dropdownContentTemplate: TemplateRef<any>;
+
+  /**
+   * Indicates whether the dropdown should be closed when clicking one of dropdown items or pressing ESC.
+   *
+   * * `true` - the dropdown will close on both outside and inside (menu) clicks.
+   * * `false` - the dropdown can only be closed manually via `close()` or `toggle()` methods.
+   * * `"inside"` - the dropdown will close on inside menu clicks, but not outside clicks.
+   * * `"outside"` - the dropdown will close only on the outside clicks and not on menu clicks.
+   */
   @Input() autoClose: boolean | 'outside' | 'inside' = true;
 
-  public get IsOpen(){
+  @Input() public get IsOpen() {
     return this.input.isOpen();
   }
 
   /** 当前选中的文本 */
   @Input() selectedText: string;
+
+  NoSelectedText: string = 'No Selected Item';
   // isOpen: boolean;
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2) {}
 
-  }
-
-  ngOnInit() {
-  }
-  openModal() { }
+  ngOnInit() {}
+  openModal() {}
   ngAfterViewInit() {
     if (this.childs != null) {
       this.childs.forEach((dropdownItem) => {
@@ -51,8 +67,7 @@ export class VDropdownComponent implements OnInit {
         });
       });
     }
-
-    this.input.openChange.subscribe((isOpen: boolean) => { });
+    // this.input.openChange.subscribe((isOpen: boolean) => { });
   }
 
   /**
@@ -60,5 +75,9 @@ export class VDropdownComponent implements OnInit {
    */
   close() {
     this.input.close();
+  }
+
+  open() {
+    this.input.open();
   }
 }

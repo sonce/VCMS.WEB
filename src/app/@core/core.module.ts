@@ -8,7 +8,7 @@ import { RouteReusableStrategy } from './route-reusable-strategy';
 import { ApiPrefixInterceptor } from './http/api-prefix.interceptor';
 import { ErrorHandlerInterceptor } from './http/error-handler.interceptor';
 
-import { DesignerService, SitePageService, JwtService, TestService, ApiService } from './services';
+import { DesignerService, SitePageService, JwtService, AddonService, TestService, ApiService } from './services';
 
 @NgModule({
   // imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule],
@@ -31,7 +31,8 @@ import { DesignerService, SitePageService, JwtService, TestService, ApiService }
     SitePageService,
     JwtService,
     TestService,
-    ApiService
+    AddonService,
+    ApiService,
   ],
 })
 export class CoreModule {

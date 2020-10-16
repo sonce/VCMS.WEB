@@ -12,17 +12,15 @@ import { SitePage } from '@app/@core/models';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-
   menuHidden = true;
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
     private credentialsService: CredentialsService,
     public designerService: DesignerService
-  ) { }
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   toggleMenu() {
     this.menuHidden = !this.menuHidden;
@@ -38,11 +36,13 @@ export class HeaderComponent implements OnInit {
   }
 
   SelectPageChanged(sitePage: SitePage) {
-    this.router.navigate(['/design/' + sitePage.id])
+    this.router.navigate(['/design/' + sitePage.id]);
   }
 
   changeViewMode(val: any) {
-    debugger
     this.designerService.IsMobile = val;
+  }
+  togglePreview() {
+    this.designerService.InDesign = !this.designerService.InDesign;
   }
 }

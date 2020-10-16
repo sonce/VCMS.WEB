@@ -16,5 +16,5 @@ export enum SitePageType {
   /** 电话 */
   Tel = 6,
   /** 文件夹，不带链接，可在下面增加页面。 */
-  Folder = 100
+  Folder = 100,
 }

@@ -1,27 +1,46 @@
-<nav class="nav-main-dark-text" [class.vertical]="isVertical" [class.vertical-dropdown]="isVertical"
-  [class.arrow]="showArrow" [class.noborder]="noBorder">
+<nav
+  class="nav-main-dark-text"
+  [class.vertical]="isVertical"
+  [class.vertical-dropdown]="isVertical"
+  [class.arrow]="showArrow"
+  [class.noborder]="noBorder"
+>
   <ul class="nav nav-pills">
-    <ng-template *ngFor="let menuItem of visibleNavItems; let i = index" [ngTemplateOutlet]="li"
-      [ngTemplateOutletContext]="{ $implicit: {menuItem:menuItem,isSubMenu:false,enabled:menuItem.enabled}}">
+    <ng-template
+      *ngFor="let menuItem of visibleNavItems; let i = index"
+      [ngTemplateOutlet]="li"
+      [ngTemplateOutletContext]="{ $implicit: { menuItem: menuItem, isSubMenu: false, enabled: menuItem.enabled } }"
+    >
     </ng-template>
   </ul>
 </nav>
 
-<ng-content>
-</ng-content>
+<ng-content> </ng-content>
 
 <ng-template #li let-data>
   <ng-container *ngIf="convertToNavItemDirective(data.menuItem) as itemDirective">
-    <li [class.dropdown]="!data.isSubMenu" [class.dropdown-submenu]="data.isSubMenu&&!!itemDirective.subMenu"
-      [class.divider]="itemDirective.divider" [class.hassubmenu]="!!itemDirective.subMenu"
+    <li
+      [class.dropdown]="!data.isSubMenu"
+      [class.dropdown-submenu]="data.isSubMenu && !!itemDirective.subMenu"
+      [class.divider]="itemDirective.divider"
+      [class.hassubmenu]="!!itemDirective.subMenu"
       [class.dropdown-divider]="itemDirective.divider"
       [class.active]="itemDirective.isActive && isMenuItemEnabled(itemDirective)"
-      [class.dropdown-mega]="itemDirective.passive" [attr.role]="itemDirective.divider ? 'separator' : undefined">
-      <ng-template *ngIf="itemDirective.fullTemplate&&!itemDirective.divider"
-        [ngTemplateOutlet]="itemDirective.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
-      <a class="dropdown-item" href *ngIf="!itemDirective.divider&&!itemDirective.fullTemplate"
-        [class.disabled]="!isMenuItemEnabled(itemDirective)||!data.enabled"
-        (click)="onMenuItemSelect(itemDirective, $event)">
+      [class.dropdown-mega]="itemDirective.passive"
+      [attr.role]="itemDirective.divider ? 'separator' : undefined"
+    >
+      <ng-template
+        *ngIf="itemDirective.fullTemplate && !itemDirective.divider"
+        [ngTemplateOutlet]="itemDirective.template"
+        [ngTemplateOutletContext]="{ $implicit: item }"
+      ></ng-template>
+      <a
+        class="dropdown-item"
+        href
+        *ngIf="!itemDirective.divider && !itemDirective.fullTemplate"
+        [class.disabled]="!isMenuItemEnabled(itemDirective) || !data.enabled"
+        (click)="onMenuItemSelect(itemDirective, $event)"
+      >
         <ng-template [ngTemplateOutlet]="itemDirective.template" [ngTemplateOutletContext]="{ $implicit: item }">
         </ng-template>
       </a>
@@ -29,15 +48,18 @@
         <ng-container *ngIf="itemDirective.passive">
           <li>
             <div class="dropdown-mega-content">
-              <ng-container *ngTemplateOutlet="itemDirective.subMenu; context: {$implicit:item}">
-              </ng-container>
+              <ng-container *ngTemplateOutlet="itemDirective.subMenu; context: { $implicit: item }"> </ng-container>
             </div>
           </li>
         </ng-container>
         <ng-container *ngIf="!itemDirective.passive">
-          <ng-template *ngFor="let childMenuItem of itemDirective.subMenu.visibleNavItems; let i = index"
+          <ng-template
+            *ngFor="let childMenuItem of itemDirective.subMenu.visibleNavItems; let i = index"
             [ngTemplateOutlet]="li"
-            [ngTemplateOutletContext]="{$implicit: {menuItem:childMenuItem,isSubMenu:true,enabled:childMenuItem.enabled&&data.enabled}}">
+            [ngTemplateOutletContext]="{
+              $implicit: { menuItem: childMenuItem, isSubMenu: true, enabled: childMenuItem.enabled && data.enabled }
+            }"
+          >
           </ng-template>
         </ng-container>
       </ul>

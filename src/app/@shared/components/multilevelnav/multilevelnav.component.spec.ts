@@ -1,20 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MultilevelnavComponent } from './multilevelnav.component';
+import { MultiLevelNavComponent } from './multilevelnav.component';
 
 describe('MultilevelnavComponent', () => {
-  let component: MultilevelnavComponent;
-  let fixture: ComponentFixture<MultilevelnavComponent>;
+  let component: MultiLevelNavComponent;
+  let fixture: ComponentFixture<MultiLevelNavComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MultilevelnavComponent ]
-    })
-    .compileComponents();
+      declarations: [MultiLevelNavComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MultilevelnavComponent);
+    fixture = TestBed.createComponent(MultiLevelNavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

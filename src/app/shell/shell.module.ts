@@ -12,10 +12,21 @@ import { HeaderComponent } from './header/header.component';
 import { TreeModule } from '@circlon/angular-tree-component';
 import { SitePagesDropdownComponent } from './components';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgxSpinnerModule } from "ngx-bootstrap-spinner";
+import { NgxSpinnerModule } from 'ngx-bootstrap-spinner';
 
 @NgModule({
-  imports: [CommonModule, TranslateModule, NgbModule, AuthModule, I18nModule, RouterModule, ReactiveFormsModule, SharedModule, TreeModule, NgxSpinnerModule],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    NgbModule,
+    AuthModule,
+    I18nModule,
+    RouterModule,
+    ReactiveFormsModule,
+    SharedModule,
+    TreeModule,
+    NgxSpinnerModule,
+  ],
   declarations: [HeaderComponent, ShellComponent, SitePagesDropdownComponent],
 })
-export class ShellModule { }
+export class ShellModule {}

@@ -1,4 +1,15 @@
-import { Component, OnInit, Input, QueryList, EventEmitter, Output, AfterViewInit, ContentChildren, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  QueryList,
+  EventEmitter,
+  Output,
+  AfterViewInit,
+  ContentChildren,
+  ChangeDetectionStrategy,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MultiLevelNavitemDirective } from './multilevelnavitem.directive';
 import { Subscription } from 'rxjs';
 
@@ -26,29 +37,31 @@ import { Subscription } from 'rxjs';
   //             </li>
   // `
   template: `
-        <ng-template #li let-menuItem>
-          <li class="dropdown"
-               [class.dropdown]="!isSubMenu"
-               [class.dropdown-submenu]="isSubMenu"
-               [class.disabled]="!isMenuItemEnabled(menuItem)"
-               [class.divider]="menuItem.divider" [class.dropdown-divider]="menuItem.divider"
-               [class.active]="menuItem.isActive && isMenuItemEnabled(menuItem)"
-               [class.dropdown-mega]="menuItem.passive"
-               [attr.role]="menuItem.divider ? 'separator' : undefined">
-                 <a class="dropdown-item" [class.hasSubMenu]="!!menuItem.subMenu" href
-                 *ngIf="!menuItem.divider">
-                   <ng-template [ngTemplateOutlet]="menuItem.template" [ngTemplateOutletContext]="{ $implicit: item }">
-                   </ng-template>
-                 </a>
-                 <ul *ngIf="!!menuItem.subMenu" class="dropdown-menu">
-                   <ng-container *ngFor="let childMenuItem of menuItem.subMenu.visibleNavItems; let i = index">
-                     <ng-template *ngTemplateOutlet="li; context:{ $implicit: childMenuItem }"></ng-template>
-                   </ng-container>
-                 </ul>
-          </li>
-        </ng-template>
-        <ng-container *ngTemplateOutlet="li; context:{ $implicit: menuItem}"></ng-container>
-  `
+    <ng-template #li let-menuItem>
+      <li
+        class="dropdown"
+        [class.dropdown]="!isSubMenu"
+        [class.dropdown-submenu]="isSubMenu"
+        [class.disabled]="!isMenuItemEnabled(menuItem)"
+        [class.divider]="menuItem.divider"
+        [class.dropdown-divider]="menuItem.divider"
+        [class.active]="menuItem.isActive && isMenuItemEnabled(menuItem)"
+        [class.dropdown-mega]="menuItem.passive"
+        [attr.role]="menuItem.divider ? 'separator' : undefined"
+      >
+        <a class="dropdown-item" [class.hasSubMenu]="!!menuItem.subMenu" href *ngIf="!menuItem.divider">
+          <ng-template [ngTemplateOutlet]="menuItem.template" [ngTemplateOutletContext]="{ $implicit: item }">
+          </ng-template>
+        </a>
+        <ul *ngIf="!!menuItem.subMenu" class="dropdown-menu">
+          <ng-container *ngFor="let childMenuItem of menuItem.subMenu.visibleNavItems; let i = index">
+            <ng-template *ngTemplateOutlet="li; context: { $implicit: childMenuItem }"></ng-template>
+          </ng-container>
+        </ul>
+      </li>
+    </ng-template>
+    <ng-container *ngTemplateOutlet="li; context: { $implicit: menuItem }"></ng-container>
+  `,
 })
 export class MultiLevelNavItemComponent implements OnInit {
   @Input() public menuItem: MultiLevelNavitemDirective;
@@ -76,5 +89,4 @@ export class MultiLevelNavItemComponent implements OnInit {
     }
     return value;
   }
-
 }

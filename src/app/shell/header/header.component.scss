@@ -20,7 +20,7 @@
 }
 
 v-radiogroup {
-  >::ng-deep .btn-group {
+  > ::ng-deep .btn-group {
     height: 100%;
   }
 }

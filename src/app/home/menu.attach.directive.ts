@@ -4,8 +4,5 @@ import { Directive, HostListener, Input, ViewChild } from '@angular/core';
   selector: '[menu]',
 })
 export class MenuAttachDirective {
-
-  constructor() {
-
-  }
+  constructor() {}
 }

@@ -1,8 +1,8 @@
-<div class="d-flex flex-column" style="height:100%">
+<div class="d-flex flex-column" style="height: 100%;">
   <div>
     <app-header></app-header>
   </div>
-  <div class="flex-grow-1 overflow-auto">
+  <div class="flex-grow-1" [class.overflow-auto]="!designerService.NoScroll">
     <router-outlet></router-outlet>
   </div>
 </div>

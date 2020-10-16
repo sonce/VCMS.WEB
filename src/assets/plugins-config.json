@@ -1,0 +1,12 @@
+{
+  "plugin1": {
+    "name": "Plugin 2",
+    "path": "/assets/plugins/plugin1.js",
+    "deps": []
+  },
+  "plugin2": {
+    "name": "Plugin 2",
+    "path": "/assets/plugins/plugin2.js",
+    "deps": []
+  }
+}

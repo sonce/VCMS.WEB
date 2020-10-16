@@ -16,9 +16,11 @@ const log = new Logger('ErrorHandlerInterceptor');
 })
 export class ErrorHandlerInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(request).pipe(catchError((error: HttpErrorResponse) => {
-      return this.errorHandler(error)
-    }));
+    return next.handle(request).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return this.errorHandler(error);
+      })
+    );
   }
 
   // Customize the default error handler here if needed

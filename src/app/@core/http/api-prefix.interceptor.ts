@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 import { JwtService, TestService } from '../services';
 import { filter, tap } from 'rxjs/operators';
+import { Logger } from '../logger.service';
+
+const log = new Logger('ApiPrefixInterceptor');
 
 /**
  * Prefixes all requests not starting with `http[s]` with `environment.serverUrl`.
@@ -13,13 +16,12 @@ import { filter, tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ApiPrefixInterceptor implements HttpInterceptor {
-  constructor(private injector: Injector,
-    private jwtService: JwtService) { }
+  constructor(private jwtService: JwtService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const headersConfig = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      Accept: 'application/json',
     };
 
     const token = this.jwtService.getToken();
@@ -35,9 +37,8 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
     request = request.clone({ setHeaders: headersConfig, url: requestUrl });
 
     return next.handle(request).pipe(
-      filter(event=>event instanceof HttpResponse),
-      tap((event:HttpResponse<any>)=>{
-      })
-    )
+      filter((event) => event instanceof HttpResponse),
+      tap((event: HttpResponse<any>) => {})
+    );
   }
 }

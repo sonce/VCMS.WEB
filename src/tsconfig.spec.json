@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/spec",
+    "allowJs": true,
+    "types": ["jest", "node"]
+  },
+  "files": ["./polyfills.ts"],
+  "include": ["./**/*.spec.ts", "./**/*.mock.ts", "./**/*.d.ts", "./@types/PostmatEvents.d.ts"]
+}

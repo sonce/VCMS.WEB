@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DesignerService } from '@app/@core/services';
 
 @Component({
   selector: 'app-shell',
@@ -6,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shell.component.scss'],
 })
 export class ShellComponent implements OnInit {
-  constructor() {
-  }
+  constructor(public designerService: DesignerService) {}
 
   ngOnInit() {}
 }

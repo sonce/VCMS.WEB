@@ -6,7 +6,7 @@ import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl
  * Sanitize HTML
  */
 @Pipe({
-  name: 'safe'
+  name: 'safe',
 })
 export class SafePipe implements PipeTransform {
   /**
@@ -15,8 +15,7 @@ export class SafePipe implements PipeTransform {
    * @param _sanitizer: DomSanitezer
    */
   // tslint:disable-next-line
-  constructor(protected _sanitizer: DomSanitizer) {
-  }
+  constructor(protected _sanitizer: DomSanitizer) {}
 
   /**
    * Transform
