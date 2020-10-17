@@ -14,7 +14,7 @@
         class="icon-page-section-control-button iconfont icon-exit"
         data-bind="click:handle.bind($data,event,$root),clickBubble: false,visible:shown,attr: {title: tip },css:icon"
         title="退出"
-        style="display: none;"
+        style="display: none"
       ></div>
 
       <div
@@ -74,7 +74,7 @@
     class="component-labels label-small label-top"
     data-bind="css:{dragable:canDrag,'label-top':labelIsTop,'label-bottom':!labelIsTop()}"
   >
-    <span style="width: 130px; word-wrap: break-word; display: block;" class="text-truncate text-center text-capitalize"
+    <span style="width: 130px; word-wrap: break-word; display: block" class="text-truncate text-center text-capitalize"
       >{{ CurrentElementInfo.type }}
     </span>
     <div class="card-actions">
