@@ -1,37 +1,37 @@
-@import "./src/theme/theme-variables.scss";
-@import "~bootstrap/scss/mixins/_hover";
+@import './src/theme/theme-variables.scss';
+@import '~bootstrap/scss/mixins/_hover';
 
 :host ::ng-deep .dropdown {
-  border: $dropdown-border-width solid $dropdown-border-color;
-  background-color: $dropdown-bg;
-  &.show {
-    border-bottom: none;
-  }
+	border: $dropdown-border-width solid $dropdown-border-color;
+	background-color: $dropdown-bg;
+	&.show {
+		border-bottom: none;
+	}
 }
 .dropdown-toggle {
-  width: 100%;
-  border: none;
-  &:after {
-    display: none;
-  }
+	width: 100%;
+	border: none;
+	&:after {
+		display: none;
+	}
 
-  @include hover-focus() {
-    // border: none;
-    box-shadow: none;
-  }
+	@include hover-focus() {
+		// border: none;
+		box-shadow: none;
+	}
 }
 .dropdown-menu {
-  border: $dropdown-border-width solid $dropdown-border-color;
-  border-top-width: 0;
-  border-top-left-radius: 0em;
-  border-top-right-radius: 0em;
-  width: calc(100% + #{$dropdown-border-width * 2});
-  margin: 0;
-  margin-left: -#{$dropdown-border-width};
-  padding-bottom: 0;
+	border: $dropdown-border-width solid $dropdown-border-color;
+	border-top-width: 0;
+	border-top-left-radius: 0em;
+	border-top-right-radius: 0em;
+	width: calc(100% + #{$dropdown-border-width * 2});
+	margin: 0;
+	margin-left: -#{$dropdown-border-width};
+	padding-bottom: 0;
 }
 :host ::ng-deep .dropdownfooter {
-  padding: 0.75rem 1.25rem;
-  background-color: rgba(0, 0, 0, 0.03);
-  border-top: $dropdown-border-width solid $dropdown-border-color;
+	padding: 0.75rem 1.25rem;
+	background-color: rgba(0, 0, 0, 0.03);
+	border-top: $dropdown-border-width solid $dropdown-border-color;
 }

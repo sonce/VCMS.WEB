@@ -17,38 +17,38 @@ import { CoreModule } from '@app/@core';
 import { HttpClientModule } from '@angular/common/http';
 
 describe('HeaderComponent', () => {
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
+	let component: HeaderComponent;
+	let fixture: ComponentFixture<HeaderComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        NgbModule,
-        TranslateModule.forRoot(),
-        SharedModule,
-        CoreModule,
-        HttpClientModule,
-        I18nModule,
-        NgxSpinnerModule,
-        TreeModule,
-        ReactiveFormsModule,
-      ],
-      declarations: [HeaderComponent, SitePagesDropdownComponent],
-      providers: [
-        { provide: AuthenticationService, useClass: MockAuthenticationService },
-        { provide: CredentialsService, useClass: MockCredentialsService },
-      ],
-    }).compileComponents();
-  }));
+	beforeEach(async(() => {
+		TestBed.configureTestingModule({
+			imports: [
+				RouterTestingModule,
+				NgbModule,
+				TranslateModule.forRoot(),
+				SharedModule,
+				CoreModule,
+				HttpClientModule,
+				I18nModule,
+				NgxSpinnerModule,
+				TreeModule,
+				ReactiveFormsModule
+			],
+			declarations: [HeaderComponent, SitePagesDropdownComponent],
+			providers: [
+				{ provide: AuthenticationService, useClass: MockAuthenticationService },
+				{ provide: CredentialsService, useClass: MockCredentialsService }
+			]
+		}).compileComponents();
+	}));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HeaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(HeaderComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

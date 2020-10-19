@@ -1,119 +1,119 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white" [class.mb-0]="designerService.HeaderNoMarginBottom">
-    <a class="navbar-brand" href="#" translate>
-      <img src="/assets/v-logo.svg" width="30" height="30" alt="" />
-      APP_NAME
-    </a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      aria-controls="navbar-menu"
-      aria-label="Toggle navigation"
-      (click)="toggleMenu()"
-      [attr.aria-expanded]="!menuHidden"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <span class="separator"></span>
-    <div id="navbar-menu" class="collapse navbar-collapse float-xs-none" [ngbCollapse]="menuHidden">
-      <div class="navbar-nav">
-        <sitepages-dropdown
-          class="align-self-center"
-          [SelectedPageId]="designerService.CurrentPageId"
-          [Editable]="true"
-          (OnSelectChange)="SelectPageChanged($event)"
-        >
-        </sitepages-dropdown>
-        <span class="separator"></span>
-        <v-radiogroup
-          [name]="'designmode'"
-          [value]="designerService.IsMobile"
-          (onToggleCheck)="changeViewMode($event)"
-          [skin]="'bottomline'"
-        >
-          <v-radiogroup-item [value]="false">
-            <i>
-              <svg width="24" height="18" viewBox="0 0 24 18">
-                <defs>
-                  <path
-                    id="top-bar-desktop-icon-a"
-                    d="M18 2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h12zm0 1H6c-.551 0-1 .449-1 1v8c0 .551.449 1 1 1h12c.551 0 1-.449 1-1V4c0-.551-.449-1-1-1zm-4.207 13l1.208 1.037H9L10.257 16h3.537zM5 11v-1h14v1H5z"
-                  ></path>
-                </defs>
-                <use fill-rule="evenodd" xlink:href="#top-bar-desktop-icon-a"></use>
-              </svg>
-            </i>
-          </v-radiogroup-item>
-          <v-radiogroup-item [value]="true">
-            <i>
-              <svg width="24" height="18" viewBox="0 0 24 18" class="symbol symbol-topBarNewMobile btn-symbol">
-                <defs>
-                  <path
-                    id="top-bar-mobile-icon-a"
-                    d="M15 0c1.1 0 2 .9 2 2v13c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2V2c0-1.1.9-2 2-2h6zm1 15V2c0-.55-.45-1-1-1H9c-.55 0-1 .45-1 1v13c0 .55.45 1 1 1h6c.55 0 1-.45 1-1zm-8-1v-1h8v1H8z"
-                  ></path>
-                </defs>
-                <use fill-rule="evenodd" xlink:href="#top-bar-mobile-icon-a"></use>
-              </svg>
-            </i>
-          </v-radiogroup-item>
-        </v-radiogroup>
-        <span class="separator"></span>
-        <app-multilevelnav [isVertical]="false" [showArrow]="true">
-          <ng-template multiLevelNavItem [fullTemplate]="true"
-            ><a class="nav-item nav-link text-uppercase" routerLink="/home" routerLinkActive="active">
-              <i class="fas fa-home"></i>
-              <span translate>Home</span>
-            </a></ng-template
-          >
-          <ng-template multiLevelNavItem [fullTemplate]="true"
-            ><a class="nav-item nav-link text-uppercase" routerLink="/about" routerLinkActive="active">
-              <i class="fas fa-question-circle"></i>
-              <span translate>About</span>
-            </a></ng-template
-          >
-          <ng-template multiLevelNavItem [fullTemplate]="true" [subMenu]="m" [passive]="true">
-            <a class="nav-item nav-link text-uppercase">
-              <i class="fas fa-question-circle"></i>
-              <span translate>多内容</span>
-            </a>
-          </ng-template>
-          <ng-template #m>
-            <div class="d-flex align-items-stretch bd-highlight" style="height: 100px">
-              <div class="p-2 bd-highlight">Flex item</div>
-              <div class="p-2 bd-highlight">Flex item</div>
-              <div class="p-2 bd-highlight">Flex item</div>
-            </div>
-          </ng-template>
-        </app-multilevelnav>
-      </div>
-      <div class="navbar-nav ml-auto">
-        <span class="separator"></span>
-        <a class="nav-item nav-link text-capitalize" (click)="togglePreview()">
-          <span translate>{{ this.designerService.InDesign ? '预览' : '返回设计' }}</span>
-        </a>
-        <span class="separator"></span>
-        <a class="nav-item nav-link text-capitalize" routerLink="/about" routerLinkActive="active">
-          <span translate>Save</span>
-        </a>
-        <span class="separator"></span>
-        <a class="nav-item nav-link text-capitalize" routerLink="/about" routerLinkActive="active">
-          <span translate>Publish</span>
-        </a>
-        <app-language-selector [inNavbar]="true" menuClass="dropdown-menu dropdown-menu-right"></app-language-selector>
-        <div class="nav-item" ngbDropdown>
-          <a id="user-dropdown" class="nav-link" ngbDropdownToggle>
-            <i class="fas fa-user-circle"></i>
-          </a>
-          <div ngbDropdownMenu aria-labelledby="user-dropdown" class="dropdown-menu dropdown-menu-right">
-            <h6 class="dropdown-header">
-              <span translate>Logged in as</span> <b>{{ username }}</b>
-            </h6>
-            <div class="dropdown-divider"></div>
-            <button class="dropdown-item" (click)="logout()" translate>Logout</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
+	<nav class="navbar navbar-expand-lg navbar-light bg-white" [class.mb-0]="designerService.HeaderNoMarginBottom">
+		<a class="navbar-brand" href="#" translate>
+			<img src="/assets/v-logo.svg" width="30" height="30" alt="" />
+			APP_NAME
+		</a>
+		<button
+			class="navbar-toggler"
+			type="button"
+			aria-controls="navbar-menu"
+			aria-label="Toggle navigation"
+			(click)="toggleMenu()"
+			[attr.aria-expanded]="!menuHidden"
+		>
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<span class="separator"></span>
+		<div id="navbar-menu" class="collapse navbar-collapse float-xs-none" [ngbCollapse]="menuHidden">
+			<div class="navbar-nav">
+				<sitepages-dropdown
+					class="align-self-center"
+					[SelectedPageId]="designerService.CurrentPageId"
+					[Editable]="true"
+					(OnSelectChange)="SelectPageChanged($event)"
+				>
+				</sitepages-dropdown>
+				<span class="separator"></span>
+				<v-radiogroup
+					[name]="'designmode'"
+					[value]="designerService.IsMobile"
+					(onToggleCheck)="changeViewMode($event)"
+					[skin]="'bottomline'"
+				>
+					<v-radiogroup-item [value]="false">
+						<i>
+							<svg width="24" height="18" viewBox="0 0 24 18">
+								<defs>
+									<path
+										id="top-bar-desktop-icon-a"
+										d="M18 2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h12zm0 1H6c-.551 0-1 .449-1 1v8c0 .551.449 1 1 1h12c.551 0 1-.449 1-1V4c0-.551-.449-1-1-1zm-4.207 13l1.208 1.037H9L10.257 16h3.537zM5 11v-1h14v1H5z"
+									></path>
+								</defs>
+								<use fill-rule="evenodd" xlink:href="#top-bar-desktop-icon-a"></use>
+							</svg>
+						</i>
+					</v-radiogroup-item>
+					<v-radiogroup-item [value]="true">
+						<i>
+							<svg width="24" height="18" viewBox="0 0 24 18" class="symbol symbol-topBarNewMobile btn-symbol">
+								<defs>
+									<path
+										id="top-bar-mobile-icon-a"
+										d="M15 0c1.1 0 2 .9 2 2v13c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2V2c0-1.1.9-2 2-2h6zm1 15V2c0-.55-.45-1-1-1H9c-.55 0-1 .45-1 1v13c0 .55.45 1 1 1h6c.55 0 1-.45 1-1zm-8-1v-1h8v1H8z"
+									></path>
+								</defs>
+								<use fill-rule="evenodd" xlink:href="#top-bar-mobile-icon-a"></use>
+							</svg>
+						</i>
+					</v-radiogroup-item>
+				</v-radiogroup>
+				<span class="separator"></span>
+				<app-multilevelnav [isVertical]="false" [showArrow]="true">
+					<ng-template multiLevelNavItem [fullTemplate]="true"
+						><a class="nav-item nav-link text-uppercase" routerLink="/home" routerLinkActive="active">
+							<i class="fas fa-home"></i>
+							<span translate>Home</span>
+						</a></ng-template
+					>
+					<ng-template multiLevelNavItem [fullTemplate]="true"
+						><a class="nav-item nav-link text-uppercase" routerLink="/about" routerLinkActive="active">
+							<i class="fas fa-question-circle"></i>
+							<span translate>About</span>
+						</a></ng-template
+					>
+					<ng-template multiLevelNavItem [fullTemplate]="true" [subMenu]="m" [passive]="true">
+						<a class="nav-item nav-link text-uppercase">
+							<i class="fas fa-question-circle"></i>
+							<span translate>多内容</span>
+						</a>
+					</ng-template>
+					<ng-template #m>
+						<div class="d-flex align-items-stretch bd-highlight" style="height: 100px">
+							<div class="p-2 bd-highlight">Flex item</div>
+							<div class="p-2 bd-highlight">Flex item</div>
+							<div class="p-2 bd-highlight">Flex item</div>
+						</div>
+					</ng-template>
+				</app-multilevelnav>
+			</div>
+			<div class="navbar-nav ml-auto">
+				<span class="separator"></span>
+				<a class="nav-item nav-link text-capitalize" (click)="togglePreview()">
+					<span translate>{{ this.designerService.InDesign ? '预览' : '返回设计' }}</span>
+				</a>
+				<span class="separator"></span>
+				<a class="nav-item nav-link text-capitalize" routerLink="/about" routerLinkActive="active">
+					<span translate>Save</span>
+				</a>
+				<span class="separator"></span>
+				<a class="nav-item nav-link text-capitalize" routerLink="/about" routerLinkActive="active">
+					<span translate>Publish</span>
+				</a>
+				<app-language-selector [inNavbar]="true" menuClass="dropdown-menu dropdown-menu-right"></app-language-selector>
+				<div class="nav-item" ngbDropdown>
+					<a id="user-dropdown" class="nav-link" ngbDropdownToggle>
+						<i class="fas fa-user-circle"></i>
+					</a>
+					<div ngbDropdownMenu aria-labelledby="user-dropdown" class="dropdown-menu dropdown-menu-right">
+						<h6 class="dropdown-header">
+							<span translate>Logged in as</span> <b>{{ username }}</b>
+						</h6>
+						<div class="dropdown-divider"></div>
+						<button class="dropdown-item" (click)="logout()" translate>Logout</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
 </header>

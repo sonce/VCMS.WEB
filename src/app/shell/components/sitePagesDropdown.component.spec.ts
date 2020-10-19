@@ -12,34 +12,34 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from '@app/@core';
 
 describe('SitePagesDropdownComponent', () => {
-  let component: SitePagesDropdownComponent;
-  let fixture: ComponentFixture<SitePagesDropdownComponent>;
+	let component: SitePagesDropdownComponent;
+	let fixture: ComponentFixture<SitePagesDropdownComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        NgbModule,
-        TranslateModule.forRoot(),
-        SharedModule,
-        TreeModule,
-        HttpClientModule,
-        I18nModule,
-        ReactiveFormsModule,
-        NgxSpinnerModule,
-        CoreModule,
-      ],
-      declarations: [SitePagesDropdownComponent],
-    }).compileComponents();
-  }));
+	beforeEach(async(() => {
+		TestBed.configureTestingModule({
+			imports: [
+				RouterTestingModule,
+				NgbModule,
+				TranslateModule.forRoot(),
+				SharedModule,
+				TreeModule,
+				HttpClientModule,
+				I18nModule,
+				ReactiveFormsModule,
+				NgxSpinnerModule,
+				CoreModule
+			],
+			declarations: [SitePagesDropdownComponent]
+		}).compileComponents();
+	}));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SitePagesDropdownComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(SitePagesDropdownComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

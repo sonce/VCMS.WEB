@@ -1,18 +1,18 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
-  selector: '[autofocus]',
+	selector: '[autofocus]'
 })
 export class AutofocusDirective {
-  private _autofocus: boolean = true;
-  constructor(private el: ElementRef) {}
+	private _autofocus = true;
+	constructor(private el: ElementRef) {}
 
-  ngOnInit() {
-    // if (this._autofocus || typeof this._autofocus === "undefined")
-    this.el.nativeElement.focus(); //For SSR (server side rendering) this is not safe. Use: https://github.com/angular/angular/issues/15008#issuecomment-285141070)
-  }
+	ngOnInit() {
+		// if (this._autofocus || typeof this._autofocus === "undefined")
+		this.el.nativeElement.focus(); //For SSR (server side rendering) this is not safe. Use: https://github.com/angular/angular/issues/15008#issuecomment-285141070)
+	}
 
-  @Input() set autofocus(condition: boolean) {
-    this._autofocus = condition != false;
-  }
+	@Input() set autofocus(condition: boolean) {
+		this._autofocus = condition != false;
+	}
 }

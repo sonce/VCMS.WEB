@@ -2,25 +2,25 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { Tab } from './tab.interface';
 
 @Component({
-  selector: 'shared-tabs',
-  templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.scss'],
+	selector: 'lib-shared-tabs',
+	templateUrl: './tabs.component.html',
+	styleUrls: ['./tabs.component.scss']
 })
 export class TabsComponent {
-  tabs: Tab[] = [];
+	tabs: Tab[] = [];
 
-  @Output() selected = new EventEmitter();
+	@Output() selected = new EventEmitter();
 
-  addTab(tabComponent: Tab) {
-    if (!this.tabs.length) {
-      tabComponent.hidden = false;
-    }
-    this.tabs.push(tabComponent);
-  }
+	addTab(tabComponent: Tab) {
+		if (!this.tabs.length) {
+			tabComponent.hidden = false;
+		}
+		this.tabs.push(tabComponent);
+	}
 
-  selectTab(tabComponent: Tab) {
-    this.tabs.map((tab) => (tab.hidden = true));
-    tabComponent.hidden = false;
-    this.selected.emit(tabComponent);
-  }
+	selectTab(tabComponent: Tab) {
+		this.tabs.map((tab) => (tab.hidden = true));
+		tabComponent.hidden = false;
+		this.selected.emit(tabComponent);
+	}
 }

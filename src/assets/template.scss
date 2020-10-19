@@ -1,106 +1,106 @@
 $default-border-color: rgba(211, 237, 255, 0.8);
 
 [contenteditable]:focus {
-  outline: 0px solid transparent;
+	outline: 0px solid transparent;
 }
 
 html {
-  &.indesign {
-    cursor: default;
+	&.indesign {
+		cursor: default;
 
-    & > body {
-      cursor: default;
+		& > body {
+			cursor: default;
 
-      a {
-        cursor: default;
-      }
+			a {
+				cursor: default;
+			}
 
-      // [data-addon] {
-      //   // cursor: grab;
-      //   [placeholder]:empty:before {
-      //     content: attr(placeholder);
-      //     display: block; /* For Firefox */
-      //   }
-      // }
-      [data-addon] {
-        cursor: pointer;
-        // &:hover,
-        // &:active {
-        //   outline: $default-border-color solid 1px;
-        // }
-      }
+			// [data-addon] {
+			//   // cursor: grab;
+			//   [placeholder]:empty:before {
+			//     content: attr(placeholder);
+			//     display: block; /* For Firefox */
+			//   }
+			// }
+			[data-addon] {
+				cursor: pointer;
+				// &:hover,
+				// &:active {
+				//   outline: $default-border-color solid 1px;
+				// }
+			}
 
-      [data-addon="text"] {
-        cursor: text;
-      }
+			[data-addon='text'] {
+				cursor: text;
+			}
 
-      section.page-section {
-        & > .content-wrapper {
-          [placeholder] {
-            &:hover:empty:before {
-              color: rgb(95, 95, 95);
-            }
-            &:empty:before {
-              cursor: pointer;
-              color: #999;
-              content: attr(placeholder);
-              display: block;
-            }
-          }
-        }
-        &:hover,
-        &.indesign {
-          & > .content-wrapper {
-            & > .content {
-              &:not(:empty) {
-                outline: 1px dashed rgba(0, 0, 0, 0.1);
-                .grid-stack-item,
-                .colitem {
-                  &.doing {
-                    opacity: 0.5;
-                  }
-                  outline: 1px dashed rgba(0, 0, 0, 0.1);
-                }
-              }
-            }
-          }
-        }
-      }
+			section.page-section {
+				& > .content-wrapper {
+					[placeholder] {
+						&:hover:empty:before {
+							color: rgb(95, 95, 95);
+						}
+						&:empty:before {
+							cursor: pointer;
+							color: #999;
+							content: attr(placeholder);
+							display: block;
+						}
+					}
+				}
+				&:hover,
+				&.indesign {
+					& > .content-wrapper {
+						& > .content {
+							&:not(:empty) {
+								outline: 1px dashed rgba(0, 0, 0, 0.1);
+								.grid-stack-item,
+								.colitem {
+									&.doing {
+										opacity: 0.5;
+									}
+									outline: 1px dashed rgba(0, 0, 0, 0.1);
+								}
+							}
+						}
+					}
+				}
+			}
 
-      .btui-dragable-target {
-        &.left {
-          border-left: 2px solid;
-          margin-left: -2px;
-        }
-        &.right {
-          border-right: 2px solid;
-          margin-right: -2px;
-        }
-        &.top {
-          border-top: 2px solid;
-          margin-top: -2px;
-        }
-        &.bottom {
-          border-bottom: 2px solid;
-          margin-bottom: -2px;
-        }
-      }
-    }
-  }
-  &.mobile {
-    &::-webkit-scrollbar {
-      width: 5px;
-      background-color: transparent;
-    }
-    &::-webkit-scrollbar-track {
-      // -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-      border-radius: 5px;
-      background-color: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-      border-radius: 5px;
-      // -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-      background-color: rgba(85, 85, 85, 0.507);
-    }
-  }
+			.btui-dragable-target {
+				&.left {
+					border-left: 2px solid;
+					margin-left: -2px;
+				}
+				&.right {
+					border-right: 2px solid;
+					margin-right: -2px;
+				}
+				&.top {
+					border-top: 2px solid;
+					margin-top: -2px;
+				}
+				&.bottom {
+					border-bottom: 2px solid;
+					margin-bottom: -2px;
+				}
+			}
+		}
+	}
+	&.mobile {
+		&::-webkit-scrollbar {
+			width: 5px;
+			background-color: transparent;
+		}
+		&::-webkit-scrollbar-track {
+			// -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+			border-radius: 5px;
+			background-color: transparent;
+		}
+		&::-webkit-scrollbar-thumb {
+			border-radius: 5px;
+			// -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+			background-color: rgba(85, 85, 85, 0.507);
+		}
+	}
 }

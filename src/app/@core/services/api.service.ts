@@ -1,131 +1,133 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpHeaders, HttpClient, HttpParams, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import _ from 'lodash-es';
 
-import { catchError, switchMap, tap } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 
 export interface IResponseBody<T = any> {
-  code: number;
-  message: string;
-  data: T;
+	code: number;
+	message: string;
+	data: T;
 }
 
 export interface IHttpClientServiceOptions {
-  headers?:
-    | HttpHeaders
-    | {
-        [header: string]: string | string[];
-      };
-  observe?: 'response' | 'events' | 'body';
-  params?:
-    | HttpParams
-    | {
-        [param: string]: string | string[];
-      };
-  reportProgress?: boolean;
-  responseType?: 'json' | 'arraybuffer' | 'blob' | 'text' | 'arraybuffer';
-  withCredentials?: boolean;
-  /** 不检查API的数据格式 */
-  ignoreCheck?: boolean;
-  ignoreErrorCheck?: boolean;
-  timeStamp?: boolean;
+	headers?:
+		| HttpHeaders
+		| {
+				[header: string]: string | string[];
+		  };
+	observe?: 'response' | 'events' | 'body';
+	params?:
+		| HttpParams
+		| {
+				[param: string]: string | string[];
+		  };
+	reportProgress?: boolean;
+	responseType?: 'json' | 'arraybuffer' | 'blob' | 'text' | 'arraybuffer';
+	withCredentials?: boolean;
+	/** 不检查API的数据格式 */
+	ignoreCheck?: boolean;
+	ignoreErrorCheck?: boolean;
+	timeStamp?: boolean;
 }
 
 @Injectable()
 export class ApiService {
-  constructor(private http: HttpClient) {}
+	static handleSuccess<T = any>(response: IResponseBody, handleAlert = alert): Observable<T | null> {
+		// 此处根据你项目后端返回数据结构自行修改
+		if (!(_.has(response, 'message') && _.has(response, 'code'))) {
+			handleAlert.call(null, '服务器数据格式错误！');
+			return of(null);
+		}
 
-  private formatErrors(error: any) {
-    return throwError(error.error);
-  }
+		if (response.code !== 0) {
+			handleAlert.call(null, response.message || '请求成功，但服务器遭遇未知错误！');
+			return of(null);
+		}
 
-  get<T = any>(path: string, data?: object, options?: IHttpClientServiceOptions): Observable<T | null> {
-    let params = new HttpParams();
-    if (_.isObjectLike(data)) {
-      Object.keys(data).forEach((key) => {
-        params = params.append(`${key}`, `${data[key]}`);
-      });
-    }
+		return of(response.data);
+	}
 
-    const isUseTimeStamp = _.get(options, 'timeStamp');
-    if ((isUseTimeStamp !== false && !environment.production) || isUseTimeStamp === true) {
-      // 开发环境默认添加时间戳
-      params = params.append('_t', new Date().getTime().toString());
-    }
+	constructor(private http: HttpClient) {}
 
-    let currentOptions = _.merge(
-      {
-        reportProgress: true,
-        observe: 'events' as 'events',
-        responseType: 'json' as 'json',
-        withCredentials: false,
-        params: params,
-      },
-      options
-    );
-    return this.http.get(`${path}`, currentOptions).pipe(
-      switchMap((response: HttpResponse<IResponseBody>) => {
-        if (_.get(options, 'ignoreCheck')) {
-          return of(response.body.data);
-        }
+	private formatErrors(error: { error: any }) {
+		return throwError(error.error);
+	}
 
-        return ApiService.handleSuccess<T>(response.body, this.errorMsg);
-      })
-    );
-  }
+	get<T>(path: string, data?: unknown, options?: IHttpClientServiceOptions): Observable<T | null> {
+		let params = new HttpParams();
+		if (_.isObjectLike(data)) {
+			Object.keys(data).forEach((key) => {
+				params = params.append(`${key}`, `${data[key]}`);
+			});
+		}
 
-  put(path: string, body: Object = {}): Observable<any> {
-    return this.http.put(`${path}`, JSON.stringify(body)).pipe(catchError(this.formatErrors));
-  }
+		const isUseTimeStamp = _.get(options, 'timeStamp');
+		if ((isUseTimeStamp !== false && !environment.production) || isUseTimeStamp === true) {
+			// 开发环境默认添加时间戳
+			params = params.append('_t', new Date().getTime().toString());
+		}
 
-  post<T = any>(path: string, data?: Object, options?: IHttpClientServiceOptions): Observable<T | null> {
-    return this.http
-      .post(
-        `${path}`,
-        data,
-        _.merge(
-          {
-            reportProgress: true,
-            observe: 'response' as 'response',
-            responseType: 'json' as 'json',
-            withCredentials: false,
-          },
-          options
-        )
-      )
-      .pipe(
-        switchMap((response: HttpResponse<IResponseBody>) => {
-          if (_.get(options, 'ignoreCheck')) {
-            return of(response.body.data);
-          }
+		const currentOptions = _.merge(
+			{
+				reportProgress: true,
+				observe: 'events' as const,
+				responseType: 'json' as const,
+				withCredentials: false,
+				params: params
+			},
+			options
+		);
+		return this.http.get(`${path}`, currentOptions).pipe(
+			switchMap((response: HttpResponse<IResponseBody>) => {
+				if (_.get(options, 'ignoreCheck')) {
+					return of(response.body.data);
+				}
 
-          return ApiService.handleSuccess<T>(response.body, this.errorMsg);
-        })
-      );
-  }
+				return ApiService.handleSuccess<T>(response.body, this.errorMsg);
+			})
+		);
+	}
 
-  delete(path: string): Observable<any> {
-    return this.http.delete(`${path}`).pipe(catchError(this.formatErrors));
-  }
+	put(path: string, body: unknown = {}): Observable<any> {
+		return this.http.put(`${path}`, JSON.stringify(body)).pipe(catchError(this.formatErrors));
+	}
 
-  static handleSuccess<T = any>(response: IResponseBody, handleAlert = alert): Observable<T | null> {
-    // 此处根据你项目后端返回数据结构自行修改
-    if (!(_.has(response, 'message') && _.has(response, 'code'))) {
-      handleAlert.call(null, '服务器数据格式错误！');
-      return of(null);
-    }
+	post<T = any>(path: string, data?: unknown, options?: IHttpClientServiceOptions): Observable<T | null> {
+		return this.http
+			.post(
+				`${path}`,
+				data,
+				_.merge(
+					{
+						reportProgress: true,
+						observe: 'response' as const,
+						responseType: 'json' as const,
+						withCredentials: false
+					},
+					options
+				)
+			)
+			.pipe(
+				switchMap((response: HttpResponse<IResponseBody>) => {
+					if (_.get(options, 'ignoreCheck')) {
+						return of(response.body.data);
+					}
 
-    if (response.code !== 0) {
-      handleAlert.call(null, response.message || '请求成功，但服务器遭遇未知错误！');
-      return of(null);
-    }
+					return ApiService.handleSuccess<T>(response.body, this.errorMsg);
+				})
+			);
+	}
 
-    return of(response.data);
-  }
+	delete(path: string): Observable<any> {
+		return this.http.delete(`${path}`).pipe(catchError(this.formatErrors));
+	}
 
-  errorMsg(msg: string, times = 2000) {
-    // 此处使用你项目使用UI库的弹窗提示错误信息
-  }
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	errorMsg(msg: string, times = 2000): void {
+		// 此处使用你项目使用UI库的弹窗提示错误信息
+	}
 }

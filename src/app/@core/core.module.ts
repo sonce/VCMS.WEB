@@ -11,35 +11,35 @@ import { ErrorHandlerInterceptor } from './http/error-handler.interceptor';
 import { DesignerService, SitePageService, JwtService, AddonService, TestService, ApiService } from './services';
 
 @NgModule({
-  // imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ApiPrefixInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorHandlerInterceptor,
-      multi: true,
-    },
-    {
-      provide: RouteReuseStrategy,
-      useClass: RouteReusableStrategy,
-    },
-    DesignerService,
-    SitePageService,
-    JwtService,
-    TestService,
-    AddonService,
-    ApiService,
-  ],
+	// imports: [CommonModule, HttpClientModule, TranslateModule, RouterModule],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ApiPrefixInterceptor,
+			multi: true
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ErrorHandlerInterceptor,
+			multi: true
+		},
+		{
+			provide: RouteReuseStrategy,
+			useClass: RouteReusableStrategy
+		},
+		DesignerService,
+		SitePageService,
+		JwtService,
+		TestService,
+		AddonService,
+		ApiService
+	]
 })
 export class CoreModule {
-  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
-    // Import guard
-    if (parentModule) {
-      throw new Error(`${parentModule} has already been loaded. Import Core module in the AppModule only.`);
-    }
-  }
+	constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+		// Import guard
+		if (parentModule) {
+			throw new Error(`${parentModule} has already been loaded. Import Core module in the AppModule only.`);
+		}
+	}
 }

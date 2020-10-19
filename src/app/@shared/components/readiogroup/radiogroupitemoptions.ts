@@ -1,4 +1,4 @@
 export interface RadioGroupOption {
-  value: string;
-  checked: boolean;
+	value: string;
+	checked: boolean;
 }

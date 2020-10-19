@@ -8,57 +8,57 @@ import { ApiPrefixInterceptor } from './api-prefix.interceptor';
 import { JwtService } from '../services';
 
 describe('ApiPrefixInterceptor', () => {
-  let http: HttpClient;
-  let httpMock: HttpTestingController;
-  const oldResetTestingModule = TestBed.resetTestingModule;
+	let http: HttpClient;
+	let httpMock: HttpTestingController;
+	const oldResetTestingModule = TestBed.resetTestingModule;
 
-  beforeAll((done) =>
-    (async () => {
-      TestBed.resetTestingModule();
+	beforeAll((done) =>
+		(async () => {
+			TestBed.resetTestingModule();
 
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        providers: [
-          JwtService,
-          {
-            provide: HTTP_INTERCEPTORS,
-            useClass: ApiPrefixInterceptor,
-            multi: true,
-          },
-        ],
-      });
+			TestBed.configureTestingModule({
+				imports: [HttpClientTestingModule],
+				providers: [
+					JwtService,
+					{
+						provide: HTTP_INTERCEPTORS,
+						useClass: ApiPrefixInterceptor,
+						multi: true
+					}
+				]
+			});
 
-      http = TestBed.inject(HttpClient);
-      httpMock = TestBed.inject(HttpTestingController as Type<HttpTestingController>);
+			http = TestBed.inject(HttpClient);
+			httpMock = TestBed.inject(HttpTestingController as Type<HttpTestingController>);
 
-      // prevent Angular from resetting testing module
-      TestBed.resetTestingModule = () => TestBed;
-    })()
-      .then(done)
-      .catch(done.fail)
-  );
+			// prevent Angular from resetting testing module
+			TestBed.resetTestingModule = () => TestBed;
+		})()
+			.then(done)
+			.catch(done.fail)
+	);
 
-  afterEach(() => {
-    httpMock.verify();
-  });
+	afterEach(() => {
+		httpMock.verify();
+	});
 
-  it('should prepend environment.serverUrl to the request url', () => {
-    // Act
-    http.get('/toto').subscribe();
-    // Assert
-    httpMock.expectOne({ url: environment.serverUrl + '/toto' });
-  });
+	it('should prepend environment.serverUrl to the request url', () => {
+		// Act
+		http.get('/toto').subscribe();
+		// Assert
+		httpMock.expectOne({ url: environment.serverUrl + '/toto' });
+	});
 
-  it('should not prepend environment.serverUrl to request url', () => {
-    // Act
-    http.get('hTtPs://domain.com/toto').subscribe();
+	it('should not prepend environment.serverUrl to request url', () => {
+		// Act
+		http.get('hTtPs://domain.com/toto').subscribe();
 
-    // Assert
-    httpMock.expectOne((req: HttpRequest<any>) => req.url.includes('hTtPs://domain.com/toto'));
-  });
+		// Assert
+		httpMock.expectOne((req: HttpRequest<unknown>) => req.url.includes('hTtPs://domain.com/toto'));
+	});
 
-  afterAll(() => {
-    TestBed.resetTestingModule = oldResetTestingModule;
-    TestBed.resetTestingModule();
-  });
+	afterAll(() => {
+		TestBed.resetTestingModule = oldResetTestingModule;
+		TestBed.resetTestingModule();
+	});
 });

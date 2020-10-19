@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -12,20 +13,20 @@ const log = new Logger('ErrorHandlerInterceptor');
  * Adds a default error handler to all requests.
  */
 @Injectable({
-  providedIn: 'root',
+	providedIn: 'root'
 })
 export class ErrorHandlerInterceptor implements HttpInterceptor {
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(request).pipe(
-      catchError((error: HttpErrorResponse) => {
-        return this.errorHandler(error);
-      })
-    );
-  }
+	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+		return next.handle(request).pipe(
+			catchError((error: HttpErrorResponse) => {
+				return this.errorHandler(error);
+			})
+		);
+	}
 
-  // Customize the default error handler here if needed
-  private errorHandler(response: HttpErrorResponse): Observable<HttpEvent<any>> {
-    /*
+	// Customize the default error handler here if needed
+	private errorHandler(response: HttpErrorResponse): Observable<HttpEvent<any>> {
+		/*
         const { ok, error, status, statusText } = errorResponse;
         let { message = null } = error || {};
 
@@ -67,10 +68,10 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
 
         handleAlert.call(null, message);
         */
-    if (!environment.production) {
-      // Do something with the error
-      log.error('Request error', response);
-    }
-    throw response;
-  }
+		if (!environment.production) {
+			// Do something with the error
+			log.error('Request error', response);
+		}
+		throw response;
+	}
 }

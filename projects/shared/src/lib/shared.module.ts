@@ -9,8 +9,8 @@ import { ButtonComponent } from './button/button.component';
 const sharedComponents = [SharedComponent, ButtonComponent, TabComponent, TabsComponent];
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: [...sharedComponents],
-  exports: [...sharedComponents],
+	imports: [CommonModule],
+	declarations: [...sharedComponents],
+	exports: [...sharedComponents]
 })
 export class SharedModule {}

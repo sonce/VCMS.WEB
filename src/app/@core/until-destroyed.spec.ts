@@ -1,165 +1,164 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { OnInit, OnDestroy } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { PartialObserver, Subject, Subscription } from 'rxjs';
 
 import { untilDestroyed } from './until-destroyed';
 
 function createObserver() {
-  return {
-    next: jasmine.createSpy(),
-    error: jasmine.createSpy(),
-    complete: jasmine.createSpy(),
-  };
+	return {
+		next: jasmine.createSpy(),
+		error: jasmine.createSpy(),
+		complete: jasmine.createSpy()
+	};
 }
 
 describe('untilDestroyed', () => {
-  it('should not destroy other instances', () => {
-    // Arrange
-    const spy = createObserver();
-    const spy2 = createObserver();
+	it('should not destroy other instances', () => {
+		// Arrange
+		const spy = createObserver();
+		const spy2 = createObserver();
 
-    class Test implements OnDestroy {
-      obs!: Subscription;
+		class Test implements OnDestroy {
+			obs!: Subscription;
+			ngOnDestroy() {}
+			subscribe(cb: PartialObserver<unknown>) {
+				this.obs = new Subject().pipe(untilDestroyed(this)).subscribe(cb);
+			}
+		}
 
-      ngOnDestroy() {}
+		// Act
+		const component1 = new Test();
+		const component2 = new Test();
+		component1.subscribe(spy);
+		component2.subscribe(spy2);
+		component1.ngOnDestroy();
 
-      subscribe(cb: any) {
-        this.obs = new Subject().pipe(untilDestroyed(this)).subscribe(cb);
-      }
-    }
+		// Assert
+		expect(spy.complete).toHaveBeenCalledTimes(1);
+		expect(spy2.complete).not.toHaveBeenCalled();
+		component2.ngOnDestroy();
+		expect(spy2.complete).toHaveBeenCalledTimes(1);
+	});
 
-    // Act
-    const component1 = new Test();
-    const component2 = new Test();
-    component1.subscribe(spy);
-    component2.subscribe(spy2);
-    component1.ngOnDestroy();
+	it('should work with multiple observables', () => {
+		// Arrange
+		const spy = createObserver();
+		const spy2 = createObserver();
+		const spy3 = createObserver();
 
-    // Assert
-    expect(spy.complete).toHaveBeenCalledTimes(1);
-    expect(spy2.complete).not.toHaveBeenCalled();
-    component2.ngOnDestroy();
-    expect(spy2.complete).toHaveBeenCalledTimes(1);
-  });
+		class Test implements OnDestroy {
+			obs = new Subject().pipe(untilDestroyed(this)).subscribe(spy);
+			obs2 = new Subject().pipe(untilDestroyed(this)).subscribe(spy2);
+			obs3 = new Subject().pipe(untilDestroyed(this)).subscribe(spy3);
 
-  it('should work with multiple observables', () => {
-    // Arrange
-    const spy = createObserver();
-    const spy2 = createObserver();
-    const spy3 = createObserver();
+			ngOnDestroy() {}
+		}
 
-    class Test implements OnDestroy {
-      obs = new Subject().pipe(untilDestroyed(this)).subscribe(spy);
-      obs2 = new Subject().pipe(untilDestroyed(this)).subscribe(spy2);
-      obs3 = new Subject().pipe(untilDestroyed(this)).subscribe(spy3);
+		// Act
+		const instance = new Test();
+		instance.ngOnDestroy();
 
-      ngOnDestroy() {}
-    }
+		// Assert
+		expect(spy.complete).toHaveBeenCalledTimes(1);
+		expect(spy2.complete).toHaveBeenCalledTimes(1);
+		expect(spy3.complete).toHaveBeenCalledTimes(1);
+	});
 
-    // Act
-    const instance = new Test();
-    instance.ngOnDestroy();
+	it('should work with classes that are not components', () => {
+		// Arrange
+		const spy = createObserver();
 
-    // Assert
-    expect(spy.complete).toHaveBeenCalledTimes(1);
-    expect(spy2.complete).toHaveBeenCalledTimes(1);
-    expect(spy3.complete).toHaveBeenCalledTimes(1);
-  });
+		// Act
+		class Test {
+			obs = new Subject().pipe(untilDestroyed(this, 'destroy')).subscribe(spy);
 
-  it('should work with classes that are not components', () => {
-    // Arrange
-    const spy = createObserver();
+			destroy() {}
+		}
 
-    // Act
-    class Test {
-      obs = new Subject().pipe(untilDestroyed(this, 'destroy')).subscribe(spy);
+		// Assert
+		const instance = new Test();
+		instance.destroy();
+		expect(spy.complete).toHaveBeenCalledTimes(1);
+	});
 
-      destroy() {}
-    }
+	it('should unsubscribe from anywhere', () => {
+		// Arrange
+		const spy = createObserver();
+		const spy2 = createObserver();
+		const spy3 = createObserver();
 
-    // Assert
-    const instance = new Test();
-    instance.destroy();
-    expect(spy.complete).toHaveBeenCalledTimes(1);
-  });
+		class LoginComponent implements OnInit, OnDestroy {
+			dummy = new Subject().pipe(untilDestroyed(this)).subscribe(spy);
 
-  it('should unsubscribe from anywhere', () => {
-    // Arrange
-    const spy = createObserver();
-    const spy2 = createObserver();
-    const spy3 = createObserver();
+			constructor() {
+				new Subject().pipe(untilDestroyed(this)).subscribe(spy2);
+			}
 
-    class LoginComponent implements OnInit, OnDestroy {
-      dummy = new Subject().pipe(untilDestroyed(this)).subscribe(spy);
+			ngOnInit() {
+				new Subject().pipe(untilDestroyed(this)).subscribe(spy3);
+			}
 
-      constructor() {
-        new Subject().pipe(untilDestroyed(this)).subscribe(spy2);
-      }
+			ngOnDestroy() {}
+		}
 
-      ngOnInit() {
-        new Subject().pipe(untilDestroyed(this)).subscribe(spy3);
-      }
+		// Act
+		const instance = new LoginComponent();
+		instance.ngOnInit();
+		instance.ngOnDestroy();
 
-      ngOnDestroy() {}
-    }
+		// Assert
+		expect(spy.complete).toHaveBeenCalledTimes(1);
+		expect(spy2.complete).toHaveBeenCalledTimes(1);
+		expect(spy3.complete).toHaveBeenCalledTimes(1);
+	});
 
-    // Act
-    const instance = new LoginComponent();
-    instance.ngOnInit();
-    instance.ngOnDestroy();
+	it('should throw when destroy method doesnt exist', () => {
+		// Arrange
+		const spy = createObserver();
 
-    // Assert
-    expect(spy.complete).toHaveBeenCalledTimes(1);
-    expect(spy2.complete).toHaveBeenCalledTimes(1);
-    expect(spy3.complete).toHaveBeenCalledTimes(1);
-  });
+		class LoginComponent {
+			dummy = new Subject().pipe(untilDestroyed(this)).subscribe(spy);
+		}
 
-  it('should throw when destroy method doesnt exist', () => {
-    // Arrange
-    const spy = createObserver();
+		// Assert
+		expect(() => new LoginComponent()).toThrow();
+	});
 
-    class LoginComponent {
-      dummy = new Subject().pipe(untilDestroyed(this)).subscribe(spy);
-    }
+	it('should not throw when destroy method is implemented on super class', () => {
+		// Arrange
+		const spy = createObserver();
 
-    // Assert
-    expect(() => new LoginComponent()).toThrow();
-  });
+		class A implements OnDestroy {
+			ngOnDestroy() {}
+		}
 
-  it('should not throw when destroy method is implemented on super class', () => {
-    // Arrange
-    const spy = createObserver();
+		class B extends A {
+			dummy = new Subject().pipe(untilDestroyed(this)).subscribe(spy);
+		}
 
-    class A implements OnDestroy {
-      ngOnDestroy() {}
-    }
+		// Assert
+		expect(() => new B()).not.toThrow();
+	});
 
-    class B extends A {
-      dummy = new Subject().pipe(untilDestroyed(this)).subscribe(spy);
-    }
+	it('should work with subclass', () => {
+		// Arrange
+		const spy = createObserver();
 
-    // Assert
-    expect(() => new B()).not.toThrow();
-  });
+		class Parent implements OnDestroy {
+			ngOnDestroy() {}
+		}
 
-  it('should work with subclass', () => {
-    // Arrange
-    const spy = createObserver();
+		class Child extends Parent {
+			obs = new Subject().pipe(untilDestroyed(this)).subscribe(spy);
 
-    class Parent implements OnDestroy {
-      ngOnDestroy() {}
-    }
+			constructor() {
+				super();
+			}
+		}
 
-    class Child extends Parent {
-      obs = new Subject().pipe(untilDestroyed(this)).subscribe(spy);
-
-      constructor() {
-        super();
-      }
-    }
-
-    // Assert
-    const instance = new Child();
-    instance.ngOnDestroy();
-    expect(spy.complete).toHaveBeenCalledTimes(1);
-  });
+		// Assert
+		const instance = new Child();
+		instance.ngOnDestroy();
+		expect(spy.complete).toHaveBeenCalledTimes(1);
+	});
 });

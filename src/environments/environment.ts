@@ -11,12 +11,12 @@
 import { env } from './.env';
 
 export const environment = {
-  production: false,
-  hmr: true,
-  version: env.npm_package_version + '-dev',
-  serverUrl: '/api',
-  defaultLanguage: 'cn-zh',
-  supportedLanguages: ['en-US', 'cn-zh'],
+	production: false,
+	hmr: true,
+	version: env.npm_package_version + '-dev',
+	serverUrl: '/api',
+	defaultLanguage: 'cn-zh',
+	supportedLanguages: ['en-US', 'cn-zh']
 };
 
 /*

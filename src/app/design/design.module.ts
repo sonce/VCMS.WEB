@@ -10,8 +10,8 @@ import { DesignRoutingModule } from './design-routing.module';
 import { DesignResolver } from './design-resolver.service';
 
 @NgModule({
-  imports: [CommonModule, TranslateModule, NgbModule, SharedModule, DesignRoutingModule, NgxSpinnerModule],
-  declarations: [DesignComponent],
-  providers: [DesignResolver],
+	imports: [CommonModule, TranslateModule, NgbModule, SharedModule, DesignRoutingModule, NgxSpinnerModule],
+	declarations: [DesignComponent],
+	providers: [DesignResolver]
 })
 export class DesignModule {}

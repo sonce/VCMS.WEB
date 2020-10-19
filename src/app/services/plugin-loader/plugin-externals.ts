@@ -6,11 +6,11 @@ import * as rxjs from 'rxjs';
 import * as tslib from 'tslib';
 
 export const PLUGIN_EXTERNALS_MAP = {
-  'ng.core': core,
-  'ng.common': common,
-  'ng.forms': forms,
-  'ng.router': router,
-  rxjs,
-  tslib,
-  shared: '/assets/plugins/shared.js',
+	'ng.core': core,
+	'ng.common': common,
+	'ng.forms': forms,
+	'ng.router': router,
+	rxjs,
+	tslib,
+	shared: '/assets/plugins/shared.js'
 };

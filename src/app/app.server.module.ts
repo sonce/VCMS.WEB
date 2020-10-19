@@ -7,8 +7,8 @@ import { PluginLoaderService } from './services/plugin-loader/plugin-loader.serv
 import { ServerPluginLoaderService } from './services/plugin-loader/server-plugin-loader.service';
 
 @NgModule({
-  imports: [AppModule, ServerModule, ServerTransferStateModule],
-  providers: [{ provide: PluginLoaderService, useClass: ServerPluginLoaderService }],
-  bootstrap: [AppComponent],
+	imports: [AppModule, ServerModule, ServerTransferStateModule],
+	providers: [{ provide: PluginLoaderService, useClass: ServerPluginLoaderService }],
+	bootstrap: [AppComponent]
 })
 export class AppServerModule {}

@@ -21,38 +21,38 @@ import { PluginsConfigProvider } from './services/plugins-config.provider';
 // import { DesignModule } from './design/design.module';
 
 @NgModule({
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    BrowserTransferStateModule,
-    ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
-    TranslateModule.forRoot(),
-    FormsModule,
-    NgbModule,
-    CoreModule,
-    SharedModule,
-    ShellModule,
-    HomeModule,
-    AboutModule,
-    AuthModule,
-    // DesignModule,
-    AppRoutingModule, // must be imported as the last module as it contains the fallback route
-  ],
-  declarations: [AppComponent],
-  providers: [
-    { provide: PluginLoaderService, useClass: ClientPluginLoaderService },
-    PluginsConfigProvider,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (provider: PluginsConfigProvider) => () =>
-        provider
-          .loadConfig()
-          .toPromise()
-          .then((config) => (provider.config = config)),
-      multi: true,
-      deps: [PluginsConfigProvider],
-    },
-  ],
-  bootstrap: [AppComponent],
+	imports: [
+		HttpClientModule,
+		BrowserModule,
+		BrowserTransferStateModule,
+		ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
+		TranslateModule.forRoot(),
+		FormsModule,
+		NgbModule,
+		CoreModule,
+		SharedModule,
+		ShellModule,
+		HomeModule,
+		AboutModule,
+		AuthModule,
+		// DesignModule,
+		AppRoutingModule // must be imported as the last module as it contains the fallback route
+	],
+	declarations: [AppComponent],
+	providers: [
+		{ provide: PluginLoaderService, useClass: ClientPluginLoaderService },
+		PluginsConfigProvider,
+		{
+			provide: APP_INITIALIZER,
+			useFactory: (provider: PluginsConfigProvider) => () =>
+				provider
+					.loadConfig()
+					.toPromise()
+					.then((config) => (provider.config = config)),
+			multi: true,
+			deps: [PluginsConfigProvider]
+		}
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -34,29 +34,31 @@ const untilDestroyedSymbol = Symbol('untilDestroyed');
  * }
  * ```
  */
-export function untilDestroyed(instance: object, destroyMethodName: string = 'ngOnDestroy') {
-  return <T>(source: Observable<T>) => {
-    const originalDestroy = instance[destroyMethodName];
-    const hasDestroyFunction = typeof originalDestroy === 'function';
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types,@typescript-eslint/no-explicit-any
+export function untilDestroyed(instance: any, destroyMethodName = 'ngOnDestroy') {
+	return <T>(source: Observable<T>): Observable<unknown> => {
+		const originalDestroy = instance[destroyMethodName];
+		const hasDestroyFunction = typeof originalDestroy === 'function';
 
-    if (!hasDestroyFunction) {
-      throw new Error(
-        `${instance.constructor.name} is using untilDestroyed but doesn't implement ${destroyMethodName}`
-      );
-    }
+		if (!hasDestroyFunction) {
+			throw new Error(
+				`${instance.constructor.name} is using untilDestroyed but doesn't implement ${destroyMethodName}`
+			);
+		}
 
-    if (!instance[untilDestroyedSymbol]) {
-      instance[untilDestroyedSymbol] = new Subject();
+		if (!instance[untilDestroyedSymbol]) {
+			instance[untilDestroyedSymbol] = new Subject();
 
-      instance[destroyMethodName] = function () {
-        if (hasDestroyFunction) {
-          originalDestroy.apply(this, arguments);
-        }
-        instance[untilDestroyedSymbol].next();
-        instance[untilDestroyedSymbol].complete();
-      };
-    }
+			instance[destroyMethodName] = function () {
+				if (hasDestroyFunction) {
+					// eslint-disable-next-line prefer-rest-params
+					originalDestroy.apply(this, arguments);
+				}
+				instance[untilDestroyedSymbol].next();
+				instance[untilDestroyedSymbol].complete();
+			};
+		}
 
-    return source.pipe(takeUntil<T>(instance[untilDestroyedSymbol]));
-  };
+		return source.pipe(takeUntil<T>(instance[untilDestroyedSymbol]));
+	};
 }

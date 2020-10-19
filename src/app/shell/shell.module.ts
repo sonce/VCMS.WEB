@@ -15,18 +15,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-bootstrap-spinner';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    TranslateModule,
-    NgbModule,
-    AuthModule,
-    I18nModule,
-    RouterModule,
-    ReactiveFormsModule,
-    SharedModule,
-    TreeModule,
-    NgxSpinnerModule,
-  ],
-  declarations: [HeaderComponent, ShellComponent, SitePagesDropdownComponent],
+	imports: [
+		CommonModule,
+		TranslateModule,
+		NgbModule,
+		AuthModule,
+		I18nModule,
+		RouterModule,
+		ReactiveFormsModule,
+		SharedModule,
+		TreeModule,
+		NgxSpinnerModule
+	],
+	declarations: [HeaderComponent, ShellComponent, SitePagesDropdownComponent]
 })
 export class ShellModule {}

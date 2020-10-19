@@ -7,130 +7,131 @@ import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 interface Options extends JsonObject {
-  /**
-   * A string of the form `path/to/file#exportName` that acts as a path to include to bundle
-   */
-  modulePath: string;
+	/**
+	 * A string of the form `path/to/file#exportName` that acts as a path to include to bundle
+	 */
+	modulePath: string;
 
-  /**
-   * A name of compiled bundle
-   */
-  pluginName: string;
+	/**
+	 * A name of compiled bundle
+	 */
+	pluginName: string;
 
-  /**
-   * A comma-delimited list of shared lib names used by current plugin
-   */
-  sharedLibs: string;
+	/**
+	 * A comma-delimited list of shared lib names used by current plugin
+	 */
+	sharedLibs: string;
 }
 
 let entryPointPath;
 
 function buildPlugin(
-  options: Options,
-  context: BuilderContext,
-  transforms: {
-    webpackConfiguration?: ExecutionTransformer<webpack.Configuration>;
-  } = {}
+	options: Options,
+	context: BuilderContext,
+	transforms: {
+		webpackConfiguration?: ExecutionTransformer<webpack.Configuration>;
+	} = {}
 ): Observable<BrowserBuilderOutput> {
-  options.deleteOutputPath = false;
+	options.deleteOutputPath = false;
 
-  validateOptions(options);
+	validateOptions(options);
 
-  const originalWebpackConfigurationFn = transforms.webpackConfiguration;
-  transforms.webpackConfiguration = (config: webpack.Configuration) => {
-    patchWebpackConfig(config, options);
+	const originalWebpackConfigurationFn = transforms.webpackConfiguration;
+	transforms.webpackConfiguration = (config: webpack.Configuration) => {
+		patchWebpackConfig(config, options);
 
-    return originalWebpackConfigurationFn ? originalWebpackConfigurationFn(config) : config;
-  };
+		return originalWebpackConfigurationFn ? originalWebpackConfigurationFn(config) : config;
+	};
 
-  const result = executeBrowserBuilder(options as any, context, transforms);
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const result = executeBrowserBuilder(options as any, context, transforms);
 
-  return result.pipe(
-    tap(() => {
-      patchEntryPoint('');
-    })
-  );
+	return result.pipe(
+		tap(() => {
+			patchEntryPoint('');
+		})
+	);
 }
 
 function patchEntryPoint(contents: string) {
-  fs.writeFileSync(entryPointPath, contents);
+	fs.writeFileSync(entryPointPath, contents);
 }
 
 function validateOptions(options: Options) {
-  const { pluginName, modulePath } = options;
+	const { pluginName, modulePath } = options;
 
-  if (!modulePath) {
-    throw Error('Please define modulePath!');
-  }
+	if (!modulePath) {
+		throw Error('Please define modulePath!');
+	}
 
-  if (!pluginName) {
-    throw Error('Please provide pluginName!');
-  }
+	if (!pluginName) {
+		throw Error('Please provide pluginName!');
+	}
 }
 
 function patchWebpackConfig(config: webpack.Configuration, options: Options) {
-  const { pluginName, sharedLibs } = options;
+	const { pluginName, sharedLibs } = options;
 
-  // Make sure we are producing a single bundle
-  delete config.entry.polyfills;
-  delete config.entry['polyfills-es5'];
-  delete config.optimization.runtimeChunk;
-  delete config.optimization.splitChunks;
-  delete config.entry.styles;
+	// Make sure we are producing a single bundle
+	delete config.entry.polyfills;
+	delete config.entry['polyfills-es5'];
+	delete config.optimization.runtimeChunk;
+	delete config.optimization.splitChunks;
+	delete config.entry.styles;
 
-  config.externals = {
-    rxjs: 'rxjs',
-    '@angular/core': 'ng.core',
-    '@angular/common': 'ng.common',
-    '@angular/forms': 'ng.forms',
-    '@angular/router': 'ng.router',
-    tslib: 'tslib',
-    // put here other common dependencies
-  };
+	config.externals = {
+		rxjs: 'rxjs',
+		'@angular/core': 'ng.core',
+		'@angular/common': 'ng.common',
+		'@angular/forms': 'ng.forms',
+		'@angular/router': 'ng.router',
+		tslib: 'tslib'
+		// put here other common dependencies
+	};
 
-  if (sharedLibs) {
-    config.externals = [config.externals];
-    const sharedLibsArr = sharedLibs.split(',');
-    sharedLibsArr.forEach((sharedLibName) => {
-      const factoryRegexp = new RegExp(`${sharedLibName}.ngfactory$`);
-      config.externals[0][sharedLibName] = sharedLibName; // define external for code
-      config.externals.push((context, request, callback) => {
-        if (factoryRegexp.test(request)) {
-          return callback(null, sharedLibName); // define external for factory
-        }
-        callback();
-      });
-    });
-  }
+	if (sharedLibs) {
+		config.externals = [config.externals];
+		const sharedLibsArr = sharedLibs.split(',');
+		sharedLibsArr.forEach((sharedLibName) => {
+			const factoryRegexp = new RegExp(`${sharedLibName}.ngfactory$`);
+			config.externals[0][sharedLibName] = sharedLibName; // define external for code
+			config.externals.push((context, request, callback) => {
+				if (factoryRegexp.test(request)) {
+					return callback(null, sharedLibName); // define external for factory
+				}
+				callback();
+			});
+		});
+	}
 
-  const ngCompilerPluginInstance = config.plugins.find(
-    (x) => x.constructor && x.constructor.name === 'AngularCompilerPlugin'
-  );
-  if (ngCompilerPluginInstance) {
-    ngCompilerPluginInstance._entryModule = options.modulePath;
-  }
+	const ngCompilerPluginInstance = config.plugins.find(
+		(x) => x.constructor && x.constructor.name === 'AngularCompilerPlugin'
+	);
+	if (ngCompilerPluginInstance) {
+		ngCompilerPluginInstance._entryModule = options.modulePath;
+	}
 
-  // preserve path to entry point
-  // so that we can clear use it within `run` method to clear that file
-  entryPointPath = config.entry.main[0];
+	// preserve path to entry point
+	// so that we can clear use it within `run` method to clear that file
+	entryPointPath = config.entry.main[0];
 
-  const [modulePath, moduleName] = options.modulePath.split('#');
+	const [modulePath, moduleName] = options.modulePath.split('#');
 
-  // const factoryPath = `${
-  //   modulePath.includes('.') ? modulePath : `${modulePath}/${modulePath}`
-  //   }.ngfactory`;
-  const entryPointContents = `
+	// const factoryPath = `${
+	//   modulePath.includes('.') ? modulePath : `${modulePath}/${modulePath}`
+	//   }.ngfactory`;
+	const entryPointContents = `
     export * from '${modulePath}';
     import { ${moduleName} } from '${modulePath}';
     export default ${moduleName};
   `;
-  patchEntryPoint(entryPointContents);
+	patchEntryPoint(entryPointContents);
 
-  config.output.filename = `${pluginName}.js`;
-  config.output.library = pluginName;
-  config.output.libraryTarget = 'umd';
-  // workaround to support bundle on nodejs
-  config.output.globalObject = `(typeof self !== 'undefined' ? self : this)`;
+	config.output.filename = `${pluginName}.js`;
+	config.output.library = pluginName;
+	config.output.libraryTarget = 'umd';
+	// workaround to support bundle on nodejs
+	config.output.globalObject = `(typeof self !== 'undefined' ? self : this)`;
 }
 
 export default createBuilder<Options>(buildPlugin);

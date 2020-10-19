@@ -6,17 +6,17 @@ import { CoreModule } from '@core';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule, TranslateModule.forRoot(), CoreModule],
-      declarations: [AppComponent],
-      providers: [],
-    }).compileComponents();
-  }));
+	beforeEach(async(() => {
+		TestBed.configureTestingModule({
+			imports: [RouterTestingModule, TranslateModule.forRoot(), CoreModule],
+			declarations: [AppComponent],
+			providers: []
+		}).compileComponents();
+	}));
 
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }), 30000);
+	it('should create the app', async(() => {
+		const fixture = TestBed.createComponent(AppComponent);
+		const app = fixture.debugElement.componentInstance;
+		expect(app).toBeTruthy();
+	}), 30000);
 });

@@ -6,14 +6,19 @@
 declare module '*.json';
 
 // SystemJS module definition
+// eslint-disable-next-line no-var
 declare var module: NodeModule;
+
+// declare let module: NodeModule;
 interface NodeModule {
-  id: string;
+	id: string;
 }
 interface Window {
-  define: (name: string, deps: string[], definitionFn: () => any) => void;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	define: (name: string, deps: string[], definitionFn: () => any) => void;
 
-  System: {
-    import: (path) => Promise<any>;
-  };
+	System: {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		import: (path) => Promise<any>;
+	};
 }

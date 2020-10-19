@@ -11,13 +11,13 @@ import { environment } from '@env/environment';
 import { hmrBootstrap } from './hmr';
 
 if (environment.production) {
-  enableProdMode();
+	enableProdMode();
 }
 
 const bootstrap = () => platformBrowserDynamic().bootstrapModule(AppModule);
 
 if (environment.hmr) {
-  hmrBootstrap(module, bootstrap);
+	hmrBootstrap(module, bootstrap);
 } else {
-  bootstrap().catch((err) => console.error(err));
+	bootstrap().catch((err) => console.error(err));
 }

@@ -5,23 +5,23 @@ import { map, catchError } from 'rxjs/operators';
 import { ApiService } from '@app/@core/services';
 
 export interface RandomQuoteContext {
-  // The quote's category: 'dev', 'explicit'...
-  category: string;
+	// The quote's category: 'dev', 'explicit'...
+	category: string;
 }
 
 @Injectable({
-  providedIn: 'root',
+	providedIn: 'root'
 })
 export class QuoteService {
-  constructor(private httpClient: HttpClient, private apiService: ApiService) {}
+	constructor(private httpClient: HttpClient, private apiService: ApiService) {}
 
-  getRandomQuote(context: RandomQuoteContext): Observable<string> {
-    const params = {};
+	getRandomQuote(context: RandomQuoteContext): Observable<string> {
+		const params = {};
 
-    Object.keys(context).forEach((key) => {
-      params[key] = context[key];
-    });
+		Object.keys(context).forEach((key) => {
+			params[key] = context[key];
+		});
 
-    return this.apiService.get<string>('/random', context);
-  }
+		return this.apiService.get<string>('/random', context);
+	}
 }

@@ -1,36 +1,36 @@
-@import "~bootstrap/scss/_variables";
+@import '~bootstrap/scss/_variables';
 //rgba($component-active-bg, .25) !default;
 .btn-circle,
 .btn-rounded {
-  outline: 0;
-  box-shadow: 0 0 0 0.1rem rgba($component-active-bg, 0.1);
-  min-width: 30px;
-  height: 30px;
-  padding: 6px 0px;
-  border-radius: 15px;
-  text-align: center;
-  font-size: 12px;
-  line-height: 1.42857;
-  &:hover {
-    box-shadow: $input-btn-focus-box-shadow;
-  }
+	outline: 0;
+	box-shadow: 0 0 0 0.1rem rgba($component-active-bg, 0.1);
+	min-width: 30px;
+	height: 30px;
+	padding: 6px 0px;
+	border-radius: 15px;
+	text-align: center;
+	font-size: 12px;
+	line-height: 1.42857;
+	&:hover {
+		box-shadow: $input-btn-focus-box-shadow;
+	}
 }
 .btn-circle.btn-xl,
 .btn-xl.btn-rounded {
-  min-width: 70px;
-  height: 70px;
-  padding: 10px 16px;
-  border-radius: 35px;
-  font-size: 24px;
-  line-height: 1.33;
+	min-width: 70px;
+	height: 70px;
+	padding: 10px 16px;
+	border-radius: 35px;
+	font-size: 24px;
+	line-height: 1.33;
 }
 .btn-circle > i,
 .btn-rounded > i {
-  font-size: 12px;
-  margin-right: unset !important;
-  vertical-align: unset !important;
+	font-size: 12px;
+	margin-right: unset !important;
+	vertical-align: unset !important;
 }
 
 .btn-rounded {
-  padding: 6px 10px;
+	padding: 6px 10px;
 }

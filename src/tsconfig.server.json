@@ -1,25 +1,12 @@
 {
-  "extends": "./tsconfig.app.json",
-  "compilerOptions": {
-    "module": "commonjs",
-    "outDir": "../out-tsc/app-server",
-    "baseUrl": ".",
-    "paths": {
-      "shared": ["dist/shared"],
-      "shared/*": ["dist/shared/*"],
-      "@app/*": ["src/app/*"],
-      "@assets": ["src/assets/*"],
-      "@core": ["src/app/@core"],
-      "@core/*": ["src/app/@core/*"],
-      "@shared": ["src/app/@shared"],
-      "@shared/*": ["src/app/@shared/*"],
-      "@env/*": ["src/environments/*"],
-      "rxjs": ["node_modules/rxjs"]
-    }
-  },
-  "angularCompilerOptions": {
-    "entryModule": "app/app.server.module#AppServerModule"
-  },
-  "files": ["./main.server.ts", "../server.ts"],
-  "include": ["src/**/*.d.ts"]
+	"extends": "./tsconfig.app.json",
+	"compilerOptions": {
+		"module": "commonjs",
+		"outDir": "../out-tsc/app-server",
+		"baseUrl": "."
+	},
+	"angularCompilerOptions": {
+		"entryModule": "app/app.server.module#AppServerModule"
+	},
+	"files": ["./main.server.ts", "../server.ts"]
 }

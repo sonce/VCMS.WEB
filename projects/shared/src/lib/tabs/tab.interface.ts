@@ -1,4 +1,4 @@
 export interface Tab {
-  title: string;
-  hidden: boolean;
+	title: string;
+	hidden: boolean;
 }

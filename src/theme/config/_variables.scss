@@ -1,9 +1,9 @@
 // =============================================================================
 // TYPOGRAPHY
 // =============================================================================
-$font-primary: "Open Sans", Arial, sans-serif;
-$font-secondary: "Shadows Into Light", cursive;
-$font-tertiary: "Oswald", sans-serif;
+$font-primary: 'Open Sans', Arial, sans-serif;
+$font-secondary: 'Shadows Into Light', cursive;
+$font-tertiary: 'Oswald', sans-serif;
 
 $body-font-size: 14;
 $root-font-size: 10;
@@ -81,12 +81,12 @@ $color-info-inverse: #fff;
 
 // colors list
 $colors-list: (primary $color-primary $color-primary-inverse) (secondary $color-secondary $color-secondary-inverse)
-  (tertiary $color-tertiary $color-tertiary-inverse) (quaternary $color-quaternary $color-quaternary-inverse);
+	(tertiary $color-tertiary $color-tertiary-inverse) (quaternary $color-quaternary $color-quaternary-inverse);
 
 // states list
 $states: (primary $color-primary $color-primary-inverse) (success $color-success $color-success-inverse)
-  (warning $color-warning $color-warning-inverse) (danger $color-danger $color-danger-inverse)
-  (info $color-info $color-info-inverse) (dark $color-dark $color-dark-inverse);
+	(warning $color-warning $color-warning-inverse) (danger $color-danger $color-danger-inverse)
+	(info $color-info $color-info-inverse) (dark $color-dark $color-dark-inverse);
 
 // light version
 $light-bg: #fff;
@@ -105,9 +105,9 @@ $border-radius: 5px;
 // GRID BREAKPOINTS
 // =============================================================================
 $grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px
 ) !default;

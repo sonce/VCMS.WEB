@@ -1,5 +1,5 @@
 import { Component, ComponentFactoryResolver, Injector, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { finalize, tap, map } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 import { QuoteService } from './quote.service';
 import { SitePage } from '@app/@core/models';
@@ -9,62 +9,67 @@ import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
 import { PluginLoaderService } from '@app/services/plugin-loader/plugin-loader.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+	selector: 'app-home',
+	templateUrl: './home.component.html',
+	styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  quote: string | undefined;
+	quote: string | undefined;
 
-  SitePages: SitePage[];
-  @ViewChild('targetRef', { read: ViewContainerRef, static: true })
-  vcRef: ViewContainerRef;
+	SitePages: SitePage[];
+	@ViewChild('targetRef', { read: ViewContainerRef, static: true })
+	vcRef: ViewContainerRef;
 
-  constructor(
-    private quoteService: QuoteService,
-    private spinner: NgxSpinnerService,
-    private injector: Injector,
-    private pluginLoader: PluginLoaderService,
-    private cfr: ComponentFactoryResolver
-  ) {}
+	constructor(
+		private quoteService: QuoteService,
+		private spinner: NgxSpinnerService,
+		private injector: Injector,
+		private pluginLoader: PluginLoaderService,
+		private cfr: ComponentFactoryResolver
+	) {}
 
-  data = { name: 'love' };
+	data = { name: 'love' };
 
-  ngOnInit() {
-    this.spinner.show();
-    this.quoteService
-      .getRandomQuote({ category: 'dev' })
-      .pipe(
-        finalize(() => {
-          this.spinner.hide();
-        })
-      )
-      .subscribe((quote: string) => {
-        this.quote = quote;
-      });
-  }
+	ngOnInit(): void {
+		this.spinner.show();
+		this.quoteService
+			.getRandomQuote({ category: 'dev' })
+			.pipe(
+				finalize(() => {
+					this.spinner.hide();
+				})
+			)
+			.subscribe((quote: string) => {
+				this.quote = quote;
+			});
+	}
 
-  toggleWithGreeting(popover: NgbPopover, greeting: string, language: string) {
-    if (popover.isOpen()) {
-      popover.close();
-    } else {
-      popover.open({ greeting, language });
-    }
-  }
+	toggleWithGreeting(popover: NgbPopover, greeting: string, language: string): void {
+		if (popover.isOpen()) {
+			popover.close();
+		} else {
+			popover.open({ greeting, language });
+		}
+	}
 
-  test(info: string) {
-    alert(info);
-  }
+	test(info: string): void {
+		alert(info);
+	}
 
-  testExcute(event: { event: MouseEvent | KeyboardEvent; item: any; menuItem: MultiLevelNavitemDirective }) {
-    console.log('Hi, ' + event.item.name);
-  }
+	testExcute(event: {
+		event: MouseEvent | KeyboardEvent;
+		item: { name: string };
+		menuItem: MultiLevelNavitemDirective;
+	}): void {
+		console.log('Hi, ' + event.item.name);
+	}
 
-  loadPlugin(pluginName: string) {
-    this.pluginLoader.load(pluginName).then((moduleType: any) => {
-      const entry = moduleType.entry;
-      const componentFactory = this.cfr.resolveComponentFactory(entry);
-      this.vcRef.createComponent(componentFactory, undefined, this.injector);
-    });
-  }
+	loadPlugin(pluginName: string): void {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		this.pluginLoader.load(pluginName).then((moduleType: any) => {
+			const entry = moduleType.entry;
+			const componentFactory = this.cfr.resolveComponentFactory(entry);
+			this.vcRef.createComponent(componentFactory, undefined, this.injector);
+		});
+	}
 }

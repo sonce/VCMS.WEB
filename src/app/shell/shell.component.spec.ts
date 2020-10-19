@@ -19,38 +19,38 @@ import { HttpClientModule } from '@angular/common/http';
 import { TreeModule } from '@circlon/angular-tree-component';
 
 describe('ShellComponent', () => {
-  let component: ShellComponent;
-  let fixture: ComponentFixture<ShellComponent>;
+	let component: ShellComponent;
+	let fixture: ComponentFixture<ShellComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        TranslateModule.forRoot(),
-        HttpClientModule,
-        I18nModule,
-        NgbModule,
-        SharedModule,
-        CoreModule,
-        TreeModule,
-        ReactiveFormsModule,
-        NgxSpinnerModule,
-      ],
-      providers: [
-        { provide: AuthenticationService, useClass: MockAuthenticationService },
-        { provide: CredentialsService, useClass: MockCredentialsService },
-      ],
-      declarations: [HeaderComponent, ShellComponent, SitePagesDropdownComponent],
-    }).compileComponents();
-  }));
+	beforeEach(async(() => {
+		TestBed.configureTestingModule({
+			imports: [
+				RouterTestingModule,
+				TranslateModule.forRoot(),
+				HttpClientModule,
+				I18nModule,
+				NgbModule,
+				SharedModule,
+				CoreModule,
+				TreeModule,
+				ReactiveFormsModule,
+				NgxSpinnerModule
+			],
+			providers: [
+				{ provide: AuthenticationService, useClass: MockAuthenticationService },
+				{ provide: CredentialsService, useClass: MockCredentialsService }
+			],
+			declarations: [HeaderComponent, ShellComponent, SitePagesDropdownComponent]
+		}).compileComponents();
+	}));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ShellComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(ShellComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

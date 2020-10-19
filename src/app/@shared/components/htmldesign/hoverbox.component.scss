@@ -1,5 +1,5 @@
 $fonts-fallback: Helvetica Neue, Helvetica, Arial, メイリオ, meiryo, ヒラギノ角ゴ pro w3, hiragino kaku gothic pro,
-  sans-serif;
+	sans-serif;
 $default-overlay-color: rgba(211, 237, 255, 0.24);
 //Hover for elements with color B4
 $g-color-b4: #d3edff;
@@ -9,366 +9,366 @@ $g-font55: HelveticaNeueW01-55Roma, HelveticaNeueW02-55Roma, HelveticaNeueW10-55
 $g-color-o3: #fed8c1;
 
 @mixin user-select($val) {
-  -moz-user-select: $val;
-  -webkit-user-select: $val;
-  -ms-user-select: $val;
-  user-select: $val;
+	-moz-user-select: $val;
+	-webkit-user-select: $val;
+	-ms-user-select: $val;
+	user-select: $val;
 }
 
 .hover-box,
 .container-hover-box {
-  &.noborder {
-    border: 0px !important;
-  }
+	&.noborder {
+		border: 0px !important;
+	}
 
-  $default-border-color: rgba(211, 237, 255, 0.8);
-  $default-background-color: rgba($g-color-b4, 0.07);
-  $show-on-all-pages-border-color: rgba(235, 165, 84, 0.6);
-  $show-on-all-pages-background-color: rgba(235, 165, 84, 0.05);
-  $show-on-all-pages-overlay-color: rgba(235, 165, 84, 0.24);
+	$default-border-color: rgba(211, 237, 255, 0.8);
+	$default-background-color: rgba($g-color-b4, 0.07);
+	$show-on-all-pages-border-color: rgba(235, 165, 84, 0.6);
+	$show-on-all-pages-background-color: rgba(235, 165, 84, 0.05);
+	$show-on-all-pages-overlay-color: rgba(235, 165, 84, 0.24);
 
-  $handle-resize-side-size: 5px;
-  $handle-resize-corner-size: 7px;
-  $handle-side-resize-position: (-1 * ($handle-resize-corner-size / 2)) - 0.5;
-  $handle-resize-corner-position: -5px;
+	$handle-resize-side-size: 5px;
+	$handle-resize-corner-size: 7px;
+	$handle-side-resize-position: (-1 * ($handle-resize-corner-size / 2)) - 0.5;
+	$handle-resize-corner-position: -5px;
 
-  $label-background-color: $g-color-b4;
-  $label-background-color-show-on-all-pages: #eba554;
-  $label-color-show-on-all-pages: #fff;
+	$label-background-color: $g-color-b4;
+	$label-background-color-show-on-all-pages: #eba554;
+	$label-color-show-on-all-pages: #fff;
 
-  position: absolute;
-  border: 1px solid $default-border-color;
-  pointer-events: none;
+	position: absolute;
+	border: 1px solid $default-border-color;
+	pointer-events: none;
 
-  &.components-background-color {
-    background: $default-background-color;
-  }
+	&.components-background-color {
+		background: $default-background-color;
+	}
 
-  &.overlay {
-    background-color: $default-overlay-color;
-  }
+	&.overlay {
+		background-color: $default-overlay-color;
+	}
 
-  &.components-ui-color-orange {
-    border-color: $show-on-all-pages-border-color;
-    background-color: $show-on-all-pages-background-color;
+	&.components-ui-color-orange {
+		border-color: $show-on-all-pages-border-color;
+		background-color: $show-on-all-pages-background-color;
 
-    .comp-label {
-      background-color: $label-background-color-show-on-all-pages;
-      color: $label-color-show-on-all-pages;
-    }
+		.comp-label {
+			background-color: $label-background-color-show-on-all-pages;
+			color: $label-color-show-on-all-pages;
+		}
 
-    &.overlay {
-      background-color: $show-on-all-pages-overlay-color;
-    }
-  }
+		&.overlay {
+			background-color: $show-on-all-pages-overlay-color;
+		}
+	}
 
-  &.resizable {
-    .handle {
-      pointer-events: auto;
-      position: absolute;
-      visibility: inherit;
+	&.resizable {
+		.handle {
+			pointer-events: auto;
+			position: absolute;
+			visibility: inherit;
 
-      &:active {
-        visibility: visible !important;
-      }
+			&:active {
+				visibility: visible !important;
+			}
 
-      &.top-resize-cursor {
-        cursor: ns-resize;
-      }
+			&.top-resize-cursor {
+				cursor: ns-resize;
+			}
 
-      &.top-left-resize-cursor {
-        cursor: nwse-resize;
-      }
+			&.top-left-resize-cursor {
+				cursor: nwse-resize;
+			}
 
-      &.top-right-resize-cursor {
-        cursor: nesw-resize;
-      }
+			&.top-right-resize-cursor {
+				cursor: nesw-resize;
+			}
 
-      &.right-resize-cursor {
-        cursor: ew-resize;
-      }
+			&.right-resize-cursor {
+				cursor: ew-resize;
+			}
 
-      &.bottom-resize-cursor {
-        cursor: ns-resize;
-      }
+			&.bottom-resize-cursor {
+				cursor: ns-resize;
+			}
 
-      &.bottom-right-resize-cursor {
-        cursor: nwse-resize;
-      }
+			&.bottom-right-resize-cursor {
+				cursor: nwse-resize;
+			}
 
-      &.bottom-left-resize-cursor {
-        cursor: nesw-resize;
-      }
+			&.bottom-left-resize-cursor {
+				cursor: nesw-resize;
+			}
 
-      &.left-resize-cursor {
-        cursor: ew-resize;
-      }
+			&.left-resize-cursor {
+				cursor: ew-resize;
+			}
 
-      &.handle-resize-corner {
-        width: $handle-resize-corner-size;
-        height: $handle-resize-corner-size;
-        background-color: #fff;
-        border: 1px solid $default-border-color;
-        border-radius: 50%;
-        z-index: $g-zindex-handle-resize-corner;
+			&.handle-resize-corner {
+				width: $handle-resize-corner-size;
+				height: $handle-resize-corner-size;
+				background-color: #fff;
+				border: 1px solid $default-border-color;
+				border-radius: 50%;
+				z-index: $g-zindex-handle-resize-corner;
 
-        &.top.left {
-          top: $handle-resize-corner-position;
-          left: $handle-resize-corner-position;
-        }
+				&.top.left {
+					top: $handle-resize-corner-position;
+					left: $handle-resize-corner-position;
+				}
 
-        &.top.right {
-          top: $handle-resize-corner-position;
-          right: $handle-resize-corner-position;
-        }
+				&.top.right {
+					top: $handle-resize-corner-position;
+					right: $handle-resize-corner-position;
+				}
 
-        &.bottom.right {
-          bottom: $handle-resize-corner-position;
-          right: $handle-resize-corner-position;
-        }
+				&.bottom.right {
+					bottom: $handle-resize-corner-position;
+					right: $handle-resize-corner-position;
+				}
 
-        &.bottom.left {
-          bottom: $handle-resize-corner-position;
-          left: $handle-resize-corner-position;
-        }
-      }
+				&.bottom.left {
+					bottom: $handle-resize-corner-position;
+					left: $handle-resize-corner-position;
+				}
+			}
 
-      &.handle-resize-side {
-        &.top {
-          height: $handle-resize-side-size;
-          left: -1 * $handle-side-resize-position;
-          right: -1 * $handle-side-resize-position;
-          top: -1 * ($handle-resize-side-size / 2);
+			&.handle-resize-side {
+				&.top {
+					height: $handle-resize-side-size;
+					left: -1 * $handle-side-resize-position;
+					right: -1 * $handle-side-resize-position;
+					top: -1 * ($handle-resize-side-size / 2);
 
-          &:after {
-            content: "";
-            width: $handle-resize-corner-size;
-            height: $handle-resize-corner-size;
-            background-color: #fff;
-            border: 1px solid $default-border-color;
-            border-radius: 50%;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            margin-left: -1 * $handle-resize-side-size;
-            margin-top: -1 * $handle-resize-side-size;
-          }
-        }
+					&:after {
+						content: '';
+						width: $handle-resize-corner-size;
+						height: $handle-resize-corner-size;
+						background-color: #fff;
+						border: 1px solid $default-border-color;
+						border-radius: 50%;
+						position: absolute;
+						left: 50%;
+						top: 50%;
+						margin-left: -1 * $handle-resize-side-size;
+						margin-top: -1 * $handle-resize-side-size;
+					}
+				}
 
-        &.right {
-          width: $handle-resize-side-size;
-          top: -1 * $handle-side-resize-position;
-          bottom: -1 * $handle-side-resize-position;
-          right: -1 * ($handle-resize-side-size / 2);
+				&.right {
+					width: $handle-resize-side-size;
+					top: -1 * $handle-side-resize-position;
+					bottom: -1 * $handle-side-resize-position;
+					right: -1 * ($handle-resize-side-size / 2);
 
-          &:after {
-            content: "";
-            width: $handle-resize-corner-size;
-            height: $handle-resize-corner-size;
-            background-color: #fff;
-            border: 1px solid $default-border-color;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            right: 50%;
-            margin-top: -1 * $handle-resize-side-size;
-            margin-right: -1 * $handle-resize-side-size;
-          }
-        }
+					&:after {
+						content: '';
+						width: $handle-resize-corner-size;
+						height: $handle-resize-corner-size;
+						background-color: #fff;
+						border: 1px solid $default-border-color;
+						border-radius: 50%;
+						position: absolute;
+						top: 50%;
+						right: 50%;
+						margin-top: -1 * $handle-resize-side-size;
+						margin-right: -1 * $handle-resize-side-size;
+					}
+				}
 
-        &.bottom {
-          height: $handle-resize-side-size;
-          left: -1 * $handle-side-resize-position;
-          right: -1 * $handle-side-resize-position;
-          bottom: -1 * ($handle-resize-side-size / 2);
+				&.bottom {
+					height: $handle-resize-side-size;
+					left: -1 * $handle-side-resize-position;
+					right: -1 * $handle-side-resize-position;
+					bottom: -1 * ($handle-resize-side-size / 2);
 
-          &:after {
-            content: "";
-            width: $handle-resize-corner-size;
-            height: $handle-resize-corner-size;
-            background-color: #fff;
-            border: 1px solid $default-border-color;
-            border-radius: 50%;
-            position: absolute;
-            left: 50%;
-            bottom: 50%;
-            margin-left: -1 * $handle-resize-side-size;
-            margin-bottom: -1 * $handle-resize-side-size;
-          }
-        }
+					&:after {
+						content: '';
+						width: $handle-resize-corner-size;
+						height: $handle-resize-corner-size;
+						background-color: #fff;
+						border: 1px solid $default-border-color;
+						border-radius: 50%;
+						position: absolute;
+						left: 50%;
+						bottom: 50%;
+						margin-left: -1 * $handle-resize-side-size;
+						margin-bottom: -1 * $handle-resize-side-size;
+					}
+				}
 
-        &.left {
-          width: $handle-resize-side-size;
-          top: -1 * $handle-side-resize-position;
-          bottom: -1 * $handle-side-resize-position;
-          left: -1 * ($handle-resize-side-size / 2);
+				&.left {
+					width: $handle-resize-side-size;
+					top: -1 * $handle-side-resize-position;
+					bottom: -1 * $handle-side-resize-position;
+					left: -1 * ($handle-resize-side-size / 2);
 
-          &:after {
-            content: "";
-            width: $handle-resize-corner-size;
-            height: $handle-resize-corner-size;
-            background-color: #fff;
-            border: 1px solid $default-border-color;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin-top: -1 * $handle-resize-side-size;
-            margin-left: -1 * $handle-resize-side-size;
-          }
-        }
-      }
-    }
-  }
-  &.resizing {
-    visibility: visible !important;
-    display: block !important;
-    .card-actions {
-      visibility: hidden;
-    }
-  }
-  &.draggable {
-    .dragHandle {
-      cursor: move;
-      visibility: inherit;
-      pointer-events: auto;
-      position: absolute;
-      &.top {
-        width: 100%;
-        height: 15px;
-        top: 0px;
-      }
-      &.bottom {
-        width: 100%;
-        height: 15px;
-        bottom: 0px;
-      }
-      &.left {
-        width: 15px;
-        height: 100%;
-        left: 0px;
-      }
-      &.right {
-        width: 15px;
-        height: 100%;
-        right: 0px;
-      }
-    }
-  }
+					&:after {
+						content: '';
+						width: $handle-resize-corner-size;
+						height: $handle-resize-corner-size;
+						background-color: #fff;
+						border: 1px solid $default-border-color;
+						border-radius: 50%;
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						margin-top: -1 * $handle-resize-side-size;
+						margin-left: -1 * $handle-resize-side-size;
+					}
+				}
+			}
+		}
+	}
+	&.resizing {
+		visibility: visible !important;
+		display: block !important;
+		.card-actions {
+			visibility: hidden;
+		}
+	}
+	&.draggable {
+		.dragHandle {
+			cursor: move;
+			visibility: inherit;
+			pointer-events: auto;
+			position: absolute;
+			&.top {
+				width: 100%;
+				height: 15px;
+				top: 0px;
+			}
+			&.bottom {
+				width: 100%;
+				height: 15px;
+				bottom: 0px;
+			}
+			&.left {
+				width: 15px;
+				height: 100%;
+				left: 0px;
+			}
+			&.right {
+				width: 15px;
+				height: 100%;
+				right: 0px;
+			}
+		}
+	}
 
-  &.dragging {
-    visibility: visible !important;
-    display: block !important;
-    .handle,
-    .card-actions {
-      visibility: hidden;
-    }
-  }
-  &.fixed-position {
-    position: fixed;
-  }
+	&.dragging {
+		visibility: visible !important;
+		display: block !important;
+		.handle,
+		.card-actions {
+			visibility: hidden;
+		}
+	}
+	&.fixed-position {
+		position: fixed;
+	}
 }
 .root-container-hover-box {
-  pointer-events: none;
-  position: absolute;
-  outline: 1px dashed rgba(0, 0, 0, 0.1);
-  // outline: 2px solid #0888c8;
-  outline-offset: -2px;
+	pointer-events: none;
+	position: absolute;
+	outline: 1px dashed rgba(0, 0, 0, 0.1);
+	// outline: 2px solid #0888c8;
+	outline-offset: -2px;
 
-  .control-button-wrapper {
-    &.rootContainer {
-      top: 22px;
-      right: 22px;
-      height: 44px;
-      & > .control-buttons {
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.02);
-        border-radius: 8px;
-      }
-    }
-    position: absolute;
-    display: flex;
-    & > .control-buttons {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      transform: scale(var(--inverse-viewport-scale)) translatex(-50%);
-      background-color: #fff;
-      overflow-x: hidden;
-      overflow-y: hidden;
-      outline: none;
-      padding: 4px;
+	.control-button-wrapper {
+		&.rootContainer {
+			top: 22px;
+			right: 22px;
+			height: 44px;
+			& > .control-buttons {
+				box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.02);
+				border-radius: 8px;
+			}
+		}
+		position: absolute;
+		display: flex;
+		& > .control-buttons {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			transform: scale(var(--inverse-viewport-scale)) translatex(-50%);
+			background-color: #fff;
+			overflow-x: hidden;
+			overflow-y: hidden;
+			outline: none;
+			padding: 4px;
 
-      .icon-page-section-control-button {
-        pointer-events: all;
-        border-radius: 4px;
-        width: 36px;
-        height: 36px;
-        margin-right: 4px;
-        background-position: 50%;
-        background-repeat: no-repeat;
-        cursor: pointer;
-        line-height: 32px;
-        text-align: center;
-        &:hover {
-          background-color: #f6f6f6;
-        }
-      }
-      .page-section-label {
-        color: #313131;
-        font-size: 14px !important;
-        font-weight: 500;
-        line-height: 36px;
-        margin-left: 16px !important;
-        margin-right: 11px !important;
-      }
-    }
-  }
+			.icon-page-section-control-button {
+				pointer-events: all;
+				border-radius: 4px;
+				width: 36px;
+				height: 36px;
+				margin-right: 4px;
+				background-position: 50%;
+				background-repeat: no-repeat;
+				cursor: pointer;
+				line-height: 32px;
+				text-align: center;
+				&:hover {
+					background-color: #f6f6f6;
+				}
+			}
+			.page-section-label {
+				color: #313131;
+				font-size: 14px !important;
+				font-weight: 500;
+				line-height: 36px;
+				margin-left: 16px !important;
+				margin-right: 11px !important;
+			}
+		}
+	}
 }
 
 .component-labels {
-  position: absolute;
-  white-space: nowrap;
-  cursor: default;
-  display: inline-flex;
-  font-family: $g-font55;
-  pointer-events: auto;
-  background-color: $g-color-o3;
+	position: absolute;
+	white-space: nowrap;
+	cursor: default;
+	display: inline-flex;
+	font-family: $g-font55;
+	pointer-events: auto;
+	background-color: $g-color-o3;
 
-  &.dragable {
-    cursor: move;
-  }
+	&.dragable {
+		cursor: move;
+	}
 
-  // &.label-large {
-  //   font-size: 16px;
+	// &.label-large {
+	//   font-size: 16px;
 
-  //   &.label-above-line {
-  //     top: -20px;
-  //   }
-  // }
+	//   &.label-above-line {
+	//     top: -20px;
+	//   }
+	// }
 
-  &.label-inner {
-    left: -6px;
-  }
+	&.label-inner {
+		left: -6px;
+	}
 
-  &.label-small {
-    left: -1px;
-    font-size: 14px;
-  }
+	&.label-small {
+		left: -1px;
+		font-size: 14px;
+	}
 
-  &.label-top {
-    top: -29px;
-  }
+	&.label-top {
+		top: -29px;
+	}
 
-  &.label-bottom {
-    bottom: -22px;
-  }
-  & > .card-actions {
-    right: 1px;
-    top: 0px;
-    & > a.card-action {
-      height: 22px;
-      width: 22px;
-      font-size: 19px;
-    }
-  }
+	&.label-bottom {
+		bottom: -22px;
+	}
+	& > .card-actions {
+		right: 1px;
+		top: 0px;
+		& > a.card-action {
+			height: 22px;
+			width: 22px;
+			font-size: 19px;
+		}
+	}
 }

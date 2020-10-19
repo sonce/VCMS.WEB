@@ -9,7 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-bootstrap-spinner';
 
 @NgModule({
-  imports: [CommonModule, TranslateModule, NgbModule, SharedModule, HomeRoutingModule, NgxSpinnerModule],
-  declarations: [HomeComponent],
+	imports: [CommonModule, TranslateModule, NgbModule, SharedModule, HomeRoutingModule, NgxSpinnerModule],
+	declarations: [HomeComponent]
 })
 export class HomeModule {}

@@ -1,31 +1,31 @@
 .logo {
-  width: 100px;
+	width: 100px;
 }
 
 q {
-  font-style: italic;
-  font-size: 1.2rem;
-  quotes: "« " " »";
+	font-style: italic;
+	font-size: 1.2rem;
+	quotes: '« ' ' »';
 }
 
-@import "../../theme/config/directional.scss";
+@import '../../theme/config/directional.scss';
 
 .nav .nav-item {
-  position: relative;
-  &.hasSubItem {
-    > .nav {
-      display: none;
-      left: 100%;
-      position: absolute;
-      width: 100%;
-      top: 0;
-    }
+	position: relative;
+	&.hasSubItem {
+		> .nav {
+			display: none;
+			left: 100%;
+			position: absolute;
+			width: 100%;
+			top: 0;
+		}
 
-    &:hover {
-      background-color: blue;
-      > .nav {
-        display: block;
-      }
-    }
-  }
+		&:hover {
+			background-color: blue;
+			> .nav {
+				display: block;
+			}
+		}
+	}
 }

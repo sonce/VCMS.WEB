@@ -3,8 +3,8 @@
  */
 
 // Set Font Awesome font path
-$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
-@import "~bootstrap/scss/_functions";
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~bootstrap/scss/_functions';
 
 // ---------------------------------------------------------------------------
 // Bootstrap variables
@@ -48,16 +48,16 @@ $navbar-light-hover-color: #3899ec;
 $navbar-light-color: #212529;
 
 $theme-colors: (
-  primary: $blue,
-  secondary: $gray-600,
-  success: $green,
-  info: $cyan,
-  warning: $yellow,
-  danger: $red,
-  light: $gray-100,
-  dark: $gray-800,
+	primary: $blue,
+	secondary: $gray-600,
+	success: $green,
+	info: $cyan,
+	warning: $yellow,
+	danger: $red,
+	light: $gray-100,
+	dark: $gray-800
 );
 
 // Use Bootstrap defaults for other variables, imported here so we can access all app variables in one place when used
 // in components.
-@import "~bootstrap/scss/_variables";
+@import '~bootstrap/scss/_variables';

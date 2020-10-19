@@ -1,8 +1,6 @@
-import { Directive, HostListener, Input, ViewChild } from '@angular/core';
+import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[menu]',
+	selector: '[menu]'
 })
-export class MenuAttachDirective {
-  constructor() {}
-}
+export class MenuAttachDirective {}

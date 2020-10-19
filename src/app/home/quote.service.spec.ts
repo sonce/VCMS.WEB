@@ -6,51 +6,51 @@ import { CoreModule } from '@core';
 import { QuoteService } from './quote.service';
 
 describe('QuoteService', () => {
-  let quoteService: QuoteService;
-  let httpMock: HttpTestingController;
+	let quoteService: QuoteService;
+	let httpMock: HttpTestingController;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [CoreModule, HttpClientTestingModule],
-      providers: [QuoteService],
-    });
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			imports: [CoreModule, HttpClientTestingModule],
+			providers: [QuoteService]
+		});
 
-    quoteService = TestBed.inject(QuoteService);
-    httpMock = TestBed.inject(HttpTestingController as Type<HttpTestingController>);
-  });
+		quoteService = TestBed.inject(QuoteService);
+		httpMock = TestBed.inject(HttpTestingController as Type<HttpTestingController>);
+	});
 
-  afterEach(() => {
-    httpMock.verify();
-  });
+	afterEach(() => {
+		httpMock.verify();
+	});
 
-  describe('getRandomQuote', () => {
-    it('should return a random Chuck Norris quote', () => {
-      // Arrange
-      const mockQuote = { data: 'a random quote' };
+	describe('getRandomQuote', () => {
+		it('should return a random Chuck Norris quote', () => {
+			// Arrange
+			const mockQuote = { data: 'a random quote' };
 
-      // Act
-      const randomQuoteSubscription = quoteService.getRandomQuote({ category: 'toto' });
+			// Act
+			const randomQuoteSubscription = quoteService.getRandomQuote({ category: 'toto' });
 
-      // Assert
-      randomQuoteSubscription.subscribe((quote: string) => {
-        expect(quote).toEqual(mockQuote.data);
-      });
-      httpMock.expectOne({}).flush(mockQuote);
-    });
+			// Assert
+			randomQuoteSubscription.subscribe((quote: string) => {
+				expect(quote).toEqual(mockQuote.data);
+			});
+			httpMock.expectOne({}).flush(mockQuote);
+		});
 
-    it('should return a string in case of error', () => {
-      // Act
-      const randomQuoteSubscription = quoteService.getRandomQuote({ category: 'toto' });
+		it('should return a string in case of error', () => {
+			// Act
+			const randomQuoteSubscription = quoteService.getRandomQuote({ category: 'toto' });
 
-      // Assert
-      randomQuoteSubscription.subscribe((quote: string) => {
-        expect(typeof quote).toEqual('string');
-        expect(quote).toContain('Error');
-      });
-      httpMock.expectOne({}).flush(null, {
-        status: 500,
-        statusText: 'error',
-      });
-    });
-  });
+			// Assert
+			randomQuoteSubscription.subscribe((quote: string) => {
+				expect(typeof quote).toEqual('string');
+				expect(quote).toContain('Error');
+			});
+			httpMock.expectOne({}).flush(null, {
+				status: 500,
+				statusText: 'error'
+			});
+		});
+	});
 });

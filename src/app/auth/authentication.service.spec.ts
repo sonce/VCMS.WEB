@@ -5,108 +5,108 @@ import { CredentialsService, Credentials } from './credentials.service';
 import { MockCredentialsService } from './credentials.service.mock';
 
 describe('AuthenticationService', () => {
-  let authenticationService: AuthenticationService;
-  let credentialsService: MockCredentialsService;
+	let authenticationService: AuthenticationService;
+	let credentialsService: MockCredentialsService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [{ provide: CredentialsService, useClass: MockCredentialsService }, AuthenticationService],
-    });
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			providers: [{ provide: CredentialsService, useClass: MockCredentialsService }, AuthenticationService]
+		});
 
-    authenticationService = TestBed.inject(AuthenticationService);
-    credentialsService = TestBed.inject(CredentialsService);
-    credentialsService.credentials = null;
-    spyOn(credentialsService, 'setCredentials').and.callThrough();
-  });
+		authenticationService = TestBed.inject(AuthenticationService);
+		credentialsService = TestBed.inject(CredentialsService);
+		credentialsService.credentials = null;
+		spyOn(credentialsService, 'setCredentials').and.callThrough();
+	});
 
-  describe('login', () => {
-    it('should return credentials', fakeAsync(() => {
-      // Act
-      const request = authenticationService.login({
-        username: 'toto',
-        password: '123',
-      });
-      tick();
+	describe('login', () => {
+		it('should return credentials', fakeAsync(() => {
+			// Act
+			const request = authenticationService.login({
+				username: 'toto',
+				password: '123'
+			});
+			tick();
 
-      // Assert
-      request.subscribe((credentials) => {
-        expect(credentials).toBeDefined();
-        expect(credentials.token).toBeDefined();
-      });
-    }));
+			// Assert
+			request.subscribe((credentials) => {
+				expect(credentials).toBeDefined();
+				expect(credentials.token).toBeDefined();
+			});
+		}));
 
-    it('should authenticate user', fakeAsync(() => {
-      expect(credentialsService.isAuthenticated()).toBe(false);
+		it('should authenticate user', fakeAsync(() => {
+			expect(credentialsService.isAuthenticated()).toBe(false);
 
-      // Act
-      const request = authenticationService.login({
-        username: 'toto',
-        password: '123',
-      });
-      tick();
+			// Act
+			const request = authenticationService.login({
+				username: 'toto',
+				password: '123'
+			});
+			tick();
 
-      // Assert
-      request.subscribe(() => {
-        expect(credentialsService.isAuthenticated()).toBe(true);
-        expect(credentialsService.credentials).not.toBeNull();
-        expect((credentialsService.credentials as Credentials).token).toBeDefined();
-        expect((credentialsService.credentials as Credentials).token).not.toBeNull();
-      });
-    }));
+			// Assert
+			request.subscribe(() => {
+				expect(credentialsService.isAuthenticated()).toBe(true);
+				expect(credentialsService.credentials).not.toBeNull();
+				expect((credentialsService.credentials as Credentials).token).toBeDefined();
+				expect((credentialsService.credentials as Credentials).token).not.toBeNull();
+			});
+		}));
 
-    it('should persist credentials for the session', fakeAsync(() => {
-      // Act
-      const request = authenticationService.login({
-        username: 'toto',
-        password: '123',
-      });
-      tick();
+		it('should persist credentials for the session', fakeAsync(() => {
+			// Act
+			const request = authenticationService.login({
+				username: 'toto',
+				password: '123'
+			});
+			tick();
 
-      // Assert
-      request.subscribe(() => {
-        expect(credentialsService.setCredentials).toHaveBeenCalled();
-        expect((credentialsService.setCredentials as jasmine.Spy).calls.mostRecent().args[1]).toBe(undefined);
-      });
-    }));
+			// Assert
+			request.subscribe(() => {
+				expect(credentialsService.setCredentials).toHaveBeenCalled();
+				expect((credentialsService.setCredentials as jasmine.Spy).calls.mostRecent().args[1]).toBe(undefined);
+			});
+		}));
 
-    it('should persist credentials across sessions', fakeAsync(() => {
-      // Act
-      const request = authenticationService.login({
-        username: 'toto',
-        password: '123',
-        remember: true,
-      });
-      tick();
+		it('should persist credentials across sessions', fakeAsync(() => {
+			// Act
+			const request = authenticationService.login({
+				username: 'toto',
+				password: '123',
+				remember: true
+			});
+			tick();
 
-      // Assert
-      request.subscribe(() => {
-        expect(credentialsService.setCredentials).toHaveBeenCalled();
-        expect((credentialsService.setCredentials as jasmine.Spy).calls.mostRecent().args[1]).toBe(true);
-      });
-    }));
-  });
+			// Assert
+			request.subscribe(() => {
+				expect(credentialsService.setCredentials).toHaveBeenCalled();
+				expect((credentialsService.setCredentials as jasmine.Spy).calls.mostRecent().args[1]).toBe(true);
+			});
+		}));
+	});
 
-  describe('logout', () => {
-    it('should clear user authentication', fakeAsync(() => {
-      // Arrange
-      const loginRequest = authenticationService.login({
-        username: 'toto',
-        password: '123',
-      });
-      tick();
+	describe('logout', () => {
+		it('should clear user authentication', fakeAsync(() => {
+			// Arrange
+			const loginRequest = authenticationService.login({
+				username: 'toto',
+				password: '123'
+			});
+			tick();
 
-      // Assert
-      loginRequest.subscribe(() => {
-        expect(credentialsService.isAuthenticated()).toBe(true);
+			// Assert
+			loginRequest.subscribe(() => {
+				expect(credentialsService.isAuthenticated()).toBe(true);
 
-        const request = authenticationService.logout();
-        tick();
+				const request = authenticationService.logout();
+				tick();
 
-        request.subscribe(() => {
-          expect(credentialsService.isAuthenticated()).toBe(false);
-          expect(credentialsService.credentials).toBeNull();
-        });
-      });
-    }));
-  });
+				request.subscribe(() => {
+					expect(credentialsService.isAuthenticated()).toBe(false);
+					expect(credentialsService.credentials).toBeNull();
+				});
+			});
+		}));
+	});
 });
