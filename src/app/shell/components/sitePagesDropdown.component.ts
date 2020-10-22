@@ -253,7 +253,10 @@ export class SitePagesDropdownComponent implements OnInit {
 					tree: TreeModel,
 					node: TreeNode,
 					$event: DragEvent,
-					info: { from: TreeNode; to: { dropOnNode: boolean; index: number; parent: TreeNode } }
+					info: {
+						from: TreeNode;
+						to: { dropOnNode: boolean; index: number; parent: TreeNode };
+					}
 				): void => {
 					this.spinner.show(this.dropdownpagesLoader);
 					setTimeout(() => {
@@ -375,7 +378,6 @@ export class SitePagesDropdownComponent implements OnInit {
 	}
 
 	//#region 修改名字
-
 	private createForm() {
 		this.changeNameForm = this.formBuilder.group({
 			pageName: ['', Validators.required]

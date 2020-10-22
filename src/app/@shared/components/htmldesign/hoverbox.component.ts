@@ -13,13 +13,16 @@ export class HoverboxComponent {
 	@Input() ContainerInfo: ElementInfo;
 
 	@Input() InHover = false;
-	onDel: EventEmitter<{ element: ElementInfo; autoDelEmpty: boolean }> = new EventEmitter();
+	onDel: EventEmitter<{
+		element: ElementInfo;
+		autoDelEmpty: boolean;
+	}> = new EventEmitter();
 	constructor(
 		private confirmationDialogService: ConfirmationDialogService,
 		private translateService: TranslateService
 	) {}
 
-	public setElementInfo(elementInfo: ElementInfo[]): void {
+	public setHoverElementInfo(elementInfo: ElementInfo[]): void {
 		if (elementInfo.length <= 0) return;
 		if (elementInfo.findIndex((x) => !x.addon.IsContainer) == -1) return;
 		this.quit();
@@ -35,6 +38,7 @@ export class HoverboxComponent {
 		}
 		//没有容器
 		if (typeof this.ContainerInfo === 'undefined') this.ContainerInfo = this.CurrentElementInfo;
+		this.InHover = true;
 	}
 
 	delElement(event: MouseEvent, elementInfo: ElementInfo, autoDelEmpty = true): void {
@@ -59,6 +63,7 @@ export class HoverboxComponent {
 			});
 	}
 
+	/** 退出所有的HOVER */
 	quit(): void {
 		this.InHover = false;
 		this.CurrentElementInfo = undefined;

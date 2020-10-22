@@ -29,11 +29,13 @@ export class VDropdownComponent implements AfterViewInit {
 	/**
 	 * 下拉框完整的内容模板
 	 */
-	@ContentChild('dropdownFullTemplate', { static: false }) dropdownFullTemplate: TemplateRef<unknown>;
+	@ContentChild('dropdownFullTemplate', { static: false })
+	dropdownFullTemplate: TemplateRef<unknown>;
 	/**
 	 * 下拉选项的模板
 	 */
-	@ContentChild('dropdownContentTemplate', { static: false }) dropdownContentTemplate: TemplateRef<unknown>;
+	@ContentChild('dropdownContentTemplate', { static: false })
+	dropdownContentTemplate: TemplateRef<unknown>;
 
 	/**
 	 * Indicates whether the dropdown should be closed when clicking one of dropdown items or pressing ESC.

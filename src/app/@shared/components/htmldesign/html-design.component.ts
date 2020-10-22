@@ -83,6 +83,8 @@ export class HTMLDesignComponent implements AfterViewInit {
 	private init() {
 		//iframe还没有渲染
 		if (!this.iframe) return;
+		this.hoverBox.quit();
+
 		//第二次初始化，只要握手IFRAME即可
 		if (this.iframeChatService) {
 			this.iframeChatService.Init(this.iframe.nativeElement);
@@ -94,7 +96,7 @@ export class HTMLDesignComponent implements AfterViewInit {
 		this.iframeChatService.onScriptInited.subscribe(() => {
 			this.getIframePos();
 			forkJoin([
-				this.iframeChatService.PostMessage<boolean>('loadCSS', 'http://localhost:4200/assets/dist/template'),
+				this.iframeChatService.PostMessage<boolean>('loadCSS', 'http://localhost:4200/assets/template/main'),
 				this.iframeChatService.PostMessage<boolean>('SetIframePos', this.iframePos.left, this.iframePos.top),
 				this.changeDesignState(this.InDesign),
 				this.addonService.getAll()
@@ -114,27 +116,33 @@ export class HTMLDesignComponent implements AfterViewInit {
 		//先加载JS
 		this.iframeChatService.onConnected.subscribe(() => {
 			//优先加载JS
-			this.iframeChatService.PostMessage('loadScript', 'http://localhost:4200/assets/dist/template');
+			this.iframeChatService.PostMessage('loadScript', 'http://localhost:4200/assets/template/main');
 		});
 		this.iframeChatService.onTrackHoverElement.subscribe((info: ElementInfo[]) => {
 			//获取当前元素的插件
+			if (typeof this.hoverBox === 'undefined') return;
 			const elements: ElementInfo[] = [];
 			info.forEach((theInfo) => {
 				const theAddon = this.addons.find((x) => x.Name.toLocaleLowerCase() == theInfo.type);
 				theInfo.addon = theAddon;
 				if (theAddon) elements.push(theInfo);
 			});
-			this.hoverBox.setElementInfo(elements);
-			this.hoverBox.InHover = true;
+			this.hoverBox.setHoverElementInfo(elements);
 		});
 		this.iframeChatService.onScroll.subscribe(() => {
-			this.hoverBox.quit();
+			if (typeof this.hoverBox !== 'undefined') this.hoverBox.quit();
 		});
 		this.iframeChatService.onsizechanged.subscribe(() => {
-			this.hoverBox.quit();
+			if (typeof this.hoverBox !== 'undefined') this.hoverBox.quit();
 			if (this.getIframePos()) {
 				this.iframeChatService.PostMessage<boolean>('SetIframePos', this.iframePos.left, this.iframePos.top);
 			}
+		});
+
+		this.iframeChatService.onClick.subscribe((info: ElementInfo[]) => {
+			debugger;
+			const ele: ElementInfo = info[0];
+			console.log(ele);
 		});
 	}
 

@@ -28,7 +28,7 @@
 				<v-radiogroup
 					[name]="'designmode'"
 					[value]="designerService.IsMobile"
-					(onToggleCheck)="changeViewMode($event)"
+					(toggleCheck)="changeViewMode($event)"
 					[skin]="'bottomline'"
 				>
 					<v-radiogroup-item [value]="false">

@@ -12,7 +12,7 @@
 		"esModuleInterop": true,
 		"importHelpers": true,
 		"target": "ES2015",
-		"typeRoots": ["node_modules/@types"],
+		"typeRoots": ["node_modules/@types","custom_typings"],
 		"lib": ["es2018", "dom"],
 		"paths": {
 			"shared": ["dist/shared"],
@@ -26,6 +26,6 @@
 			"@env/*": ["src/environments/*"],
 			"rxjs": ["./node_modules/rxjs"]
 		}
-	},
+  },
 	"exclude": ["dist"]
 }

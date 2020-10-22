@@ -13,7 +13,7 @@
       }
     ],
     "selector-attribute-quotes": "always",
-    "string-quotes": "double",
+    "string-quotes": "single",
     "max-nesting-depth": 3,
     "selector-max-compound-selectors": 3,
     "selector-max-specificity": "0,3,2",
@@ -41,7 +41,7 @@
         "ignorePseudoElements": ["ng-deep"]
       }
     ],
-    "unit-whitelist": ["px", "%", "em", "rem", "vw", "vh", "deg", "s"],
+    "unit-whitelist": ["px", "%", "em", "rem", "vw", "vh", "deg", "s","ms"],
     "max-empty-lines": 2,
     "max-line-length": 120
   }

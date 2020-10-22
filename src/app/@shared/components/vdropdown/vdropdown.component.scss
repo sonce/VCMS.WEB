@@ -11,7 +11,7 @@
 .dropdown-toggle {
 	width: 100%;
 	border: none;
-	&:after {
+	&::after {
 		display: none;
 	}
 
@@ -23,8 +23,8 @@
 .dropdown-menu {
 	border: $dropdown-border-width solid $dropdown-border-color;
 	border-top-width: 0;
-	border-top-left-radius: 0em;
-	border-top-right-radius: 0em;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 	width: calc(100% + #{$dropdown-border-width * 2});
 	margin: 0;
 	margin-left: -#{$dropdown-border-width};

@@ -1,5 +1,5 @@
 import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -25,7 +25,9 @@ import { PluginsConfigProvider } from './services/plugins-config.provider';
 		HttpClientModule,
 		BrowserModule,
 		BrowserTransferStateModule,
-		ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
+		ServiceWorkerModule.register('./ngsw-worker.js', {
+			enabled: environment.production
+		}),
 		TranslateModule.forRoot(),
 		FormsModule,
 		NgbModule,

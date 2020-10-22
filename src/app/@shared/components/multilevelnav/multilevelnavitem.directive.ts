@@ -13,7 +13,10 @@ export class MultiLevelNavitemDirective {
 	@Input() public enabled: boolean | ((item: any) => boolean) = true;
 	@Input() public passive = false;
 	@Input() public visible: boolean | ((item: any) => boolean) = true;
-	@Output() public execute: EventEmitter<{ event: Event; item: any }> = new EventEmitter();
+	@Output() public execute: EventEmitter<{
+		event: Event;
+		item: any;
+	}> = new EventEmitter();
 
 	public currentItem: any;
 	public isActive = false;

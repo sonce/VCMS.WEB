@@ -1,0 +1,13 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"module": "commonjs",
+		"types": [],
+		"outDir": "../../src/assets/dist",
+		"importHelpers": false,
+		"sourceMap": true,
+		"target": "ES5"
+	},
+	"include": ["../../custom_typings"],
+	"files": ["./src/index.ts"]
+}

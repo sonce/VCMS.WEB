@@ -120,7 +120,7 @@ class Template {
 			});
 		}
 
-		this.disableClick();
+		this.handClick();
 		this.hoverAddonElement();
 		this.attachScroll();
 
@@ -128,16 +128,18 @@ class Template {
 	}
 
 	/**
-	 * 禁用页面单击，防止页面跳转
+	 * 单击后的事件传递，以及禁用页面单击，防止页面跳转。
 	 */
-	disableClick() {
-		document.onclick = function (e: MouseEvent) {
+	handClick() {
+		document.onclick = (e: MouseEvent) => {
 			if (messageHandlers.InDesign) {
 				window.event ? (window.event.cancelBubble = true) : e.stopPropagation();
 				const event = e || window.event; //用于IE
 				if (event.preventDefault) event.preventDefault(); //标准技术
 				if (event.returnValue) event.returnValue = false; //IE
 				e.stopImmediatePropagation();
+				debugger;
+				designer.emit<ElementInfo[]>('onClick', this.currentElementInfo);
 			}
 		};
 	}

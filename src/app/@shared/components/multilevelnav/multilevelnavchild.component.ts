@@ -6,7 +6,8 @@ import { MultiLevelNavitemDirective } from './multilevelnavitem.directive';
 	template: `<ng-content></ng-content>`
 })
 export class MultiLevelNavChildComponent {
-	@ContentChildren(MultiLevelNavitemDirective) public queryListNavItems: QueryList<MultiLevelNavitemDirective>;
+	@ContentChildren(MultiLevelNavitemDirective)
+	public queryListNavItems: QueryList<MultiLevelNavitemDirective>;
 	get visibleNavItems(): MultiLevelNavitemDirective[] {
 		const items = this.queryListNavItems.filter((x) => x.isMenuItemVisible(x, this.item));
 		return items;

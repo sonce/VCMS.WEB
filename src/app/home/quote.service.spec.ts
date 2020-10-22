@@ -1,5 +1,5 @@
 import { Type } from '@angular/core';
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { CoreModule } from '@core';
@@ -29,7 +29,9 @@ describe('QuoteService', () => {
 			const mockQuote = { data: 'a random quote' };
 
 			// Act
-			const randomQuoteSubscription = quoteService.getRandomQuote({ category: 'toto' });
+			const randomQuoteSubscription = quoteService.getRandomQuote({
+				category: 'toto'
+			});
 
 			// Assert
 			randomQuoteSubscription.subscribe((quote: string) => {
@@ -40,7 +42,9 @@ describe('QuoteService', () => {
 
 		it('should return a string in case of error', () => {
 			// Act
-			const randomQuoteSubscription = quoteService.getRandomQuote({ category: 'toto' });
+			const randomQuoteSubscription = quoteService.getRandomQuote({
+				category: 'toto'
+			});
 
 			// Assert
 			randomQuoteSubscription.subscribe((quote: string) => {

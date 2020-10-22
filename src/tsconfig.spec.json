@@ -6,5 +6,5 @@
     "types": ["jest", "node"]
   },
   "files": ["./polyfills.ts"],
-  "include": ["./**/*.spec.ts", "./**/*.mock.ts", "./**/*.d.ts", "./@types/PostmatEvents.d.ts"]
+  "include": ["./**/*.spec.ts", "./**/*.mock.ts", "./**/*.d.ts", "../custom_typings"]
 }

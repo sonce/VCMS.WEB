@@ -38,4 +38,5 @@ declare interface PostmatEvents {
 	onScriptInited: EventEmitter<string>;
 	onTrackHoverElement: EventEmitter<ElementInfo[]>;
 	onScroll: EventEmitter<number>;
+	onClick: EventEmitter<ElementInfo[]>;
 }

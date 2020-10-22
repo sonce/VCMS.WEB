@@ -17,6 +17,7 @@ export class IFrameChatService implements PostmatEvents {
 	constructor(iframe: HTMLIFrameElement) {
 		this.Init(iframe);
 	}
+	onClick: EventEmitter<ElementInfo[]> = new EventEmitter<ElementInfo[]>();
 	onScroll: EventEmitter<number> = new EventEmitter<number>();
 	onTrackHoverElement: EventEmitter<ElementInfo[]> = new EventEmitter<ElementInfo[]>();
 	onScriptInited: EventEmitter<string> = new EventEmitter();
@@ -41,6 +42,7 @@ export class IFrameChatService implements PostmatEvents {
 					this.postmateClient.on('onScriptInited', () => this.onScriptInited.emit());
 					this.postmateClient.on('onTrackHoverElement', (data: ElementInfo[]) => this.onTrackHoverElement.emit(data));
 					this.postmateClient.on('onScroll', (y: number) => this.onScroll.emit(y));
+					this.postmateClient.on('onClick', (data: ElementInfo[]) => this.onClick.emit(data));
 					this.onConnected.emit(true);
 				})
 			)

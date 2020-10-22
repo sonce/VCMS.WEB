@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { extract } from '@app/i18n';
 import { DesignComponent } from './design.component';
 import { Shell } from '@app/shell/shell.service';
 import { DesignResolver } from './design-resolver.service';

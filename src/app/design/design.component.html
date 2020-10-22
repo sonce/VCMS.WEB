@@ -1,7 +1,7 @@
 <v-html-design
 	[url]="designService.CurrentPage.Url"
 	[IsMobile]="designService.IsMobile"
-	[InDesign]="designService.InDesign"
-	(onLoaded)="pageEndLoaded()"
-	(onStartLoad)="pageStartLoad()"
+  [InDesign]="designService.InDesign"
+	(loaded)="pageEndLoaded()"
+	(startLoad)="pageStartLoad()"
 ></v-html-design>

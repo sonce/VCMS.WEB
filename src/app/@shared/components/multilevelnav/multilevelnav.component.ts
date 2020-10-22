@@ -7,7 +7,8 @@ import { MultiLevelNavitemDirective } from './multilevelnavitem.directive';
 	styleUrls: ['./multilevelnav.component.scss']
 })
 export class MultiLevelNavComponent {
-	@ContentChildren(MultiLevelNavitemDirective) public queryListNavItems: QueryList<MultiLevelNavitemDirective>;
+	@ContentChildren(MultiLevelNavitemDirective)
+	public queryListNavItems: QueryList<MultiLevelNavitemDirective>;
 	/** 菜单纵向 */
 	@Input() public isVertical = false;
 	/** 没有边框线 */

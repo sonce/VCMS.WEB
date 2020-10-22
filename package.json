@@ -5,13 +5,15 @@
 	"scripts": {
 		"ng": "ng",
 		"start": "npm run env -s && ng serve --proxy-config proxy.conf.js",
-		"lint": "ng lint && stylelint \"src/**/*.scss\" --syntax scss && htmlhint \"src\" --config .htmlhintrc",
-		"lint2": "tsc --noEmit && eslint . --ext ts --quiet --fix",
+		"lint": "npm run prettier && stylelint \"{src,projects}/**/*.scss\" --syntax scss && htmlhint \"{src,projects}\" --config .htmlhintrc",
+		"prettier": "prettier-eslint --list-different %INIT_CWD%/{src,e2e,projects}/**/*.ts",
+		"format": "prettier-eslint --list-different --write %INIT_CWD%/{src,e2e,projects}/**/*.ts",
 		"build": "npm run env -s && ng build --prod",
 		"postinstall": "patch-package && npm run prettier -s && tsc -p builders/tsconfig.builders.json",
-		"build:shared": "ng build shared --prod && ng build --project plugins --prod --modulePath=shared#SharedModule --pluginName=shared  --outputPath=./src/assets/plugins",
-		"build:plugin1": "ng build --project plugins --prod --modulePath=./plugin1/plugin1.module#Plugin1Module --pluginName=plugin1 --sharedLibs=shared --outputPath=./src/assets/plugins",
-		"build:plugin2": "ng build --project plugins --prod --modulePath=./plugin2/plugin2.module#Plugin2Module --pluginName=plugin2 --sharedLibs=shared --outputPath=./src/assets/plugins ",
+		"build:template": "webpack --config projects/template/webpack.config.js && ncp projects/template/dist/ src/assets/template",
+		"build:shared": "ng build shared && ng build --project plugins --aot --modulePath=shared#SharedModule --pluginName=shared  --outputPath=./src/assets/plugins",
+		"build:plugin1": "ng build --project plugins --aot --modulePath=./plugin1/plugin1.module#Plugin1Module --pluginName=plugin1 --sharedLibs=shared --outputPath=./src/assets/plugins",
+		"build:plugin2": "ng build --project plugins --aot --modulePath=./plugin2/plugin2.module#Plugin2Module --pluginName=plugin2 --sharedLibs=shared --outputPath=./src/assets/plugins ",
 		"build:plugins": "npm run build:shared && npm run build:plugin1 && npm run build:plugin2",
 		"serve:sw": "npm run build -s && npx http-server ./dist -p 4200",
 		"compile:server_bak": "webpack --config webpack.server.config.js --progress --colors",
@@ -28,8 +30,6 @@
 		"translations:extract": "ngx-translate-extract --input ./src --output ./src/translations/template.json --format=json --clean --sort --marker extract",
 		"docs": "hads ./docs -o",
 		"env": "ngx-scripts env npm_package_version",
-		"prettier": "prettier --write \"./{src,e2e}/**/*.{ts,js,html,scss}\"",
-		"prettier:check": "prettier --list-different \"./{src,e2e}/**/*.{ts,js,html,scss}\"",
 		"generate": "ng generate"
 	},
 	"dependencies": {
@@ -62,6 +62,11 @@
 		"@angular-builders/jest": "^10.0.1",
 		"@angular-devkit/build-angular": "^0.1001.7",
 		"@angular-devkit/build-ng-packagr": "~0.1001.7",
+		"@angular-eslint/builder": "0.5.0-beta.4",
+		"@angular-eslint/eslint-plugin": "0.5.0-beta.4",
+		"@angular-eslint/eslint-plugin-template": "0.5.0-beta.4",
+		"@angular-eslint/schematics": "^0.5.0-beta.4",
+		"@angular-eslint/template-parser": "0.5.0-beta.4",
 		"@angular/cli": "^10.1.7",
 		"@angular/compiler-cli": "^10.1.6",
 		"@angular/language-service": "^10.1.6",
@@ -89,28 +94,27 @@
 		"jest": "^26.5.3",
 		"jest-preset-angular": "^8.3.1",
 		"karma": "^5.2.3",
+		"lint-staged": "^10.4.2",
+		"ncp": "^2.0.0",
 		"ng-packagr": "^10.1.2",
 		"patch-package": "^6.2.2",
 		"prettier": "^2.1.2",
 		"prettier-eslint": "^11.0.0",
-		"pretty-quick": "^3.1.0",
+		"prettier-eslint-cli": "^5.0.0",
 		"protractor": "~7.0.0",
 		"stylelint": "~13.7.2",
 		"stylelint-config-prettier": "^8.0.2",
 		"stylelint-config-recommended-scss": "~4.2.0",
 		"stylelint-config-standard": "~20.0.0",
 		"stylelint-scss": "~3.18.0",
+		"ts-loader": "^8.0.5",
 		"ts-node": "^9.0.0",
 		"typescript": "~4.0.3",
-		"@angular-eslint/builder": "0.5.0-beta.4",
-		"@angular-eslint/eslint-plugin": "0.5.0-beta.4",
-		"@angular-eslint/eslint-plugin-template": "0.5.0-beta.4",
-		"@angular-eslint/schematics": "^0.5.0-beta.4",
-		"@angular-eslint/template-parser": "0.5.0-beta.4"
+		"webpack-cli": "^4.0.0"
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "pretty-quick --staged"
+			"pre-commit": "lint-staged"
 		}
 	}
 }
