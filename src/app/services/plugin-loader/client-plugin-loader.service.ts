@@ -13,7 +13,6 @@ export class ClientPluginLoaderService extends PluginLoaderService {
 
 	provideExternals(): void {
 		Object.keys(PLUGIN_EXTERNALS_MAP).forEach((externalKey) => {
-			debugger;
 			window.define(externalKey, [], () => PLUGIN_EXTERNALS_MAP[externalKey]);
 		});
 	}

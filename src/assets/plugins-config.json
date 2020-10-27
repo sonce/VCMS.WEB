@@ -8,5 +8,10 @@
     "name": "Plugin 2",
     "path": "/assets/plugins/plugin2.js",
     "deps": []
+  },
+  "text":{
+    "name":"Text",
+    "path":"/assets/plugins/text.js",
+    "deps":[]
   }
 }

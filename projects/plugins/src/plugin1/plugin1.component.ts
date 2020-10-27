@@ -1,4 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { TestService } from 'shared';
 
 @Component({
 	selector: 'app-plugin-1',
@@ -6,9 +7,10 @@ import { AfterViewInit, Component } from '@angular/core';
 })
 export class Plugin1Component implements AfterViewInit {
 	x = false;
-
+	constructor(private testService: TestService) {
+		testService.HelloWorld();
+	}
 	ngAfterViewInit(): void {
-		debugger;
 		console.log('aaa');
 	}
 }

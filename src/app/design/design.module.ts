@@ -8,10 +8,20 @@ import { NgxSpinnerModule } from 'ngx-bootstrap-spinner';
 import { DesignComponent } from './design.component';
 import { DesignRoutingModule } from './design-routing.module';
 import { DesignResolver } from './design-resolver.service';
+import { PluginsConfigProvider } from '@app/services/plugins-config.provider';
 
 @NgModule({
 	imports: [CommonModule, TranslateModule, NgbModule, SharedModule, DesignRoutingModule, NgxSpinnerModule],
 	declarations: [DesignComponent],
 	providers: [DesignResolver]
 })
-export class DesignModule {}
+export class DesignModule {
+	constructor(private provider: PluginsConfigProvider) {
+		provider
+			.loadConfig()
+			.toPromise()
+			.then((config) => {
+				provider.config = config;
+			});
+	}
+}

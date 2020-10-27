@@ -138,7 +138,6 @@ class Template {
 				if (event.preventDefault) event.preventDefault(); //标准技术
 				if (event.returnValue) event.returnValue = false; //IE
 				e.stopImmediatePropagation();
-				debugger;
 				designer.emit<ElementInfo[]>('onClick', this.currentElementInfo);
 			}
 		};

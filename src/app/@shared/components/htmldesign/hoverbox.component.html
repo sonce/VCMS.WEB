@@ -43,8 +43,16 @@
 		</div>
 	</div>
 
+	<!-- 临近元素的容器 -->
 	<div
 		class="container-hover-box"
+		*ngIf="InHover && ContainerInfo"
+		[ngStyle]="{
+			left: ContainerInfo.pos.left + 'px',
+			top: ContainerInfo.pos.top + 'px',
+			width: ContainerInfo.pos.width + 'px',
+			height: ContainerInfo.pos.height + 'px'
+		}"
 		data-bind="visible:inHover,style:{left:left,top:top,width:width,height:height},css:{draggable:canDrag,dragging:dragging}"
 	></div>
 
@@ -67,7 +75,7 @@
 		width: ContainerInfo.pos.width + 'px',
 		height: ContainerInfo.pos.height + 'px'
 	}"
-	[ngClass]="{ draggable: CurrentElementInfo.addon.CanDrag }"
+	[ngClass]="{ draggable: ContainerInfo.addon.CanDrag }"
 	data-bind="css:{resizable:canResize}"
 >
 	<span
@@ -75,14 +83,14 @@
 		data-bind="css:{dragable:canDrag,'label-top':labelIsTop,'label-bottom':!labelIsTop()}"
 	>
 		<span style="width: 130px; word-wrap: break-word; display: block" class="text-truncate text-center text-capitalize"
-			>{{ CurrentElementInfo.type }}
+			>{{ ContentElementInfo.type }}
 		</span>
 		<div class="card-actions">
 			<a
-				(click)="delElement($event, CurrentElementInfo, true)"
+				(click)="delElement($event, ContentElementInfo, true)"
 				class="card-action iconfont icon-del"
-				*ngIf="CurrentElementInfo.addon.CanDel"
-				title="{{ ('Del' | translate) + CurrentElementInfo.addon.Name }}"
+				*ngIf="ContentElementInfo.addon.CanDel"
+				title="{{ ('Del' | translate) + ContentElementInfo.addon.Name }}"
 			></a>
 		</div>
 	</span>
@@ -112,7 +120,7 @@
 		data-bind="visible:resizeBottomRight"
 	></span>
 
-	<ng-container *ngIf="CurrentElementInfo.addon.CanDrag">
+	<ng-container *ngIf="ContentElementInfo.addon.CanDrag">
 		<div class="dragHandle top"></div>
 		<div class="dragHandle bottom"></div>
 		<div class="dragHandle left"></div>

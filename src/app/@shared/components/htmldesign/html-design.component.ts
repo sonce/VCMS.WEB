@@ -15,6 +15,8 @@ export class HTMLDesignComponent implements AfterViewInit {
 	@ViewChild(HoverboxComponent) hoverBox: HoverboxComponent;
 	private inited = false;
 
+	private currentElementInfos: ElementInfo[];
+
 	/** IFRAME的位置 */
 	iframePos: { top: number; left: number } = { top: 0, left: 0 };
 	/**
@@ -113,11 +115,24 @@ export class HTMLDesignComponent implements AfterViewInit {
 				this.loaded.emit(true);
 			});
 		});
+
 		//先加载JS
 		this.iframeChatService.onConnected.subscribe(() => {
 			//优先加载JS
 			this.iframeChatService.PostMessage('loadScript', 'http://localhost:4200/assets/template/main');
 		});
+
+		this.iframeChatService.onScroll.subscribe(() => {
+			if (typeof this.hoverBox !== 'undefined') this.hoverBox.quit();
+		});
+
+		this.iframeChatService.onsizechanged.subscribe(() => {
+			if (typeof this.hoverBox !== 'undefined') this.hoverBox.quit();
+			if (this.getIframePos()) {
+				this.iframeChatService.PostMessage<boolean>('SetIframePos', this.iframePos.left, this.iframePos.top);
+			}
+		});
+
 		this.iframeChatService.onTrackHoverElement.subscribe((info: ElementInfo[]) => {
 			//获取当前元素的插件
 			if (typeof this.hoverBox === 'undefined') return;
@@ -127,21 +142,12 @@ export class HTMLDesignComponent implements AfterViewInit {
 				theInfo.addon = theAddon;
 				if (theAddon) elements.push(theInfo);
 			});
+			this.currentElementInfos = elements;
 			this.hoverBox.setHoverElementInfo(elements);
 		});
-		this.iframeChatService.onScroll.subscribe(() => {
-			if (typeof this.hoverBox !== 'undefined') this.hoverBox.quit();
-		});
-		this.iframeChatService.onsizechanged.subscribe(() => {
-			if (typeof this.hoverBox !== 'undefined') this.hoverBox.quit();
-			if (this.getIframePos()) {
-				this.iframeChatService.PostMessage<boolean>('SetIframePos', this.iframePos.left, this.iframePos.top);
-			}
-		});
 
-		this.iframeChatService.onClick.subscribe((info: ElementInfo[]) => {
-			debugger;
-			const ele: ElementInfo = info[0];
+		this.iframeChatService.onClick.subscribe(() => {
+			const ele: ElementInfo = this.currentElementInfos[0];
 			console.log(ele);
 		});
 	}

@@ -1,5 +1,5 @@
 import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -18,12 +18,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { PluginLoaderService } from './services/plugin-loader/plugin-loader.service';
 import { ClientPluginLoaderService } from './services/plugin-loader/client-plugin-loader.service';
 import { PluginsConfigProvider } from './services/plugins-config.provider';
+import { TransferStateService } from './services/transfer-state.service';
 // import { DesignModule } from './design/design.module';
 
 @NgModule({
 	imports: [
 		HttpClientModule,
-		BrowserModule,
+		BrowserModule.withServerTransition({ appId: 'serverApp' }),
 		BrowserTransferStateModule,
 		ServiceWorkerModule.register('./ngsw-worker.js', {
 			enabled: environment.production
@@ -50,11 +51,16 @@ import { PluginsConfigProvider } from './services/plugins-config.provider';
 				provider
 					.loadConfig()
 					.toPromise()
-					.then((config) => (provider.config = config)),
+					.then((config) => {
+						provider.config = config;
+					}),
 			multi: true,
 			deps: [PluginsConfigProvider]
 		}
 	],
 	bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-empty-function
+	constructor(transferStateService: TransferStateService) {}
+}

@@ -7,6 +7,7 @@ import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { MultiLevelNavitemDirective } from '@app/@shared';
 import { NgxSpinnerService } from 'ngx-bootstrap-spinner';
 import { PluginLoaderService } from '@app/services/plugin-loader/plugin-loader.service';
+import { TestService } from 'shared';
 
 @Component({
 	selector: 'app-home',
@@ -25,7 +26,8 @@ export class HomeComponent implements OnInit {
 		private spinner: NgxSpinnerService,
 		private injector: Injector,
 		private pluginLoader: PluginLoaderService,
-		private cfr: ComponentFactoryResolver
+		private cfr: ComponentFactoryResolver,
+		private ts: TestService
 	) {}
 
 	data = { name: 'love' };

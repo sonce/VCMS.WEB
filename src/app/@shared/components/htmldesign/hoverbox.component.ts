@@ -8,9 +8,12 @@ import { ConfirmationDialogService } from '../confirmation-dialog';
 	styleUrls: ['./hoverbox.component.scss']
 })
 export class HoverboxComponent {
-	@Input() CurrentElementInfo: ElementInfo;
+	/** 最上层的容器 */
 	@Input() RootContainerInfo: ElementInfo;
+	/** 包含内容元素的容器 */
 	@Input() ContainerInfo: ElementInfo;
+	/** 内容元素 */
+	@Input() ContentElementInfo: ElementInfo;
 
 	@Input() InHover = false;
 	onDel: EventEmitter<{
@@ -24,6 +27,7 @@ export class HoverboxComponent {
 
 	public setHoverElementInfo(elementInfo: ElementInfo[]): void {
 		if (elementInfo.length <= 0) return;
+		//没有内容元素
 		if (elementInfo.findIndex((x) => !x.addon.IsContainer) == -1) return;
 		this.quit();
 		if (elementInfo[0].addon.IsContainer) this.RootContainerInfo = elementInfo[0];
@@ -32,12 +36,12 @@ export class HoverboxComponent {
 		for (let index = elementInfo.length - 1; index >= 0; index--) {
 			const element = elementInfo[index];
 			if (typeof this.ContainerInfo === 'undefined' && element.addon.IsContainer) this.ContainerInfo = element;
-			if (typeof this.CurrentElementInfo === 'undefined' && !element.addon.IsContainer)
-				this.CurrentElementInfo = element;
-			if (typeof this.ContainerInfo !== 'undefined' && typeof this.CurrentElementInfo !== 'undefined') break;
+			if (typeof this.ContentElementInfo === 'undefined' && !element.addon.IsContainer)
+				this.ContentElementInfo = element;
+			if (typeof this.ContainerInfo !== 'undefined' && typeof this.ContentElementInfo !== 'undefined') break;
 		}
 		//没有容器
-		if (typeof this.ContainerInfo === 'undefined') this.ContainerInfo = this.CurrentElementInfo;
+		if (typeof this.ContainerInfo === 'undefined') this.ContainerInfo = this.ContentElementInfo;
 		this.InHover = true;
 	}
 
@@ -66,7 +70,7 @@ export class HoverboxComponent {
 	/** 退出所有的HOVER */
 	quit(): void {
 		this.InHover = false;
-		this.CurrentElementInfo = undefined;
+		this.ContentElementInfo = undefined;
 		this.RootContainerInfo = undefined;
 		this.ContainerInfo = undefined;
 	}

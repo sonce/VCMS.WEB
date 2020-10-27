@@ -84,7 +84,7 @@ export class ApiService {
 		return this.http.get(`${path}`, currentOptions).pipe(
 			switchMap((response: HttpResponse<IResponseBody>) => {
 				if (_.get(options, 'ignoreCheck')) {
-					return of(response.body.data);
+					return of(response.body.data ? response.body.data : response.body);
 				}
 
 				return ApiService.handleSuccess<T>(response.body, this.errorMsg);
@@ -114,7 +114,7 @@ export class ApiService {
 			.pipe(
 				switchMap((response: HttpResponse<IResponseBody>) => {
 					if (_.get(options, 'ignoreCheck')) {
-						return of(response.body.data);
+						return of(response.body.data ? response.body.data : response.body);
 					}
 
 					return ApiService.handleSuccess<T>(response.body, this.errorMsg);
