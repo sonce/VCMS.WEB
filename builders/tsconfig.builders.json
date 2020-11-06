@@ -1,11 +1,12 @@
 {
-  "extends": "../tsconfig.json",
-  "compilerOptions": {
-    "module": "commonjs",
-    "outDir": "./plugin-builder",
-    "importHelpers": false,
-    "sourceMap": false,
-    "target": "es6"
-  },
-  "files": ["./plugin-builder/index.ts"]
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"module": "CommonJS",
+		"outDir": "./plugin-builder",
+		"importHelpers": false,
+		"sourceMap": false,
+    "target": "es6",
+    "resolveJsonModule": true
+	},
+	"files": ["./plugin-builder/index.ts", "./plugin-builder/plugins.ts"]
 }

@@ -349,7 +349,13 @@
             _classCallCheck(this, TextModule);
           };
 
-          TextModule.entry = _text_component__WEBPACK_IMPORTED_MODULE_2__["TextComponent"];
+          TextModule.config = {
+            Title: 'Text',
+            indexComponent: _text_component__WEBPACK_IMPORTED_MODULE_2__["TextComponent"],
+            dependencies: {
+              scripts: ['medium-editor-textcolor.umd.js']
+            }
+          };
           TextModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({
             type: TextModule
           });

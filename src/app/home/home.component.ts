@@ -1,4 +1,12 @@
-import { Component, ComponentFactoryResolver, Injector, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+	Component,
+	ComponentFactoryResolver,
+	Injector,
+	OnInit,
+	Type,
+	ViewChild,
+	ViewContainerRef
+} from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
 import { QuoteService } from './quote.service';
@@ -69,8 +77,8 @@ export class HomeComponent implements OnInit {
 	loadPlugin(pluginName: string): void {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		this.pluginLoader.load(pluginName).then((moduleType: any) => {
-			const entry = moduleType.entry;
-			const componentFactory = this.cfr.resolveComponentFactory(entry);
+			const entry = moduleType.config as IAddon;
+			const componentFactory = this.cfr.resolveComponentFactory(entry.indexComponent as Type<unknown>);
 			this.vcRef.createComponent(componentFactory, undefined, this.injector);
 		});
 	}

@@ -198,7 +198,11 @@
 						"main": "projects/plugins/src/main.ts",
 						"polyfills": "projects/plugins/src/polyfills.ts",
 						"tsConfig": "projects/plugins/tsconfig.app.json",
-						"assets": [],
+						"assets": [
+              { "glob": "assets/**/*", "input": "projects/plugins/src" ,"output":"."},
+              { "glob": "components/**/*", "input": "projects/plugins/src" ,"output":"."},
+              { "glob": "plugins-config.json", "input": "projects/plugins/src" ,"output":"."}
+            ],
 						"styles": [],
 						"scripts": []
 					},

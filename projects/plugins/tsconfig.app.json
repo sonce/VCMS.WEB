@@ -4,5 +4,6 @@
     "outDir": "../../out-tsc/plugins",
     "types": []
   },
+  "include": ["../../custom_types"],
   "files": ["./src/main.ts"]
 }

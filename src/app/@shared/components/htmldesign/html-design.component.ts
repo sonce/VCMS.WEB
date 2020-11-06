@@ -1,8 +1,10 @@
 import { Component, Input, ViewChild, AfterViewInit, ElementRef, EventEmitter, Output } from '@angular/core';
-import { AddonService } from '@app/@core/services';
-import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
+import { PluginLoaderService } from '@app/services/plugin-loader/plugin-loader.service';
+import { ObjectUtil, StringUtil } from 'js-dom-utility';
+import { BehaviorSubject, Observable, forkJoin, from } from 'rxjs';
+import { IFrameChatService, IParentWindowAPI } from 'shared';
 import { HoverboxComponent } from './hoverbox.component';
-import { IFrameChatService } from './iframechat.service';
+import { ParentWindowAPI } from './ParentWindowAPI';
 
 @Component({
 	selector: 'v-html-design',
@@ -16,6 +18,7 @@ export class HTMLDesignComponent implements AfterViewInit {
 	private inited = false;
 
 	private currentElementInfos: ElementInfo[];
+	private parentAPI: IParentWindowAPI;
 
 	/** IFRAME的位置 */
 	iframePos: { top: number; left: number } = { top: 0, left: 0 };
@@ -67,11 +70,13 @@ export class HTMLDesignComponent implements AfterViewInit {
 	@Output() pageChanged: EventEmitter<string> = new EventEmitter();
 
 	private iframeChatService: IFrameChatService;
-	constructor(private addonService: AddonService) {}
+	constructor(private pluginLoader: PluginLoaderService) {
+		this.parentAPI = new ParentWindowAPI();
+	}
 
 	ngAfterViewInit(): void {
 		this.hoverBox.onDel.subscribe((x: { element: ElementInfo; autoDelEmpty: boolean }) => {
-			this.iframeChatService.PostMessage('Del', x.element.id, x.autoDelEmpty);
+			this.iframeChatService.childAPI.Del(x.element.id, x.autoDelEmpty);
 		});
 		this.init();
 	}
@@ -89,21 +94,20 @@ export class HTMLDesignComponent implements AfterViewInit {
 
 		//第二次初始化，只要握手IFRAME即可
 		if (this.iframeChatService) {
-			this.iframeChatService.Init(this.iframe.nativeElement);
+			this.iframeChatService.Init(this.iframe.nativeElement, this.parentAPI);
 			return;
 		}
 
-		this.iframeChatService = new IFrameChatService(this.iframe.nativeElement);
+		this.iframeChatService = new IFrameChatService(this.iframe.nativeElement, this.parentAPI);
+
 		//加载完JS，并执行JS的初始化后
-		this.iframeChatService.onScriptInited.subscribe(() => {
+		this.iframeChatService.childEvents.onScriptInited.subscribe(() => {
 			this.getIframePos();
 			forkJoin([
-				this.iframeChatService.PostMessage<boolean>('loadCSS', 'http://localhost:4200/assets/template/main'),
-				this.iframeChatService.PostMessage<boolean>('SetIframePos', this.iframePos.left, this.iframePos.top),
-				this.changeDesignState(this.InDesign),
-				this.addonService.getAll()
-			]).subscribe((result: [boolean, boolean, boolean, IAddon[]]) => {
-				this.addons = result[3];
+				this.iframeChatService.childAPI.loadCSS('http://localhost:4200/assets/template/main'),
+				this.iframeChatService.childAPI.SetIframePos(this.iframePos.left, this.iframePos.top),
+				this.changeDesignState(this.InDesign)
+			]).subscribe(() => {
 				//切换手机PC模式
 				if (!this.inited) {
 					this.toggleMobileMode(this.isMobile$.value);
@@ -116,38 +120,40 @@ export class HTMLDesignComponent implements AfterViewInit {
 			});
 		});
 
-		//先加载JS
-		this.iframeChatService.onConnected.subscribe(() => {
-			//优先加载JS
-			this.iframeChatService.PostMessage('loadScript', 'http://localhost:4200/assets/template/main');
-		});
+		// //先加载JS
+		// this.iframeChatService.onConnected.subscribe(() => {
+		// 	//优先加载JS
+		// 	this.iframeChatService.childAPI.loadScript('http://localhost:4200/assets/template/main');
+		// });
 
-		this.iframeChatService.onScroll.subscribe(() => {
+		this.iframeChatService.childEvents.onScroll.subscribe(() => {
 			if (typeof this.hoverBox !== 'undefined') this.hoverBox.quit();
 		});
 
-		this.iframeChatService.onsizechanged.subscribe(() => {
+		this.iframeChatService.childEvents.onsizechanged.subscribe(() => {
 			if (typeof this.hoverBox !== 'undefined') this.hoverBox.quit();
 			if (this.getIframePos()) {
-				this.iframeChatService.PostMessage<boolean>('SetIframePos', this.iframePos.left, this.iframePos.top);
+				this.iframeChatService.childAPI.SetIframePos(this.iframePos.left, this.iframePos.top);
 			}
 		});
 
-		this.iframeChatService.onTrackHoverElement.subscribe((info: ElementInfo[]) => {
+		this.iframeChatService.childEvents.onTrackHoverElement.subscribe((elementsInfo: ElementInfo[]) => {
 			//获取当前元素的插件
-			if (typeof this.hoverBox === 'undefined') return;
-			const elements: ElementInfo[] = [];
-			info.forEach((theInfo) => {
-				const theAddon = this.addons.find((x) => x.Name.toLocaleLowerCase() == theInfo.type);
-				theInfo.addon = theAddon;
-				if (theAddon) elements.push(theInfo);
+			if (ObjectUtil.isNull(this.hoverBox)) return;
+			this.loadPlugin(...elementsInfo).then((addons: IAddon[]) => {
+				const elements: ElementInfo[] = [];
+				elementsInfo.forEach((eleInfo) => {
+					const theAddon = addons.find((x) => x.OwnPlugin.name.toLocaleLowerCase() == eleInfo.type);
+					eleInfo.addon = theAddon;
+					if (theAddon) elements.push(eleInfo);
+				});
+				this.currentElementInfos = elements;
+				this.hoverBox.setHoverElementInfo(elements);
 			});
-			this.currentElementInfos = elements;
-			this.hoverBox.setHoverElementInfo(elements);
 		});
 
-		this.iframeChatService.onClick.subscribe(() => {
-			const ele: ElementInfo = this.currentElementInfos[0];
+		this.iframeChatService.childEvents.onClick.subscribe(() => {
+			const ele: ElementInfo = this.currentElementInfos[this.currentElementInfos.length - 1];
 			console.log(ele);
 		});
 	}
@@ -165,9 +171,9 @@ export class HTMLDesignComponent implements AfterViewInit {
 		return true;
 	}
 
-	private changeDesignState(val: boolean): Observable<boolean> {
+	private changeDesignState(val: boolean): Observable<void> {
 		if (!this.iframeChatService) return null;
-		return this.iframeChatService.PostMessage<boolean>('ToggleDesignState', val);
+		return from(this.iframeChatService.childAPI.ToggleDesignState(val));
 	}
 
 	/**
@@ -176,7 +182,33 @@ export class HTMLDesignComponent implements AfterViewInit {
 	 */
 	private toggleMobileMode(val: boolean) {
 		if (!this.iframeChatService) return null;
-		if (val) return this.iframeChatService.PostMessage('AddClass', 'html', 'mobile');
-		else return this.iframeChatService.PostMessage('RemoveClass', 'html', 'mobile');
+		if (val) return this.iframeChatService.childAPI.AddClass('html', 'mobile');
+		else return this.iframeChatService.childAPI.RemoveClass('html', 'mobile');
+	}
+
+	private loadPlugin(...elementsInfo: ElementInfo[]): Promise<IAddon[]> {
+		const loadPluginPromises = [];
+		elementsInfo.forEach((eleInfo) => {
+			if (!StringUtil.isNullOrEmpty(eleInfo.type)) loadPluginPromises.push(this.pluginLoader.load(eleInfo.type));
+		});
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		return Promise.allSettled(loadPluginPromises).then((moduleTypes: PromiseSettledResult<any>[]) => {
+			const addons = [];
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			moduleTypes
+				.filter((x) => x.status == 'fulfilled')
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				.forEach((moduleType: PromiseFulfilledResult<any>) => {
+					addons.push(moduleType.value.config as IAddon);
+				});
+
+			moduleTypes
+				.filter((x) => x.status == 'rejected')
+				.forEach((result: PromiseRejectedResult) => {
+					console.log(result.reason);
+				});
+
+			return addons;
+		});
 	}
 }

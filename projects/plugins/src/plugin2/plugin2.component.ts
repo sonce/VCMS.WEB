@@ -8,5 +8,11 @@ import { TestService } from 'shared';
 export class Plugin2Component {
 	constructor(private testService: TestService) {
 		testService.HelloWorld();
+		const v: ElementInfo<string> = {
+			id: 'a',
+			type: 'aa',
+			pos: { left: 1, top: 1, width: 2, height: 3 }
+		};
+		if (v) console.log('a');
 	}
 }

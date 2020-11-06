@@ -334,6 +334,17 @@
 
             this.testService = testService;
             testService.HelloWorld();
+            var v = {
+              id: 'a',
+              type: 'aa',
+              pos: {
+                left: 1,
+                top: 1,
+                width: 2,
+                height: 3
+              }
+            };
+            if (v) console.log('a');
           };
 
           Plugin2Component.ɵfac = function Plugin2Component_Factory(t) {

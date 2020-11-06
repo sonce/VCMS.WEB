@@ -6,7 +6,7 @@
 	},
 	"exclude": ["test.ts", "**/*.spec.ts"],
 	"files": ["main.ts", "polyfills.ts"],
-	"include": ["**/*.d.ts","../custom_typings"],
+	"include": ["**/*.d.ts","../custom_types"],
 	"angularCompilerOptions": {
 		"fullTemplateTypeCheck": true,
 		"strictInjectionParameters": true,

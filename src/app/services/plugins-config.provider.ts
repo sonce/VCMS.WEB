@@ -3,13 +3,10 @@ import { preserveServerState } from './transfer-state.service';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
 import { ApiService } from '@app/@core/services';
+import { tap } from 'rxjs/operators';
 
 interface PluginsConfig {
-	[key: string]: {
-		name: string;
-		path: string;
-		deps: string[];
-	};
+	[key: string]: PluginConfig;
 }
 
 @Injectable()
@@ -29,9 +26,18 @@ export class PluginsConfigProvider {
 
 	@preserveServerState('PLUGIN_CONFIGS')
 	loadConfig(): Observable<PluginsConfig> {
-		return this.apiService.get<PluginsConfig>(`${this.baseUrl}/assets/plugins-config.json`, null, {
-			ignoreCheck: true
-		});
+		return this.apiService
+			.get<PluginsConfig>(`${this.baseUrl}/assets/plugins/plugins-config.json`, null, {
+				ignoreCheck: true
+			})
+			.pipe(
+				tap((config: PluginsConfig) => {
+					const pluginsName: string[] = Object.getOwnPropertyNames(config);
+					pluginsName.forEach((pname) => {
+						config[pname].name = pname;
+					});
+				})
+			);
 		// return this.http.get<PluginsConfig>(`${this.baseUrl}/assets/plugins-config.json`);
 	}
 }

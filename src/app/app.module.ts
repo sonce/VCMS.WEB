@@ -44,19 +44,19 @@ import { TransferStateService } from './services/transfer-state.service';
 	declarations: [AppComponent],
 	providers: [
 		{ provide: PluginLoaderService, useClass: ClientPluginLoaderService },
-		PluginsConfigProvider,
-		{
-			provide: APP_INITIALIZER,
-			useFactory: (provider: PluginsConfigProvider) => () =>
-				provider
-					.loadConfig()
-					.toPromise()
-					.then((config) => {
-						provider.config = config;
-					}),
-			multi: true,
-			deps: [PluginsConfigProvider]
-		}
+		PluginsConfigProvider
+		// {
+		// 	provide: APP_INITIALIZER,
+		// 	useFactory: (provider: PluginsConfigProvider) => () =>
+		// 		provider
+		// 			.loadConfig()
+		// 			.toPromise()
+		// 			.then((config) => {
+		// 				provider.config = config;
+		// 			}),
+		// 	multi: true,
+		// 	deps: [PluginsConfigProvider]
+		// }
 	],
 	bootstrap: [AppComponent]
 })

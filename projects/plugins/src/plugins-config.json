@@ -1,16 +1,19 @@
 {
   "plugin1": {
-    "name": "Plugin 2",
+    "title": "Plugin 1",
+    "moduleName":"Plugin1Module",
     "path": "/assets/plugins/plugin1.js",
     "deps": []
   },
   "plugin2": {
-    "name": "Plugin 2",
+    "title": "Plugin 2",
+    "moduleName":"Plugin2Module",
     "path": "/assets/plugins/plugin2.js",
     "deps": []
   },
   "text":{
-    "name":"Text",
+    "title":"Text",
+    "moduleName":"TextModule",
     "path":"/assets/plugins/text.js",
     "deps":[]
   }

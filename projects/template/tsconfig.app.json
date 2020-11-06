@@ -8,6 +8,6 @@
 		"sourceMap": true,
 		"target": "ES5"
 	},
-	"include": ["../../custom_typings"],
+	"include": ["../../custom_types","./src/**/*.d.ts"],
 	"files": ["./src/index.ts"]
 }

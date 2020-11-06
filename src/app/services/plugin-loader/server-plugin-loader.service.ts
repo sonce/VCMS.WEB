@@ -2,6 +2,7 @@ import { Injectable, NgModuleFactory } from '@angular/core';
 import { PluginLoaderService } from './plugin-loader.service';
 import { PLUGIN_EXTERNALS_MAP } from './plugin-externals';
 import { PluginsConfigProvider } from '../plugins-config.provider';
+import { ObjectUtil } from 'js-dom-utility';
 
 declare let global: unknown;
 
@@ -28,10 +29,13 @@ export class ServerPluginLoaderService extends PluginLoaderService {
 	load<T>(pluginName: string): Promise<NgModuleFactory<T>> {
 		const { config } = this.configProvider;
 		if (!config[pluginName]) {
-			throw Error(`Can't find appropriate plugin`);
+			// throw Error(`Can't find appropriate plugin`);
+			return Promise.reject(`Can't find appropriate plugin`);
 		}
 
 		const factory = global['require'](`./browser${config[pluginName].path}`).default;
+		if (ObjectUtil.isNull(factory.config)) throw Error('The Plugin no Config:IAddon property');
+		(factory.config as IAddon).OwnPlugin = config[pluginName];
 		return Promise.resolve(factory);
 	}
 }

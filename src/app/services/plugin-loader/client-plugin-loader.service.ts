@@ -2,6 +2,7 @@ import { Injectable, Type } from '@angular/core';
 import { PluginLoaderService } from './plugin-loader.service';
 import { PLUGIN_EXTERNALS_MAP } from './plugin-externals';
 import { PluginsConfigProvider } from '../plugins-config.provider';
+import { ObjectUtil } from 'js-dom-utility';
 
 const SystemJs = window.System;
 
@@ -20,7 +21,8 @@ export class ClientPluginLoaderService extends PluginLoaderService {
 	load<T>(pluginName: string): Promise<Type<T>> {
 		const { config } = this.configProvider;
 		if (!config[pluginName]) {
-			throw Error(`Can't find appropriate plugin`);
+			return Promise.reject(`Can't find ${pluginName} plugin`);
+			// throw Error(`Can't find appropriate plugin`);
 		}
 
 		const depsPromises = (config[pluginName].deps || []).map((dep) => {
@@ -39,7 +41,13 @@ export class ClientPluginLoaderService extends PluginLoaderService {
 		}
 
 		return Promise.all(depsPromises).then(() => {
-			return SystemJs.import(config[pluginName].path).then((module) => module.default.default);
+			return SystemJs.import(config[pluginName].path).then((module) => {
+				if (ObjectUtil.isNull(module.default.default.config))
+					throw Error(`The Plugin ${pluginName} no Config:IAddon property`);
+
+				(module.default.default.config as IAddon).OwnPlugin = config[pluginName];
+				return module.default.default;
+			});
 		});
 	}
 }
