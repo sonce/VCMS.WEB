@@ -21,7 +21,17 @@ export class HTMLDesignComponent implements AfterViewInit {
 	private parentAPI: IParentWindowAPI;
 
 	/** IFRAME的位置 */
-	iframePos: { top: number; left: number } = { top: 0, left: 0 };
+	iframePos: {
+		top: number;
+		left: number;
+		offsetLeft: number;
+		offsetTop: number;
+	} = {
+		top: 0,
+		left: 0,
+		offsetLeft: 0,
+		offsetTop: 0
+	};
 	/**
 	 * 所有支持的插件
 	 */
@@ -105,7 +115,12 @@ export class HTMLDesignComponent implements AfterViewInit {
 			this.getIframePos();
 			forkJoin([
 				this.iframeChatService.childAPI.loadCSS('http://localhost:4200/assets/template/main'),
-				this.iframeChatService.childAPI.SetIframePos(this.iframePos.left, this.iframePos.top),
+				this.iframeChatService.childAPI.SetIframePos(
+					this.iframePos.left,
+					this.iframePos.top,
+					this.iframePos.offsetLeft,
+					this.iframePos.offsetTop
+				),
 				this.changeDesignState(this.InDesign)
 			]).subscribe(() => {
 				//切换手机PC模式
@@ -133,7 +148,12 @@ export class HTMLDesignComponent implements AfterViewInit {
 		this.iframeChatService.childEvents.onsizechanged.subscribe(() => {
 			if (typeof this.hoverBox !== 'undefined') this.hoverBox.quit();
 			if (this.getIframePos()) {
-				this.iframeChatService.childAPI.SetIframePos(this.iframePos.left, this.iframePos.top);
+				this.iframeChatService.childAPI.SetIframePos(
+					this.iframePos.left,
+					this.iframePos.top,
+					this.iframePos.offsetLeft,
+					this.iframePos.offsetTop
+				);
 			}
 		});
 
@@ -167,6 +187,8 @@ export class HTMLDesignComponent implements AfterViewInit {
 
 		this.iframePos.left = rect.left;
 		this.iframePos.top = rect.top;
+		this.iframePos.offsetLeft = this.iframe.nativeElement.offsetLeft;
+		this.iframePos.offsetTop = this.iframe.nativeElement.offsetTop;
 
 		return true;
 	}

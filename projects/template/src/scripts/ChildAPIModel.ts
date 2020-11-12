@@ -4,7 +4,9 @@ import { IChildIframeMethods } from 'shared';
 export class ChildAPIModel implements IChildIframeMethods {
 	InDesign: boolean;
 	IFrameLeft: number;
+	IFrameOffsetLeft: number;
 	IFrameTop: number;
+	IFrameOffsetTop: number;
 
 	multiply = (num1: number, num2: number): number => {
 		return num1 * num2;
@@ -92,9 +94,11 @@ export class ChildAPIModel implements IChildIframeMethods {
 		});
 	};
 
-	SetIframePos = (left: number, top: number): boolean => {
+	SetIframePos = (left: number, top: number, offsetLeft: number, offsetTop: number): boolean => {
 		this.IFrameLeft = left;
 		this.IFrameTop = top;
+		this.IFrameOffsetLeft = offsetLeft;
+		this.IFrameOffsetTop = offsetTop;
 		return true;
 	};
 	ToggleDesignState = (inDesign: boolean): void => {

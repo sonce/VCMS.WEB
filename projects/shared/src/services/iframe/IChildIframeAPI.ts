@@ -13,7 +13,7 @@ export interface IChildIframeMethods {
 	/** 除法 */
 	divide(num1: number, num2: number): Promise<number>;
 
-	SetIframePos: (left: number, top: number) => boolean;
+	SetIframePos: (left: number, top: number, offsetLeft: number, offsetTop: number) => boolean;
 	ToggleDesignState: (inDesign: boolean) => void;
 	AddClass: (selector: string, className: string) => void;
 	RemoveClass: (selector: string, className: string) => void;
