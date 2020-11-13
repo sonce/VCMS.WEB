@@ -46,6 +46,7 @@ declare interface IAddon {
 	 * 是否容器
 	 */
 	IsContainer?: boolean;
+	IsRootContainer?: boolean;
 	// /**
 	//  * 是否可以编辑
 	//  */

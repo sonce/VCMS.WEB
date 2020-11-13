@@ -1,7 +1,23 @@
-<v-html-design
-	[url]="designService.CurrentPage.Url"
-	[IsMobile]="designService.IsMobile"
-  [InDesign]="designService.InDesign"
-	(loaded)="pageEndLoaded()"
-	(startLoad)="pageStartLoad()"
-></v-html-design>
+<div
+	*ngIf="designService.CurrentPage.Url"
+	class="preview-frame-cover"
+	[class.mobile-editor]="designService.IsMobile"
+	style="min-width: 980px"
+>
+	<div class="frame d-flex flex-column">
+		<div class="frame-top"></div>
+		<div class="frame-content flex-grow">
+			<v-html-design
+				[url]="designService.CurrentPage.Url"
+				[IsMobile]="designService.IsMobile"
+				[InDesign]="designService.InDesign"
+				(loaded)="pageEndLoaded()"
+				(startLoad)="pageStartLoad()"
+			></v-html-design>
+			<<ng-container *ngIf="designService.InDesign">
+				<v-htmldesign-rootcontainer></v-htmldesign-rootcontainer>
+			</ng-container>
+		</div>
+		<div class="frame-bottom"></div>
+	</div>
+</div>

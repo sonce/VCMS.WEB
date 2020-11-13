@@ -268,62 +268,7 @@ $g-color-o3: #fed8c1;
 		position: fixed;
 	}
 }
-.root-container-hover-box {
-	pointer-events: none;
-	position: absolute;
-	outline: 1px dashed rgba(0, 0, 0, 0.1);
-	// outline: 2px solid #0888c8;
-	outline-offset: -2px;
 
-	.control-button-wrapper {
-		&.rootContainer {
-			top: 22px;
-			right: 22px;
-			height: 44px;
-			& > .control-buttons {
-				box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.02);
-				border-radius: 8px;
-			}
-		}
-		position: absolute;
-		display: flex;
-		& > .control-buttons {
-			display: flex;
-			justify-content: space-around;
-			align-items: center;
-			transform: scale(var(--inverse-viewport-scale)) translatex(-50%);
-			background-color: #fff;
-			overflow-x: hidden;
-			overflow-y: hidden;
-			outline: none;
-			padding: 4px;
-
-			.icon-page-section-control-button {
-				pointer-events: all;
-				border-radius: 4px;
-				width: 36px;
-				height: 36px;
-				margin-right: 4px;
-				background-position: 50%;
-				background-repeat: no-repeat;
-				cursor: pointer;
-				line-height: 32px;
-				text-align: center;
-				&:hover {
-					background-color: #f6f6f6;
-				}
-			}
-			.page-section-label {
-				color: #313131;
-				font-size: 14px !important;
-				font-weight: 500;
-				line-height: 36px;
-				margin-left: 16px !important;
-				margin-right: 11px !important;
-			}
-		}
-	}
-}
 
 .component-labels {
 	position: absolute;

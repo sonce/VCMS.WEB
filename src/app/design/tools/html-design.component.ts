@@ -1,9 +1,9 @@
 import { Component, Input, ViewChild, AfterViewInit, ElementRef, EventEmitter, Output } from '@angular/core';
 import { PluginLoaderService } from '@app/services/plugin-loader/plugin-loader.service';
-import { ObjectUtil, StringUtil } from 'js-dom-utility';
+import { StringUtil } from 'js-dom-utility';
 import { BehaviorSubject, Observable, forkJoin, from } from 'rxjs';
 import { IFrameChatService, IParentWindowAPI } from 'shared';
-import { HoverboxComponent } from './hoverbox.component';
+import { HtmlDesignService } from './html-design.service';
 import { ParentWindowAPI } from './ParentWindowAPI';
 
 @Component({
@@ -14,7 +14,6 @@ import { ParentWindowAPI } from './ParentWindowAPI';
 })
 export class HTMLDesignComponent implements AfterViewInit {
 	@ViewChild('iframe') iframe: ElementRef<HTMLIFrameElement>;
-	@ViewChild(HoverboxComponent) hoverBox: HoverboxComponent;
 	private inited = false;
 
 	private currentElementInfos: ElementInfo[];
@@ -80,12 +79,12 @@ export class HTMLDesignComponent implements AfterViewInit {
 	@Output() pageChanged: EventEmitter<string> = new EventEmitter();
 
 	private iframeChatService: IFrameChatService;
-	constructor(private pluginLoader: PluginLoaderService) {
+	constructor(private pluginLoader: PluginLoaderService, private htlmdesignerService: HtmlDesignService) {
 		this.parentAPI = new ParentWindowAPI();
 	}
 
 	ngAfterViewInit(): void {
-		this.hoverBox.onDel.subscribe((x: { element: ElementInfo; autoDelEmpty: boolean }) => {
+		this.htlmdesignerService.onDel.subscribe((x: { element: ElementInfo; autoDelEmpty: boolean }) => {
 			this.iframeChatService.childAPI.Del(x.element.id, x.autoDelEmpty);
 		});
 		this.init();
@@ -100,7 +99,7 @@ export class HTMLDesignComponent implements AfterViewInit {
 	private init() {
 		//iframe还没有渲染
 		if (!this.iframe) return;
-		this.hoverBox.quit();
+		this.htlmdesignerService.quit();
 
 		//第二次初始化，只要握手IFRAME即可
 		if (this.iframeChatService) {
@@ -142,11 +141,11 @@ export class HTMLDesignComponent implements AfterViewInit {
 		// });
 
 		this.iframeChatService.childEvents.onScroll.subscribe(() => {
-			if (typeof this.hoverBox !== 'undefined') this.hoverBox.quit();
+			this.htlmdesignerService.quit();
 		});
 
 		this.iframeChatService.childEvents.onsizechanged.subscribe(() => {
-			if (typeof this.hoverBox !== 'undefined') this.hoverBox.quit();
+			this.htlmdesignerService.quit();
 			if (this.getIframePos()) {
 				this.iframeChatService.childAPI.SetIframePos(
 					this.iframePos.left,
@@ -159,7 +158,6 @@ export class HTMLDesignComponent implements AfterViewInit {
 
 		this.iframeChatService.childEvents.onTrackHoverElement.subscribe((elementsInfo: ElementInfo[]) => {
 			//获取当前元素的插件
-			if (ObjectUtil.isNull(this.hoverBox)) return;
 			this.loadPlugin(...elementsInfo).then((addons: IAddon[]) => {
 				const elements: ElementInfo[] = [];
 				elementsInfo.forEach((eleInfo) => {
@@ -168,7 +166,7 @@ export class HTMLDesignComponent implements AfterViewInit {
 					if (theAddon) elements.push(eleInfo);
 				});
 				this.currentElementInfos = elements;
-				this.hoverBox.setHoverElementInfo(elements);
+				this.htlmdesignerService.setHoverElementInfo(elements);
 			});
 		});
 

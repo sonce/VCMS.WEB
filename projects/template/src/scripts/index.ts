@@ -135,8 +135,8 @@ class Template {
 			id: element.getAttribute('data-addon-id'),
 			type: element.getAttribute('data-addon'),
 			pos: {
-				left: rect.left + apiModel.IFrameLeft,
-				top: rect.top + apiModel.IFrameTop,
+				left: rect.left + apiModel.IFrameOffsetLeft,
+				top: rect.top + apiModel.IFrameOffsetTop,
 				height: rect.height,
 				width: rect.width
 			}

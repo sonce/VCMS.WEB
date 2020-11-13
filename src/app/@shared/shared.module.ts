@@ -13,9 +13,7 @@ import {
 	MultiLevelNavitemDirective,
 	MultiLevelNavChildComponent,
 	RadiogroupComponent,
-	RadiogroupItemComponent,
-	HTMLDesignComponent,
-	HoverboxComponent
+	RadiogroupItemComponent
 } from './components';
 
 @NgModule({
@@ -29,8 +27,6 @@ import {
 		AutofocusDirective,
 		RadiogroupComponent,
 		RadiogroupItemComponent,
-		HTMLDesignComponent,
-		HoverboxComponent,
 		SafePipe
 	],
 	providers: [ConfirmationDialogService],
@@ -43,7 +39,6 @@ import {
 		AutofocusDirective,
 		RadiogroupComponent,
 		RadiogroupItemComponent,
-		HTMLDesignComponent,
 		SafePipe
 	]
 })

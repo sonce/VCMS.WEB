@@ -9,8 +9,9 @@ import { SharedModule } from 'shared';
 	declarations: [ColComponent],
 	entryComponents: [ColComponent]
 })
-export class TextModule {
+export class ColModule {
 	static config: IAddon = {
+		IsContainer: true,
 		Title: 'Col',
 		indexComponent: ColComponent
 	};

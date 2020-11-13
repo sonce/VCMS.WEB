@@ -16,5 +16,17 @@
     "moduleName":"TextModule",
     "path":"/assets/plugins/text.js",
     "deps":[]
+  },
+  "col":{
+    "title":"Col",
+    "moduleName":"ColModule",
+    "path":"/assets/plugins/col.js",
+    "deps":[]
+  },
+  "container":{
+    "title":"Container",
+    "moduleName":"ContainerModule",
+    "path":"/assets/plugins/container.js",
+    "deps":[]
   }
 }

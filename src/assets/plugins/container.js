@@ -1,12 +1,8 @@
 (function () {
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
   (function webpackUniversalModuleDefinition(root, factory) {
-    if (typeof exports === 'object' && typeof module === 'object') module.exports = factory(require("ng.common"), require("shared"), require("ng.core"));else if (typeof define === 'function' && define.amd) define(["ng.common", "shared", "ng.core"], factory);else if (typeof exports === 'object') exports["plugin1"] = factory(require("ng.common"), require("shared"), require("ng.core"));else root["plugin1"] = factory(root["ng.common"], root["shared"], root["ng.core"]);
+    if (typeof exports === 'object' && typeof module === 'object') module.exports = factory(require("ng.common"), require("shared"), require("ng.core"));else if (typeof define === 'function' && define.amd) define(["ng.common", "shared", "ng.core"], factory);else if (typeof exports === 'object') exports["container"] = factory(require("ng.common"), require("shared"), require("ng.core"));else root["container"] = factory(root["ng.common"], root["shared"], root["ng.core"]);
   })(typeof self !== 'undefined' ? self : this, function (__WEBPACK_EXTERNAL_MODULE__0S4P__, __WEBPACK_EXTERNAL_MODULE_cfyg__, __WEBPACK_EXTERNAL_MODULE_vOrQ__) {
     return (
       /******/
@@ -294,23 +290,23 @@
         },
 
         /***/
-        "Xj3A":
-        /*!******************************************!*\
-          !*** ./src/plugin1/plugin1.component.ts ***!
-          \******************************************/
+        "3yT8":
+        /*!**********************************************!*\
+          !*** ./src/container/container.component.ts ***!
+          \**********************************************/
 
-        /*! exports provided: Plugin1Component */
+        /*! exports provided: ContainerComponent */
 
         /***/
-        function Xj3A(module, __webpack_exports__, __webpack_require__) {
+        function yT8(module, __webpack_exports__, __webpack_require__) {
           "use strict";
 
           __webpack_require__.r(__webpack_exports__);
           /* harmony export (binding) */
 
 
-          __webpack_require__.d(__webpack_exports__, "Plugin1Component", function () {
-            return Plugin1Component;
+          __webpack_require__.d(__webpack_exports__, "ContainerComponent", function () {
+            return ContainerComponent;
           });
           /* harmony import */
 
@@ -322,132 +318,41 @@
 
 
           var _angular_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_0__);
-          /* harmony import */
 
-
-          var shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-          /*! shared */
-          "cfyg");
-          /* harmony import */
-
-
-          var shared__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(shared__WEBPACK_IMPORTED_MODULE_1__);
-          /* harmony import */
-
-
-          var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-          /*! @angular/common */
-          "0S4P");
-          /* harmony import */
-
-
-          var _angular_common__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_angular_common__WEBPACK_IMPORTED_MODULE_2__);
-
-          function Plugin1Component_p_2_Template(rf, ctx) {
-            if (rf & 1) {
-              _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p");
-
-              _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Hidden text");
-
-              _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-            }
-          }
-
-          var Plugin1Component = /*#__PURE__*/function () {
-            function Plugin1Component(testService) {
-              _classCallCheck(this, Plugin1Component);
-
-              this.testService = testService;
-              this.x = false;
-              testService.HelloWorld();
-            }
-
-            _createClass(Plugin1Component, [{
-              key: "ngAfterViewInit",
-              value: function ngAfterViewInit() {
-                console.log('aaa');
-              }
-            }]);
-
-            return Plugin1Component;
-          }();
-
-          Plugin1Component.ɵfac = function Plugin1Component_Factory(t) {
-            return new (t || Plugin1Component)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](shared__WEBPACK_IMPORTED_MODULE_1__["TestService"]));
+          var ContainerComponent = function ContainerComponent() {
+            _classCallCheck(this, ContainerComponent);
           };
 
-          Plugin1Component.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
-            type: Plugin1Component,
-            selectors: [["app-plugin-1"]],
-            decls: 12,
-            vars: 1,
-            consts: [[4, "ngIf"], ["sharedBtn", "", 3, "click"], ["title", "Tab 1"], ["title", "Tab 2"], ["title", "Tab 3"]],
-            template: function Plugin1Component_Template(rf, ctx) {
+          ContainerComponent.ɵfac = function ContainerComponent_Factory(t) {
+            return new (t || ContainerComponent)();
+          };
+
+          ContainerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
+            type: ContainerComponent,
+            selectors: [["app-plugin-container"]],
+            decls: 2,
+            vars: 0,
+            template: function ContainerComponent_Template(rf, ctx) {
               if (rf & 1) {
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h3");
+                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
 
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Plugin 1");
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, Plugin1Component_p_2_Template, 2, 0, "p", 0);
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 1);
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function Plugin1Component_Template_button_click_3_listener() {
-                  return ctx.x = !ctx.x;
-                });
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Shared Button Example");
+                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "dddd");
 
                 _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "lib-shared-tabs");
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "lib-shared-tab", 2);
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, " Tab 1 contents ");
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "lib-shared-tab", 3);
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, " Tab 2 contents ");
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "lib-shared-tab", 4);
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](11, " Tab 3 contents ");
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-              }
-
-              if (rf & 2) {
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.x);
               }
             },
-            directives: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["NgIf"], shared__WEBPACK_IMPORTED_MODULE_1__["ButtonComponent"], shared__WEBPACK_IMPORTED_MODULE_1__["TabsComponent"], shared__WEBPACK_IMPORTED_MODULE_1__["TabComponent"]],
             encapsulation: 2
           });
           /*@__PURE__*/
 
           (function () {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](Plugin1Component, [{
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ContainerComponent, [{
               type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
               args: [{
-                selector: 'app-plugin-1',
-                templateUrl: './plugin1.component.html'
+                selector: 'app-plugin-container',
+                templateUrl: './container.component.html'
               }]
-            }], function () {
-              return [{
-                type: shared__WEBPACK_IMPORTED_MODULE_1__["TestService"]
-              }];
-            }, null);
+            }], null, null);
           })();
           /***/
 
@@ -482,23 +387,23 @@
         },
 
         /***/
-        "xDiq":
-        /*!***************************************!*\
-          !*** ./src/plugin1/plugin1.module.ts ***!
-          \***************************************/
+        "yiEd":
+        /*!*******************************************!*\
+          !*** ./src/container/container.module.ts ***!
+          \*******************************************/
 
-        /*! exports provided: Plugin1Module */
+        /*! exports provided: ContainerModule */
 
         /***/
-        function xDiq(module, __webpack_exports__, __webpack_require__) {
+        function yiEd(module, __webpack_exports__, __webpack_require__) {
           "use strict";
 
           __webpack_require__.r(__webpack_exports__);
           /* harmony export (binding) */
 
 
-          __webpack_require__.d(__webpack_exports__, "Plugin1Module", function () {
-            return Plugin1Module;
+          __webpack_require__.d(__webpack_exports__, "ContainerModule", function () {
+            return ContainerModule;
           });
           /* harmony import */
 
@@ -523,9 +428,9 @@
           /* harmony import */
 
 
-          var _plugin1_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-          /*! ./plugin1.component */
-          "Xj3A");
+          var _container_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+          /*! ./container.component */
+          "3yT8");
           /* harmony import */
 
 
@@ -537,30 +442,29 @@
 
           var shared__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(shared__WEBPACK_IMPORTED_MODULE_3__);
 
-          var Plugin1Module = function Plugin1Module() {
-            _classCallCheck(this, Plugin1Module);
+          var ContainerModule = function ContainerModule() {
+            _classCallCheck(this, ContainerModule);
           };
 
-          Plugin1Module.config = {
-            Title: 'Plugin 1',
-            indexComponent: _plugin1_component__WEBPACK_IMPORTED_MODULE_2__["Plugin1Component"],
-            dependencies: {
-              scripts: ['medium-editor-textcolor.umd.js']
-            }
+          ContainerModule.config = {
+            IsContainer: true,
+            IsRootContainer: true,
+            Title: 'Container',
+            indexComponent: _container_component__WEBPACK_IMPORTED_MODULE_2__["ContainerComponent"]
           };
-          Plugin1Module.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({
-            type: Plugin1Module
+          ContainerModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({
+            type: ContainerModule
           });
-          Plugin1Module.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({
-            factory: function Plugin1Module_Factory(t) {
-              return new (t || Plugin1Module)();
+          ContainerModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({
+            factory: function ContainerModule_Factory(t) {
+              return new (t || ContainerModule)();
             },
             imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], shared__WEBPACK_IMPORTED_MODULE_3__["SharedModule"]]]
           });
 
           (function () {
-            (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](Plugin1Module, {
-              declarations: [_plugin1_component__WEBPACK_IMPORTED_MODULE_2__["Plugin1Component"]],
+            (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](ContainerModule, {
+              declarations: [_container_component__WEBPACK_IMPORTED_MODULE_2__["ContainerComponent"]],
               imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], shared__WEBPACK_IMPORTED_MODULE_3__["SharedModule"]]
             });
           })();
@@ -568,12 +472,12 @@
 
 
           (function () {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](Plugin1Module, [{
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ContainerModule, [{
               type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
               args: [{
                 imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], shared__WEBPACK_IMPORTED_MODULE_3__["SharedModule"]],
-                declarations: [_plugin1_component__WEBPACK_IMPORTED_MODULE_2__["Plugin1Component"]],
-                entryComponents: [_plugin1_component__WEBPACK_IMPORTED_MODULE_2__["Plugin1Component"]]
+                declarations: [_container_component__WEBPACK_IMPORTED_MODULE_2__["ContainerComponent"]],
+                entryComponents: [_container_component__WEBPACK_IMPORTED_MODULE_2__["ContainerComponent"]]
               }]
             }], null, null);
           })();
@@ -587,7 +491,7 @@
           !*** ./src/main.ts ***!
           \*********************/
 
-        /*! exports provided: Plugin1Module, default */
+        /*! exports provided: ContainerModule, default */
 
         /***/
         function zUnb(module, __webpack_exports__, __webpack_require__) {
@@ -597,26 +501,26 @@
           /* harmony import */
 
 
-          var _plugin1_plugin1_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-          /*! ./plugin1/plugin1.module */
-          "xDiq");
+          var _container_container_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+          /*! ./container/container.module */
+          "yiEd");
           /* harmony reexport (safe) */
 
 
-          __webpack_require__.d(__webpack_exports__, "Plugin1Module", function () {
-            return _plugin1_plugin1_module__WEBPACK_IMPORTED_MODULE_0__["Plugin1Module"];
+          __webpack_require__.d(__webpack_exports__, "ContainerModule", function () {
+            return _container_container_module__WEBPACK_IMPORTED_MODULE_0__["ContainerModule"];
           });
           /* harmony default export */
 
 
-          __webpack_exports__["default"] = _plugin1_plugin1_module__WEBPACK_IMPORTED_MODULE_0__["Plugin1Module"];
+          __webpack_exports__["default"] = _container_container_module__WEBPACK_IMPORTED_MODULE_0__["ContainerModule"];
           /***/
         }
         /******/
 
       })
     );
-  }); //# sourceMappingURL=plugin1.js.map
+  }); //# sourceMappingURL=container.js.map
 
 })();
-//# sourceMappingURL=plugin1.js.map
+//# sourceMappingURL=container.js.map

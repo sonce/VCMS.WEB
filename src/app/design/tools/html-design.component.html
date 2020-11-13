@@ -1,0 +1,7 @@
+<iframe
+	#iframe
+	frameborder="0"
+	allowfullscreen
+	[src]="url | safe: 'resourceUrl'"
+	[ngClass]="{ mobile: isMobile$ | async }"
+></iframe>

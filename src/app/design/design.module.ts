@@ -9,11 +9,26 @@ import { DesignComponent } from './design.component';
 import { DesignRoutingModule } from './design-routing.module';
 import { DesignResolver } from './design-resolver.service';
 import { PluginsConfigProvider } from '@app/services/plugins-config.provider';
+import {
+	HTMLDesignComponent,
+	ContainerComponent,
+	ContainerResizerComponent,
+	ContentElementComponent,
+	HtmlDesignService,
+	RootContainerComponent
+} from './tools';
 
 @NgModule({
 	imports: [CommonModule, TranslateModule, NgbModule, SharedModule, DesignRoutingModule, NgxSpinnerModule],
-	declarations: [DesignComponent],
-	providers: [DesignResolver]
+	declarations: [
+		DesignComponent,
+		HTMLDesignComponent,
+		ContainerComponent,
+		ContainerResizerComponent,
+		ContentElementComponent,
+		RootContainerComponent
+	],
+	providers: [DesignResolver, HtmlDesignService]
 })
 export class DesignModule {
 	constructor(private provider: PluginsConfigProvider) {

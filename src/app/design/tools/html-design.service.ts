@@ -1,13 +1,9 @@
-import { Component, EventEmitter, Input } from '@angular/core';
+import { EventEmitter, Injectable, Input } from '@angular/core';
+import { ConfirmationDialogService } from '@app/@shared';
 import { TranslateService } from '@ngx-translate/core';
-import { ConfirmationDialogService } from '../confirmation-dialog';
 
-@Component({
-	selector: 'v-hoverbox',
-	templateUrl: './hoverbox.component.html',
-	styleUrls: ['./hoverbox.component.scss']
-})
-export class HoverboxComponent {
+@Injectable()
+export class HtmlDesignService {
 	/** 最上层的容器 */
 	@Input() RootContainerInfo: ElementInfo;
 	/** 包含内容元素的容器 */
@@ -20,6 +16,7 @@ export class HoverboxComponent {
 		element: ElementInfo;
 		autoDelEmpty: boolean;
 	}> = new EventEmitter();
+
 	constructor(
 		private confirmationDialogService: ConfirmationDialogService,
 		private translateService: TranslateService
@@ -28,18 +25,19 @@ export class HoverboxComponent {
 	public setHoverElementInfo(elementInfo: ElementInfo[]): void {
 		if (elementInfo.length <= 0) return;
 		//没有内容元素
-		if (elementInfo.findIndex((x) => !x.addon.IsContainer) == -1) return;
 		this.quit();
-		if (elementInfo[0].addon.IsContainer) this.RootContainerInfo = elementInfo[0];
+		this.RootContainerInfo = elementInfo.find((x) => x.addon.IsRootContainer);
 		// if (elementInfo.findIndex((x) => !x.addon.IsContainer) == -1) return;
 
-		for (let index = elementInfo.length - 1; index >= 0; index--) {
-			const element = elementInfo[index];
-			if (typeof this.ContainerInfo === 'undefined' && element.addon.IsContainer) this.ContainerInfo = element;
-			if (typeof this.ContentElementInfo === 'undefined' && !element.addon.IsContainer)
-				this.ContentElementInfo = element;
-			if (typeof this.ContainerInfo !== 'undefined' && typeof this.ContentElementInfo !== 'undefined') break;
-		}
+		// for (let index = elementInfo.length - 1; index >= 0; index--) {
+		// 	const element = elementInfo[index];
+		// 	if (typeof this.ContainerInfo === 'undefined' && element.addon.IsContainer) this.ContainerInfo = element;
+		// 	if (typeof this.ContentElementInfo === 'undefined' && !element.addon.IsContainer)
+		// 		this.ContentElementInfo = element;
+		// 	if (typeof this.ContainerInfo !== 'undefined' && typeof this.ContentElementInfo !== 'undefined') break;
+		// }
+		this.ContentElementInfo = elementInfo.find((x) => !x.addon.IsContainer);
+		this.ContainerInfo = elementInfo.find((x) => x.addon.IsContainer);
 		//没有容器
 		if (typeof this.ContainerInfo === 'undefined') this.ContainerInfo = this.ContentElementInfo;
 		this.InHover = true;
