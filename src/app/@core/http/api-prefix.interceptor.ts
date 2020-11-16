@@ -21,10 +21,7 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		const headersConfig = {
-			'Content-Type': 'application/json',
-			Accept: 'application/json'
-		};
+		const headersConfig = {};
 
 		const token = this.jwtService.getToken();
 		if (token) {

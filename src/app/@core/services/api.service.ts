@@ -77,7 +77,11 @@ export class ApiService {
 				observe: 'events' as const,
 				responseType: 'json' as const,
 				withCredentials: false,
-				params: params
+				params: params,
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json'
+				}
 			},
 			options
 		);
@@ -106,7 +110,11 @@ export class ApiService {
 						reportProgress: true,
 						observe: 'response' as const,
 						responseType: 'json' as const,
-						withCredentials: false
+						withCredentials: false,
+						headers: {
+							'Content-Type': 'application/json',
+							Accept: 'application/json'
+						}
 					},
 					options
 				)
