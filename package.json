@@ -15,7 +15,7 @@
 		"build:plugin1": "ng build --project plugins --aot --modulePath=./plugin1/plugin1.module#Plugin1Module --pluginName=plugin1 --sharedLibs=shared --outputPath=./src/assets/plugins",
 		"build:plugin2": "ng build --project plugins --aot --modulePath=./plugin2/plugin2.module#Plugin2Module --pluginName=plugin2 --sharedLibs=shared --outputPath=./src/assets/plugins",
 		"build:text": "ng build --project plugins --aot --modulePath=./text/text.module#TextModule --pluginName=text --sharedLibs=shared --outputPath=./src/assets/plugins",
-		"build:plugins": "node ./builders/plugin-builder/plugins.js --plugins=container",
+		"build:plugins": "node ./builders/plugin-builder/plugins.js --buildshared",
 		"serve:sw": "npm run build -s && npx http-server ./dist -p 4200",
 		"compile:server_bak": "webpack --config webpack.server.config.js --progress --colors",
 		"build:ssr_bak": "npm run build:client-and-server-bundles && npm run compile:server",

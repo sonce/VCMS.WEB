@@ -14,7 +14,7 @@
 				(loaded)="pageEndLoaded()"
 				(startLoad)="pageStartLoad()"
 			></v-html-design>
-			<<ng-container *ngIf="designService.InDesign">
+			<ng-container *ngIf="designService.InDesign">
 				<v-htmldesign-rootcontainer></v-htmldesign-rootcontainer>
 			</ng-container>
 		</div>

@@ -42,8 +42,6 @@ export class IFrameChatService {
 			.pipe(
 				tap((child) => {
 					this.childAPI = { ...child, ...this.childEvents };
-					this.childAPI.multiply(2, 6).then((total) => console.log(total));
-					this.childAPI.divide(12, 4).then((total) => console.log(total));
 					this.onConnected.emit(true);
 				})
 			)

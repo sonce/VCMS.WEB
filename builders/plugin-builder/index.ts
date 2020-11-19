@@ -82,6 +82,7 @@ function patchWebpackConfig(config: webpack.Configuration, options: Options) {
 	config.externals = {
 		rxjs: 'rxjs',
 		'@angular/core': 'ng.core',
+		'rxjs/operators': 'rxjs.operators',
 		'@angular/common': 'ng.common',
 		'@angular/forms': 'ng.forms',
 		'@angular/router': 'ng.router',

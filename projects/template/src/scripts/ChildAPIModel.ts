@@ -8,17 +8,6 @@ export class ChildAPIModel implements IChildIframeMethods {
 	IFrameTop: number;
 	IFrameOffsetTop: number;
 
-	multiply = (num1: number, num2: number): number => {
-		return num1 * num2;
-	};
-	divide = (num1: number, num2: number): Promise<number> => {
-		return new Promise((resolve) => {
-			setTimeout(() => {
-				resolve(num1 / num2);
-			}, 1000);
-		});
-	};
-
 	/**
 	 * 动态加载JS文件的方法
 	 * Load javascript file method
