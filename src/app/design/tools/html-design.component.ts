@@ -13,10 +13,8 @@ import {
 } from '@angular/core';
 import { PluginLoaderService } from '@app/services/plugin-loader/plugin-loader.service';
 import { StringUtil } from 'js-dom-utility';
-import { constant } from 'lodash-es';
 import { BehaviorSubject, Observable, forkJoin, from } from 'rxjs';
 import { IFrameChatService, IParentWindowAPI } from 'shared';
-import { ContainerResizerComponent } from './containerresizer.component';
 import { HtmlDesignService } from './html-design.service';
 import { ParentWindowAPI } from './ParentWindowAPI';
 
@@ -255,11 +253,6 @@ export class HTMLDesignComponent implements AfterViewInit, OnDestroy {
 					const componentRef = this.vcRef.createComponent<IAddon>(compFactory, undefined, this.injector);
 					componentRef.instance.OwnPlugin = moduleType.value.ownPlugin;
 					addons.push(componentRef.instance);
-
-					debugger;
-					const compFactory1 = this.factoryResolver.resolveComponentFactory(ContainerResizerComponent);
-					// eslint-disable-next-line @typescript-eslint/no-unused-vars
-					const componentRef2 = this.vcRef.createComponent(compFactory1, undefined, this.injector);
 				});
 
 			moduleTypes

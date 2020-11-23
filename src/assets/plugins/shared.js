@@ -301,7 +301,7 @@ const CHECK_IFRAME_IN_DOC_INTERVAL = 60000;
 /*!*******************************************************************************!*\
   !*** F:/d/Project/VSoft/VCMS.WEB/dist/shared/__ivy_ngcc__/fesm2015/shared.js ***!
   \*******************************************************************************/
-/*! exports provided: ButtonComponent, ChildIframeEvents, IFrameChatService, SharedComponent, SharedModule, TabComponent, TabsComponent, TestService */
+/*! exports provided: ButtonComponent, ChildIframeEvents, IFrameChatService, SharedComponent, SharedModule, TabComponent, TabsComponent, TestService, ɵa */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -314,6 +314,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabComponent", function() { return TabComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabsComponent", function() { return TabsComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TestService", function() { return TestService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵa", function() { return TestService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "vOrQ");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "0S4P");
@@ -456,21 +457,6 @@ ButtonComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
             }]
     }], null, null); })();
 
-const sharedComponents = [SharedComponent, ButtonComponent, TabComponent, TabsComponent];
-class SharedModule {
-}
-SharedModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({ type: SharedModule });
-SharedModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function SharedModule_Factory(t) { return new (t || SharedModule)(); }, imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"]]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](SharedModule, { declarations: function () { return [SharedComponent, ButtonComponent, TabComponent, TabsComponent]; }, imports: function () { return [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"]]; }, exports: function () { return [SharedComponent, ButtonComponent, TabComponent, TabsComponent]; } }); })();
-/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](SharedModule, [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
-        args: [{
-                imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"]],
-                declarations: [...sharedComponents],
-                exports: [...sharedComponents]
-            }]
-    }], null, null); })();
-
 class ChildIframeEvents {
     constructor() {
         this.onloaded = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
@@ -556,6 +542,22 @@ TestService.ctorParameters = () => [];
                 providedIn: 'any'
             }]
     }], function () { return []; }, null); })();
+
+const sharedComponents = [SharedComponent, ButtonComponent, TabComponent, TabsComponent];
+class SharedModule {
+}
+SharedModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({ type: SharedModule });
+SharedModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function SharedModule_Factory(t) { return new (t || SharedModule)(); }, providers: [TestService], imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"]]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](SharedModule, { declarations: function () { return [SharedComponent, ButtonComponent, TabComponent, TabsComponent]; }, imports: function () { return [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"]]; }, exports: function () { return [SharedComponent, ButtonComponent, TabComponent, TabsComponent]; } }); })();
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](SharedModule, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
+        args: [{
+                imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"]],
+                providers: [TestService],
+                declarations: [...sharedComponents],
+                exports: [...sharedComponents]
+            }]
+    }], null, null); })();
 
 /*
  * Public API Surface of shared
@@ -1290,7 +1292,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_vOrQ__;
 /*!*********************!*\
   !*** ./src/main.ts ***!
   \*********************/
-/*! exports provided: ButtonComponent, ChildIframeEvents, IFrameChatService, SharedComponent, SharedModule, TabComponent, TabsComponent, TestService, default */
+/*! exports provided: ButtonComponent, ChildIframeEvents, IFrameChatService, SharedComponent, SharedModule, TabComponent, TabsComponent, TestService, ɵa, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1311,6 +1313,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TabsComponent", function() { return shared__WEBPACK_IMPORTED_MODULE_0__["TabsComponent"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TestService", function() { return shared__WEBPACK_IMPORTED_MODULE_0__["TestService"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ɵa", function() { return shared__WEBPACK_IMPORTED_MODULE_0__["ɵa"]; });
 
 
 

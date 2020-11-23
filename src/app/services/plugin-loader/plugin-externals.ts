@@ -5,6 +5,7 @@ import * as router from '@angular/router';
 import * as rxjs from 'rxjs';
 import * as rxop from 'rxjs/operators';
 import * as tslib from 'tslib';
+import * as shared from 'shared';
 
 export const PLUGIN_EXTERNALS_MAP = {
 	'ng.core': core,
@@ -14,5 +15,6 @@ export const PLUGIN_EXTERNALS_MAP = {
 	rxjs,
 	'rxjs.operators': rxop,
 	tslib,
-	shared: '/assets/plugins/shared.js'
+	// shared: '/assets/plugins/shared.js'
+	shared: { ...shared }
 };
