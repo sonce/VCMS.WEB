@@ -3,6 +3,7 @@ import { AsyncMethodReturns } from 'penpal/lib/types';
 import { IParentWindowAPI } from 'shared';
 import { ChildAPIModel } from './ChildAPIModel';
 import { ElementUtil } from 'js-dom-utility';
+import { ElementAccessExpression } from 'ts-morph';
 
 let parentAPI: AsyncMethodReturns<IParentWindowAPI>;
 const apiModel = new ChildAPIModel();
@@ -134,6 +135,10 @@ class Template {
 		return {
 			id: element.getAttribute('data-addon-id'),
 			type: element.getAttribute('data-addon'),
+			parent: {
+				inParentIndex: ElementUtil.indexOfParent(element),
+				childCount: element.parentElement.childElementCount
+			},
 			pos: {
 				left: rect.left + apiModel.IFrameOffsetLeft,
 				top: rect.top + apiModel.IFrameOffsetTop,

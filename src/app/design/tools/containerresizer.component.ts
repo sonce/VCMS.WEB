@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IFrameChatService } from 'shared';
 
 @Component({
 	selector: 'v-htmldesign-containerresizer',
@@ -11,4 +12,6 @@ import { Component } from '@angular/core';
 		</div>
 	</div> `
 })
-export class ContainerResizerComponent {}
+export class ContainerResizerComponent {
+	constructor(private iframechatService: IFrameChatService) {}
+}

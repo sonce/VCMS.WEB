@@ -1,6 +1,10 @@
 (function () {
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+  function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
   (function webpackUniversalModuleDefinition(root, factory) {
     if (typeof exports === 'object' && typeof module === 'object') module.exports = factory(require("ng.common"), require("shared"), require("ng.core"));else if (typeof define === 'function' && define.amd) define(["ng.common", "shared", "ng.core"], factory);else if (typeof exports === 'object') exports["container"] = factory(require("ng.common"), require("shared"), require("ng.core"));else root["container"] = factory(root["ng.common"], root["shared"], root["ng.core"]);
   })(typeof self !== 'undefined' ? self : this, function (__WEBPACK_EXTERNAL_MODULE__0S4P__, __WEBPACK_EXTERNAL_MODULE_cfyg__, __WEBPACK_EXTERNAL_MODULE_vOrQ__) {
@@ -318,29 +322,65 @@
 
 
           var _angular_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_0__);
+          /* harmony import */
 
-          var ContainerComponent = function ContainerComponent() {
-            _classCallCheck(this, ContainerComponent);
-          };
+
+          var shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+          /*! shared */
+          "cfyg");
+          /* harmony import */
+
+
+          var shared__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(shared__WEBPACK_IMPORTED_MODULE_1__);
+
+          var ContainerComponent = /*#__PURE__*/function () {
+            function ContainerComponent(iframeChatService) {
+              _classCallCheck(this, ContainerComponent);
+
+              this.iframeChatService = iframeChatService;
+              this.IsContainer = true;
+              this.IsRootContainer = true;
+              this.Title = 'Container';
+            }
+
+            _createClass(ContainerComponent, [{
+              key: "moveup",
+              value: function moveup() {
+                alert('move up');
+                return true;
+              }
+            }, {
+              key: "movedown",
+              value: function movedown() {
+                alert('move down');
+                return true;
+              }
+            }, {
+              key: "config",
+              value: function config() {
+                alert('config');
+              }
+            }, {
+              key: "del",
+              value: function del() {
+                this.iframeChatService.childAPI.test();
+                return true;
+              }
+            }]);
+
+            return ContainerComponent;
+          }();
 
           ContainerComponent.ɵfac = function ContainerComponent_Factory(t) {
-            return new (t || ContainerComponent)();
+            return new (t || ContainerComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](shared__WEBPACK_IMPORTED_MODULE_1__["IFrameChatService"]));
           };
 
           ContainerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
             type: ContainerComponent,
             selectors: [["app-plugin-container"]],
-            decls: 2,
+            decls: 0,
             vars: 0,
-            template: function ContainerComponent_Template(rf, ctx) {
-              if (rf & 1) {
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "dddd");
-
-                _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-              }
-            },
+            template: function ContainerComponent_Template(rf, ctx) {},
             encapsulation: 2
           });
           /*@__PURE__*/
@@ -350,9 +390,13 @@
               type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
               args: [{
                 selector: 'app-plugin-container',
-                templateUrl: './container.component.html'
+                template: ''
               }]
-            }], null, null);
+            }], function () {
+              return [{
+                type: shared__WEBPACK_IMPORTED_MODULE_1__["IFrameChatService"]
+              }];
+            }, null);
           })();
           /***/
 
@@ -446,12 +490,7 @@
             _classCallCheck(this, ContainerModule);
           };
 
-          ContainerModule.config = {
-            IsContainer: true,
-            IsRootContainer: true,
-            Title: 'Container',
-            indexComponent: _container_component__WEBPACK_IMPORTED_MODULE_2__["ContainerComponent"]
-          };
+          ContainerModule.entry = _container_component__WEBPACK_IMPORTED_MODULE_2__["ContainerComponent"];
           ContainerModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({
             type: ContainerModule
           });

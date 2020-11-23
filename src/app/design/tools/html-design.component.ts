@@ -1,8 +1,22 @@
-import { Component, Input, ViewChild, AfterViewInit, ElementRef, EventEmitter, Output } from '@angular/core';
+import {
+	Component,
+	Input,
+	ViewChild,
+	AfterViewInit,
+	ElementRef,
+	EventEmitter,
+	Output,
+	OnDestroy,
+	ViewContainerRef,
+	ComponentFactoryResolver,
+	Injector
+} from '@angular/core';
 import { PluginLoaderService } from '@app/services/plugin-loader/plugin-loader.service';
 import { StringUtil } from 'js-dom-utility';
+import { constant } from 'lodash-es';
 import { BehaviorSubject, Observable, forkJoin, from } from 'rxjs';
 import { IFrameChatService, IParentWindowAPI } from 'shared';
+import { ContainerResizerComponent } from './containerresizer.component';
 import { HtmlDesignService } from './html-design.service';
 import { ParentWindowAPI } from './ParentWindowAPI';
 
@@ -12,10 +26,13 @@ import { ParentWindowAPI } from './ParentWindowAPI';
 	templateUrl: './html-design.component.html',
 	styleUrls: ['./html-design.component.scss']
 })
-export class HTMLDesignComponent implements AfterViewInit {
+export class HTMLDesignComponent implements AfterViewInit, OnDestroy {
+	@ViewChild('targetRef', { read: ViewContainerRef }) vcRef: ViewContainerRef;
 	@ViewChild('iframe') iframe: ElementRef<HTMLIFrameElement>;
 	private inited = false;
 
+	/** 已经加载的插件 */
+	private loadedAddons: IAddon[] = [];
 	private currentElementInfos: ElementInfo[];
 	private parentAPI: IParentWindowAPI;
 
@@ -78,8 +95,14 @@ export class HTMLDesignComponent implements AfterViewInit {
 	/** 页面改变 */
 	@Output() pageChanged: EventEmitter<string> = new EventEmitter();
 
-	private iframeChatService: IFrameChatService;
-	constructor(private pluginLoader: PluginLoaderService, private htlmdesignerService: HtmlDesignService) {
+	// private iframeChatService: IFrameChatService;
+	constructor(
+		private injector: Injector,
+		private pluginLoader: PluginLoaderService,
+		private htlmdesignerService: HtmlDesignService,
+		private iframeChatService: IFrameChatService,
+		private factoryResolver: ComponentFactoryResolver
+	) {
 		this.parentAPI = new ParentWindowAPI();
 	}
 
@@ -102,12 +125,14 @@ export class HTMLDesignComponent implements AfterViewInit {
 		this.htlmdesignerService.quit();
 
 		//第二次初始化，只要握手IFRAME即可
-		if (this.iframeChatService) {
+		if (this.iframeChatService.hadInit) {
 			this.iframeChatService.Init(this.iframe.nativeElement, this.parentAPI);
 			return;
 		}
 
-		this.iframeChatService = new IFrameChatService(this.iframe.nativeElement, this.parentAPI);
+		this.iframeChatService.Init(this.iframe.nativeElement, this.parentAPI);
+
+		// this.iframeChatService = new IFrameChatService(this.iframe.nativeElement, this.parentAPI);
 
 		//加载完JS，并执行JS的初始化后
 		this.iframeChatService.childEvents.onScriptInited.subscribe(() => {
@@ -157,11 +182,16 @@ export class HTMLDesignComponent implements AfterViewInit {
 		});
 
 		this.iframeChatService.childEvents.onTrackHoverElement.subscribe((elementsInfo: ElementInfo[]) => {
+			/** 过滤已经导入的插件 */
+			const noLoadAddonElements = elementsInfo.filter(
+				(x) => this.loadedAddons.findIndex((y) => y.OwnPlugin.name == x.type) == -1
+			);
 			//获取当前元素的插件
-			this.loadPlugin(...elementsInfo).then((addons: IAddon[]) => {
+			this.loadPlugin(...noLoadAddonElements).then((addons: IAddon[]) => {
+				this.loadedAddons = [...addons, ...this.loadedAddons];
 				const elements: ElementInfo[] = [];
 				elementsInfo.forEach((eleInfo) => {
-					const theAddon = addons.find((x) => x.OwnPlugin.name.toLocaleLowerCase() == eleInfo.type);
+					const theAddon = this.loadedAddons.find((x) => x.OwnPlugin.name.toLocaleLowerCase() == eleInfo.type);
 					eleInfo.addon = theAddon;
 					if (theAddon) elements.push(eleInfo);
 				});
@@ -192,7 +222,7 @@ export class HTMLDesignComponent implements AfterViewInit {
 	}
 
 	private changeDesignState(val: boolean): Observable<void> {
-		if (!this.iframeChatService) return null;
+		if (!this.iframeChatService.hadInit) return null;
 		return from(this.iframeChatService.childAPI.ToggleDesignState(val));
 	}
 
@@ -201,25 +231,35 @@ export class HTMLDesignComponent implements AfterViewInit {
 	 * @param val 手机模式
 	 */
 	private toggleMobileMode(val: boolean) {
-		if (!this.iframeChatService) return null;
+		if (!this.iframeChatService.hadInit) return null;
 		if (val) return this.iframeChatService.childAPI.AddClass('html', 'mobile');
 		else return this.iframeChatService.childAPI.RemoveClass('html', 'mobile');
 	}
 
 	private loadPlugin(...elementsInfo: ElementInfo[]): Promise<IAddon[]> {
-		const loadPluginPromises = [];
+		const loadPluginPromises: Promise<{ ownPlugin: PluginConfig; entry: IAddon }>[] = [];
 		elementsInfo.forEach((eleInfo) => {
 			if (!StringUtil.isNullOrEmpty(eleInfo.type)) loadPluginPromises.push(this.pluginLoader.load(eleInfo.type));
 		});
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		return Promise.allSettled(loadPluginPromises).then((moduleTypes: PromiseSettledResult<any>[]) => {
+		return Promise.allSettled(loadPluginPromises).then((moduleTypes) => {
 			const addons = [];
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			// const { config } = this.configProvider;
+
 			moduleTypes
 				.filter((x) => x.status == 'fulfilled')
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				.forEach((moduleType: PromiseFulfilledResult<any>) => {
-					addons.push(moduleType.value.config as IAddon);
+				.forEach((moduleType: PromiseFulfilledResult<{ ownPlugin: PluginConfig; entry: IAddon }>) => {
+					// eslint-disable-next-line @typescript-eslint/no-explicit-any
+					const compFactory = this.factoryResolver.resolveComponentFactory<IAddon>(moduleType.value.entry as any);
+					const componentRef = this.vcRef.createComponent<IAddon>(compFactory, undefined, this.injector);
+					componentRef.instance.OwnPlugin = moduleType.value.ownPlugin;
+					addons.push(componentRef.instance);
+
+					debugger;
+					const compFactory1 = this.factoryResolver.resolveComponentFactory(ContainerResizerComponent);
+					// eslint-disable-next-line @typescript-eslint/no-unused-vars
+					const componentRef2 = this.vcRef.createComponent(compFactory1, undefined, this.injector);
 				});
 
 			moduleTypes
@@ -230,5 +270,9 @@ export class HTMLDesignComponent implements AfterViewInit {
 
 			return addons;
 		});
+	}
+
+	ngOnDestroy(): void {
+		this.iframeChatService.destroy();
 	}
 }

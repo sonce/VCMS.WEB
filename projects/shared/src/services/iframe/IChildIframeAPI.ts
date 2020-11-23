@@ -14,6 +14,7 @@ export interface IChildIframeMethods {
 	Del: (addonId: string, removeEmptyParent: boolean) => boolean;
 	loadScript: (fileName: string, callback?: () => void, into?: keyof HTMLElementTagNameMap) => Promise<boolean>;
 	loadCSS: (fileName: string, callback?: () => void, into?: keyof HTMLElementTagNameMap) => Promise<boolean>;
+	test: () => void;
 }
 
 export interface IChildIframeEvents {

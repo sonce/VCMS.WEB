@@ -10,9 +10,5 @@ import { SharedModule } from 'shared';
 	entryComponents: [ColComponent]
 })
 export class ColModule {
-	static config: IAddon = {
-		IsContainer: true,
-		Title: 'Col',
-		indexComponent: ColComponent
-	};
+	static entry = ColComponent;
 }

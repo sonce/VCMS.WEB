@@ -77,8 +77,7 @@ export class HomeComponent implements OnInit {
 	loadPlugin(pluginName: string): void {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		this.pluginLoader.load(pluginName).then((moduleType: any) => {
-			const entry = moduleType.config as IAddon;
-			const componentFactory = this.cfr.resolveComponentFactory(entry.indexComponent as Type<unknown>);
+			const componentFactory = this.cfr.resolveComponentFactory(moduleType.entry as Type<unknown>);
 			this.vcRef.createComponent(componentFactory, undefined, this.injector);
 		});
 	}

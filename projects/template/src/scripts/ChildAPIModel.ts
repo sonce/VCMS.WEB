@@ -117,4 +117,7 @@ export class ChildAPIModel implements IChildIframeMethods {
 		});
 		return true;
 	};
+	test = (): void => {
+		alert('a');
+	};
 }

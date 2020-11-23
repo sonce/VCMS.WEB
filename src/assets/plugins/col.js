@@ -291,6 +291,9 @@
 
           var ColComponent = function ColComponent() {
             _classCallCheck(this, ColComponent);
+
+            this.IsContainer = true;
+            this.Title = 'Col';
           };
 
           ColComponent.ɵfac = function ColComponent_Factory(t) {
@@ -432,11 +435,7 @@
             _classCallCheck(this, ColModule);
           };
 
-          ColModule.config = {
-            IsContainer: true,
-            Title: 'Col',
-            indexComponent: _col_component__WEBPACK_IMPORTED_MODULE_2__["ColComponent"]
-          };
+          ColModule.entry = _col_component__WEBPACK_IMPORTED_MODULE_2__["ColComponent"];
           ColModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({
             type: ColModule
           });

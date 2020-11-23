@@ -10,11 +10,5 @@ import { SharedModule } from 'shared';
 	entryComponents: [Plugin1Component]
 })
 export class Plugin1Module {
-	static config: IAddon = {
-		Title: 'Plugin 1',
-		indexComponent: Plugin1Component,
-		dependencies: {
-			scripts: ['medium-editor-textcolor.umd.js']
-		}
-	};
+	static entry = Plugin1Component;
 }

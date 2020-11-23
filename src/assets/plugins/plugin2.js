@@ -333,8 +333,13 @@
             _classCallCheck(this, Plugin2Component);
 
             this.testService = testService;
+            this.Title = 'Plugin 2';
             testService.HelloWorld();
             var v = {
+              parent: {
+                inParentIndex: 1,
+                childCount: 2
+              },
               id: 'a',
               type: 'aa',
               pos: {
@@ -484,10 +489,7 @@
             _classCallCheck(this, Plugin2Module);
           };
 
-          Plugin2Module.config = {
-            Title: 'Plugin 2',
-            indexComponent: _plugin2_component__WEBPACK_IMPORTED_MODULE_2__["Plugin2Component"]
-          };
+          Plugin2Module.entry = _plugin2_component__WEBPACK_IMPORTED_MODULE_2__["Plugin2Component"];
           Plugin2Module.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({
             type: Plugin2Module
           });

@@ -10,10 +10,5 @@ import { SharedModule } from 'shared';
 	entryComponents: [ContainerComponent]
 })
 export class ContainerModule {
-	static config: IAddon = {
-		IsContainer: true,
-		IsRootContainer: true,
-		Title: 'Container',
-		indexComponent: ContainerComponent
-	};
+	static entry = ContainerComponent;
 }

@@ -354,12 +354,19 @@
           }
 
           var Plugin1Component = /*#__PURE__*/function () {
-            function Plugin1Component(testService) {
+            function Plugin1Component(testService, iframechatservice) {
               _classCallCheck(this, Plugin1Component);
 
               this.testService = testService;
               this.x = false;
+              this.Title = 'Plugin 1';
+              this.dependencies = {
+                scripts: ['medium-editor-textcolor.umd.js']
+              };
               testService.HelloWorld();
+              iframechatservice.childEvents.onClick.subscribe(function () {
+                alert('a');
+              });
             }
 
             _createClass(Plugin1Component, [{
@@ -373,7 +380,7 @@
           }();
 
           Plugin1Component.ɵfac = function Plugin1Component_Factory(t) {
-            return new (t || Plugin1Component)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](shared__WEBPACK_IMPORTED_MODULE_1__["TestService"]));
+            return new (t || Plugin1Component)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](shared__WEBPACK_IMPORTED_MODULE_1__["TestService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](shared__WEBPACK_IMPORTED_MODULE_1__["IFrameChatService"]));
           };
 
           Plugin1Component.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -446,6 +453,8 @@
             }], function () {
               return [{
                 type: shared__WEBPACK_IMPORTED_MODULE_1__["TestService"]
+              }, {
+                type: shared__WEBPACK_IMPORTED_MODULE_1__["IFrameChatService"]
               }];
             }, null);
           })();
@@ -541,13 +550,7 @@
             _classCallCheck(this, Plugin1Module);
           };
 
-          Plugin1Module.config = {
-            Title: 'Plugin 1',
-            indexComponent: _plugin1_component__WEBPACK_IMPORTED_MODULE_2__["Plugin1Component"],
-            dependencies: {
-              scripts: ['medium-editor-textcolor.umd.js']
-            }
-          };
+          Plugin1Module.entry = _plugin1_component__WEBPACK_IMPORTED_MODULE_2__["Plugin1Component"];
           Plugin1Module.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({
             type: Plugin1Module
           });

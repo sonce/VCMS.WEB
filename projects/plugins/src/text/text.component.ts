@@ -4,4 +4,9 @@ import { Component } from '@angular/core';
 	selector: 'app-plugin-2',
 	templateUrl: './text.component.html'
 })
-export class TextComponent {}
+export class TextComponent implements IAddon {
+	Title = 'Text';
+	dependencies = {
+		scripts: ['medium-editor-textcolor.umd.js']
+	};
+}

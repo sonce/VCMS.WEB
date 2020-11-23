@@ -1,4 +1,4 @@
-import { Injectable, NgModuleFactory } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { PluginLoaderService } from './plugin-loader.service';
 import { PLUGIN_EXTERNALS_MAP } from './plugin-externals';
 import { PluginsConfigProvider } from '../plugins-config.provider';
@@ -26,7 +26,7 @@ export class ServerPluginLoaderService extends PluginLoaderService {
 		};
 	}
 
-	load<T>(pluginName: string): Promise<NgModuleFactory<T>> {
+	load(pluginName: string): Promise<{ ownPlugin: PluginConfig; entry: IAddon }> {
 		const { config } = this.configProvider;
 		if (!config[pluginName]) {
 			// throw Error(`Can't find appropriate plugin`);
@@ -34,8 +34,8 @@ export class ServerPluginLoaderService extends PluginLoaderService {
 		}
 
 		const factory = global['require'](`./browser${config[pluginName].path}`).default;
-		if (ObjectUtil.isNull(factory.config)) throw Error('The Plugin no Config:IAddon property');
-		(factory.config as IAddon).OwnPlugin = config[pluginName];
+		if (ObjectUtil.isNull(factory.entry)) throw Error('The Plugin no entry:IAddon property');
+		factory.ownPlugin = config[pluginName];
 		return Promise.resolve(factory);
 	}
 }

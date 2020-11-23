@@ -4,4 +4,7 @@ import { Component } from '@angular/core';
 	selector: 'app-plugin-col',
 	templateUrl: './col.component.html'
 })
-export class ColComponent {}
+export class ColComponent implements IAddon {
+	IsContainer = true;
+	Title = 'Col';
+}

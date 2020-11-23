@@ -1,5 +1,5 @@
 import { connectToChild } from 'penpal';
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { from, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AsyncMethodReturns, Connection } from 'penpal/lib/types';
@@ -7,7 +7,12 @@ import { IChildIframeEvents, IClientIframeAPI } from './IChildIframeAPI';
 import { IParentWindowAPI } from './IParentWindowAPI';
 import { ChildIframeEvents } from './ChildIframeEvent';
 
+@Injectable({
+	providedIn: 'root'
+})
 export class IFrameChatService {
+	/** 是否已经握手初始化 */
+	public hadInit = false;
 	private connection: Connection<IClientIframeAPI>;
 	/** 子IFRAME的API，需要在握手后才能访问 */
 	public childAPI: AsyncMethodReturns<IClientIframeAPI>;
@@ -19,16 +24,19 @@ export class IFrameChatService {
 	 */
 	onConnected: EventEmitter<boolean> = new EventEmitter();
 
-	constructor(iframe: HTMLIFrameElement, parentAPI?: IParentWindowAPI) {
-		if (parentAPI) parentAPI.iframeChatService = this;
-		this.Init(iframe, parentAPI);
+	// constructor(iframe: HTMLIFrameElement, parentAPI?: IParentWindowAPI) {
+	// 	if (parentAPI) parentAPI.iframeChatService = this;
+	// 	this.Init(iframe, parentAPI);
+	// }
+	constructor() {
+		debugger;
 	}
 
 	/**
 	 * 初始化Postmate，用于父子页面的交互
 	 */
 	public Init(iframe: HTMLIFrameElement, parentAPI?: IParentWindowAPI): Subscription {
-		// Postmate.debug = true;
+		if (parentAPI) parentAPI.iframeChatService = this;
 		if (this.childAPI) this.connection.destroy();
 
 		this.connection = connectToChild<IClientIframeAPI>({
@@ -42,9 +50,15 @@ export class IFrameChatService {
 			.pipe(
 				tap((child) => {
 					this.childAPI = { ...child, ...this.childEvents };
+					this.hadInit = true;
 					this.onConnected.emit(true);
 				})
 			)
 			.subscribe();
+	}
+
+	destroy(): void {
+		this.hadInit = false;
+		if (this.childAPI) this.connection.destroy();
 	}
 }

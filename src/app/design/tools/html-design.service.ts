@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class HtmlDesignService {
 	/** 最上层的容器 */
-	@Input() RootContainerInfo: ElementInfo;
+	RootContainerInfo: ElementInfo;
 	/** 包含内容元素的容器 */
 	@Input() ContainerInfo: ElementInfo;
 	/** 内容元素 */

@@ -349,13 +349,7 @@
             _classCallCheck(this, TextModule);
           };
 
-          TextModule.config = {
-            Title: 'Text',
-            indexComponent: _text_component__WEBPACK_IMPORTED_MODULE_2__["TextComponent"],
-            dependencies: {
-              scripts: ['medium-editor-textcolor.umd.js']
-            }
-          };
+          TextModule.entry = _text_component__WEBPACK_IMPORTED_MODULE_2__["TextComponent"];
           TextModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({
             type: TextModule
           });
@@ -421,6 +415,11 @@
 
           var TextComponent = function TextComponent() {
             _classCallCheck(this, TextComponent);
+
+            this.Title = 'Text';
+            this.dependencies = {
+              scripts: ['medium-editor-textcolor.umd.js']
+            };
           };
 
           TextComponent.ɵfac = function TextComponent_Factory(t) {

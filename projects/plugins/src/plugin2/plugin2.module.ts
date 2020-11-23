@@ -10,8 +10,5 @@ import { SharedModule } from 'shared';
 	entryComponents: [Plugin2Component]
 })
 export class Plugin2Module {
-	static config: IAddon = {
-		Title: 'Plugin 2',
-		indexComponent: Plugin2Component
-	};
+	static entry = Plugin2Component;
 }

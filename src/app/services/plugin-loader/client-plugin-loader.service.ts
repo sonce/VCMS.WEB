@@ -1,4 +1,4 @@
-import { Injectable, Type } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { PluginLoaderService } from './plugin-loader.service';
 import { PLUGIN_EXTERNALS_MAP } from './plugin-externals';
 import { PluginsConfigProvider } from '../plugins-config.provider';
@@ -18,7 +18,7 @@ export class ClientPluginLoaderService extends PluginLoaderService {
 		});
 	}
 
-	load<T>(pluginName: string): Promise<Type<T>> {
+	load(pluginName: string): Promise<{ ownPlugin: PluginConfig; entry: IAddon }> {
 		const { config } = this.configProvider;
 		if (!config[pluginName]) {
 			return Promise.reject(`Can't find ${pluginName} plugin`);
@@ -42,10 +42,9 @@ export class ClientPluginLoaderService extends PluginLoaderService {
 
 		return Promise.all(depsPromises).then(() => {
 			return SystemJs.import(config[pluginName].path).then((module) => {
-				if (ObjectUtil.isNull(module.default.default.config))
-					throw Error(`The Plugin ${pluginName} no Config:IAddon property`);
-
-				(module.default.default.config as IAddon).OwnPlugin = config[pluginName];
+				if (ObjectUtil.isNull(module.default.default.entry))
+					throw Error(`The Plugin ${pluginName} no Entry:IAddon property`);
+				module.default.default.ownPlugin = config[pluginName];
 				return module.default.default;
 			});
 		});

@@ -8,6 +8,12 @@ interface ElementInfo<T = any> {
 		width: number;
 		height: number;
 	};
+	parent: {
+		/** 子元素数量 */
+		childCount: number;
+		/** 在父元素中的位置 */
+		inParentIndex: number;
+	};
 	config?: T;
 	addon?: IAddon;
 	// ChildElement?: ElementInfo;
@@ -24,7 +30,7 @@ interface PluginConfig {
 /**
  * 所有Addon的基类
  */
-declare interface IAddon {
+interface IAddon {
 	OwnPlugin?: PluginConfig;
 	Title: string;
 	/**
@@ -36,6 +42,8 @@ declare interface IAddon {
 	 * 是否可以删除
 	 */
 	CanDel?: boolean;
+	/** 删除 */
+	del?: () => void;
 	// /**
 	//  * 是否显示工具栏
 	//  */
@@ -57,7 +65,6 @@ declare interface IAddon {
 	// Icon: string;
 	onHover?: () => void;
 	onClick?: () => void;
-	indexComponent: unknown;
 	/** 依赖 */
 	dependencies?: {
 		/** 脚本 */
