@@ -81,6 +81,7 @@ function patchWebpackConfig(config, options) {
 		rxjs: 'rxjs',
 		'rxjs/operators': 'rxjs.operators',
 		'@angular/core': 'ng.core',
+		'@ng-bootstrap/ng-bootstrap': 'ng.bootstrap',
 		'@angular/common': 'ng.common',
 		'@angular/forms': 'ng.forms',
 		'@angular/router': 'ng.router',

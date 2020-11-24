@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable, Input } from '@angular/core';
-import { ConfirmationDialogService } from '@app/@shared';
+import { ConfirmationDialogService } from 'shared';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()

@@ -38,7 +38,6 @@ export class IFrameChatService {
 	public Init(iframe: HTMLIFrameElement, parentAPI?: IParentWindowAPI): Subscription {
 		if (parentAPI) parentAPI.iframeChatService = this;
 		if (this.childAPI) this.connection.destroy();
-
 		this.connection = connectToChild<IClientIframeAPI>({
 			// The iframe to which a connection should be made
 			iframe,

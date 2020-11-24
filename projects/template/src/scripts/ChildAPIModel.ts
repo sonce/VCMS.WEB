@@ -101,7 +101,7 @@ export class ChildAPIModel implements IChildIframeMethods {
 	RemoveClass = (selector: string, className: string): void => {
 		document.querySelector(selector).classList.remove(className);
 	};
-	Del = (addonId: string, removeEmptyParent: boolean): boolean => {
+	Del = (addonId: string, removeEmptyParent?: boolean): boolean => {
 		const delElement = document.querySelector<HTMLElement>(`[data-addon-id="${addonId}"]`);
 		if (delElement == null || typeof delElement === 'undefined') return true;
 		const parent = delElement.parentElement;

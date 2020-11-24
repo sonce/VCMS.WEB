@@ -235,7 +235,10 @@ export class HTMLDesignComponent implements AfterViewInit, OnDestroy {
 	}
 
 	private loadPlugin(...elementsInfo: ElementInfo[]): Promise<IAddon[]> {
-		const loadPluginPromises: Promise<{ ownPlugin: PluginConfig; entry: IAddon }>[] = [];
+		const loadPluginPromises: Promise<{
+			ownPlugin: PluginConfig;
+			entry: IAddon;
+		}>[] = [];
 		elementsInfo.forEach((eleInfo) => {
 			if (!StringUtil.isNullOrEmpty(eleInfo.type)) loadPluginPromises.push(this.pluginLoader.load(eleInfo.type));
 		});
@@ -247,13 +250,20 @@ export class HTMLDesignComponent implements AfterViewInit, OnDestroy {
 			moduleTypes
 				.filter((x) => x.status == 'fulfilled')
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
-				.forEach((moduleType: PromiseFulfilledResult<{ ownPlugin: PluginConfig; entry: IAddon }>) => {
-					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-					const compFactory = this.factoryResolver.resolveComponentFactory<IAddon>(moduleType.value.entry as any);
-					const componentRef = this.vcRef.createComponent<IAddon>(compFactory, undefined, this.injector);
-					componentRef.instance.OwnPlugin = moduleType.value.ownPlugin;
-					addons.push(componentRef.instance);
-				});
+				.forEach(
+					(
+						moduleType: PromiseFulfilledResult<{
+							ownPlugin: PluginConfig;
+							entry: IAddon;
+						}>
+					) => {
+						// eslint-disable-next-line @typescript-eslint/no-explicit-any
+						const compFactory = this.factoryResolver.resolveComponentFactory<IAddon>(moduleType.value.entry as any);
+						const componentRef = this.vcRef.createComponent<IAddon>(compFactory, undefined, this.injector);
+						componentRef.instance.OwnPlugin = moduleType.value.ownPlugin;
+						addons.push(componentRef.instance);
+					}
+				);
 
 			moduleTypes
 				.filter((x) => x.status == 'rejected')

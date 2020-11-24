@@ -11,7 +11,13 @@ export interface IChildIframeMethods {
 	ToggleDesignState: (inDesign: boolean) => void;
 	AddClass: (selector: string, className: string) => void;
 	RemoveClass: (selector: string, className: string) => void;
-	Del: (addonId: string, removeEmptyParent: boolean) => boolean;
+	/**
+	 * 删除元素
+	 *
+	 * @param addonId 元素id
+	 * @param removeEmptyParent 是否移除空的父元素
+	 */
+	Del: (addonId: string, removeEmptyParent?: boolean) => boolean;
 	loadScript: (fileName: string, callback?: () => void, into?: keyof HTMLElementTagNameMap) => Promise<boolean>;
 	loadCSS: (fileName: string, callback?: () => void, into?: keyof HTMLElementTagNameMap) => Promise<boolean>;
 	test: () => void;

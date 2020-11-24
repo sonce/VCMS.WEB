@@ -8,7 +8,6 @@ import { ClickStopPropagationDirective, AutofocusDirective } from './directives'
 import { FormsModule } from '@angular/forms';
 import { SafePipe } from './pipes';
 import {
-	ConfirmationDialogService,
 	MultiLevelNavComponent,
 	MultiLevelNavitemDirective,
 	MultiLevelNavChildComponent,
@@ -29,7 +28,6 @@ import {
 		RadiogroupItemComponent,
 		SafePipe
 	],
-	providers: [ConfirmationDialogService],
 	exports: [
 		VDropdownComponent,
 		MultiLevelNavComponent,

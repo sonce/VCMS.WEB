@@ -49,7 +49,7 @@ import { HtmlDesignService } from './html-design.service';
 				<div
 					class="icon-page-section-control-button iconfont icon-del"
 					data-bind="attr: {title: tip },css:icon"
-					(click)="currentAddon.del()"
+					(click)="currentAddon.del(CurrentElementInfo)"
 					title="删除容器100%"
 				></div>
 			</div>
@@ -61,7 +61,15 @@ export class RootContainerComponent {
 
 	public convertAddon(
 		eleInfo: IAddon
-	): IAddon & { moveup: () => boolean; movedown: () => boolean; config: () => void } {
-		return eleInfo as IAddon & { moveup: () => boolean; movedown: () => boolean; config: () => void };
+	): IAddon & {
+		moveup: () => boolean;
+		movedown: () => boolean;
+		config: () => void;
+	} {
+		return eleInfo as IAddon & {
+			moveup: () => boolean;
+			movedown: () => boolean;
+			config: () => void;
+		};
 	}
 }

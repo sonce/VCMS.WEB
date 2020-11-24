@@ -42,8 +42,12 @@ interface IAddon {
 	 * 是否可以删除
 	 */
 	CanDel?: boolean;
-	/** 删除 */
-	del?: () => void;
+	/**
+	 * 删除
+	 *
+	 * @param elementInfo 元素信息
+	 */
+	del?: (elementInfo: ElementInfo) => boolean | PromiseLike<boolean>;
 	// /**
 	//  * 是否显示工具栏
 	//  */
