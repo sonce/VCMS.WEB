@@ -6,8 +6,8 @@
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
   (function webpackUniversalModuleDefinition(root, factory) {
-    if (typeof exports === 'object' && typeof module === 'object') module.exports = factory(require("ng.common"), require("ng.bootstrap"), require("rxjs"), require("rxjs.operators"), require("ng.core"));else if (typeof define === 'function' && define.amd) define(["ng.common", "ng.bootstrap", "rxjs", "rxjs.operators", "ng.core"], factory);else if (typeof exports === 'object') exports["shared"] = factory(require("ng.common"), require("ng.bootstrap"), require("rxjs"), require("rxjs.operators"), require("ng.core"));else root["shared"] = factory(root["ng.common"], root["ng.bootstrap"], root["rxjs"], root["rxjs.operators"], root["ng.core"]);
-  })(typeof self !== 'undefined' ? self : this, function (__WEBPACK_EXTERNAL_MODULE__0S4P__, __WEBPACK_EXTERNAL_MODULE__7HMT__, __WEBPACK_EXTERNAL_MODULE_Vgaj__, __WEBPACK_EXTERNAL_MODULE_aP7H__, __WEBPACK_EXTERNAL_MODULE_vOrQ__) {
+    if (typeof exports === 'object' && typeof module === 'object') module.exports = factory(require("ng.common"), require("ngBootstrap"), require("@ngx-translate/core"), require("rxjs"), require("rxjs.operators"), require("ng.core"));else if (typeof define === 'function' && define.amd) define(["ng.common", "ngBootstrap", "@ngx-translate/core", "rxjs", "rxjs.operators", "ng.core"], factory);else if (typeof exports === 'object') exports["shared"] = factory(require("ng.common"), require("ngBootstrap"), require("@ngx-translate/core"), require("rxjs"), require("rxjs.operators"), require("ng.core"));else root["shared"] = factory(root["ng.common"], root["ngBootstrap"], root["@ngx-translate/core"], root["rxjs"], root["rxjs.operators"], root["ng.core"]);
+  })(typeof self !== 'undefined' ? self : this, function (__WEBPACK_EXTERNAL_MODULE__0S4P__, __WEBPACK_EXTERNAL_MODULE__7HMT__, __WEBPACK_EXTERNAL_MODULE_TGDj__, __WEBPACK_EXTERNAL_MODULE_Vgaj__, __WEBPACK_EXTERNAL_MODULE_aP7H__, __WEBPACK_EXTERNAL_MODULE_vOrQ__) {
     return (
       /******/
       function (modules) {
@@ -555,9 +555,9 @@
 
         /***/
         "7HMT":
-        /*!*******************************!*\
-          !*** external "ng.bootstrap" ***!
-          \*******************************/
+        /*!******************************!*\
+          !*** external "ngBootstrap" ***!
+          \******************************/
 
         /*! no static exports found */
 
@@ -669,39 +669,49 @@
           /* harmony import */
 
 
-          var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+          var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+          /*! @ngx-translate/core */
+          "TGDj");
+          /* harmony import */
+
+
+          var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ngx_translate_core__WEBPACK_IMPORTED_MODULE_2__);
+          /* harmony import */
+
+
+          var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
           /*! @ng-bootstrap/ng-bootstrap */
           "7HMT");
           /* harmony import */
 
 
-          var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__);
+          var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__);
           /* harmony import */
 
 
-          var penpal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+          var penpal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
           /*! penpal */
           "tGer");
           /* harmony import */
 
 
-          var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+          var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
           /*! rxjs */
           "Vgaj");
           /* harmony import */
 
 
-          var rxjs__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(rxjs__WEBPACK_IMPORTED_MODULE_4__);
+          var rxjs__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(rxjs__WEBPACK_IMPORTED_MODULE_5__);
           /* harmony import */
 
 
-          var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+          var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
           /*! rxjs/operators */
           "aP7H");
           /* harmony import */
 
 
-          var rxjs_operators__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__);
+          var rxjs_operators__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__);
 
           function TabsComponent_li_1_Template(rf, ctx) {
             if (rf & 1) {
@@ -1010,7 +1020,7 @@
           }();
 
           ConfirmationDialogComponent.ɵfac = function ConfirmationDialogComponent_Factory(t) {
-            return new (t || ConfirmationDialogComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbActiveModal"]));
+            return new (t || ConfirmationDialogComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbActiveModal"]));
           };
 
           ConfirmationDialogComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -1105,7 +1115,7 @@
 
           ConfirmationDialogComponent.ctorParameters = function () {
             return [{
-              type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbActiveModal"]
+              type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbActiveModal"]
             }];
           };
 
@@ -1134,7 +1144,7 @@
               }]
             }], function () {
               return [{
-                type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbActiveModal"]
+                type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbActiveModal"]
               }];
             }, {
               title: [{
@@ -1181,7 +1191,7 @@
           }();
 
           ConfirmationDialogService.ɵfac = function ConfirmationDialogService_Factory(t) {
-            return new (t || ConfirmationDialogService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModal"]));
+            return new (t || ConfirmationDialogService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModal"]));
           };
 
           ConfirmationDialogService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
@@ -1191,7 +1201,7 @@
 
           ConfirmationDialogService.ctorParameters = function () {
             return [{
-              type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModal"]
+              type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModal"]
             }];
           };
           /*@__PURE__*/
@@ -1202,7 +1212,7 @@
               type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"]
             }], function () {
               return [{
-                type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModal"]
+                type: _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModal"]
               }];
             }, null);
           })();
@@ -1252,13 +1262,13 @@
 
                 if (parentAPI) parentAPI.iframeChatService = this;
                 if (this.childAPI) this.connection.destroy();
-                this.connection = Object(penpal__WEBPACK_IMPORTED_MODULE_3__["connectToChild"])({
+                this.connection = Object(penpal__WEBPACK_IMPORTED_MODULE_4__["connectToChild"])({
                   // The iframe to which a connection should be made
                   iframe: iframe,
                   // Methods the parent is exposing to the child
                   methods: parentAPI
                 });
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["from"])(this.connection.promise).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (child) {
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["from"])(this.connection.promise).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["tap"])(function (child) {
                   _this.childAPI = Object.assign(Object.assign({}, child), _this.childEvents);
                   _this.hadInit = true;
 
@@ -1366,7 +1376,7 @@
               return new (t || SharedModule)();
             },
             providers: [TestService, ConfirmationDialogService],
-            imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModule"]]]
+            imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_2__["TranslateModule"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModule"]]]
           });
 
           (function () {
@@ -1375,7 +1385,7 @@
                 return [SharedComponent, ButtonComponent, TabComponent, TabsComponent, ConfirmationDialogComponent];
               },
               imports: function imports() {
-                return [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModule"]];
+                return [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_2__["TranslateModule"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModule"]];
               },
               exports: function exports() {
                 return [SharedComponent, ButtonComponent, TabComponent, TabsComponent, ConfirmationDialogComponent];
@@ -1389,7 +1399,7 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](SharedModule, [{
               type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
               args: [{
-                imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModule"]],
+                imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _ngx_translate_core__WEBPACK_IMPORTED_MODULE_2__["TranslateModule"], _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModule"]],
                 providers: [TestService, ConfirmationDialogService],
                 declarations: [].concat(sharedComponents),
                 exports: [].concat(sharedComponents)
@@ -1865,6 +1875,20 @@
           };
           /***/
 
+        },
+
+        /***/
+        "TGDj":
+        /*!**************************************!*\
+          !*** external "@ngx-translate/core" ***!
+          \**************************************/
+
+        /*! no static exports found */
+
+        /***/
+        function TGDj(module, exports) {
+          module.exports = __WEBPACK_EXTERNAL_MODULE_TGDj__;
+          /***/
         },
 
         /***/

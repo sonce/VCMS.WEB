@@ -4,7 +4,9 @@
   "lib": {
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
-      "penpal": "penpal"
+      "penpal": "penpal",
+      "@ng-bootstrap/ng-bootstrap":"@ng-bootstrap/ng-bootstrap",
+      "@ngx-translate/core":"@ngx-translate/core"
     }
   }
 }

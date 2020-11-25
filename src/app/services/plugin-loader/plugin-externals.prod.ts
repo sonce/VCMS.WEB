@@ -13,7 +13,7 @@ export const PLUGIN_EXTERNALS_MAP = {
 	'ng.common': common,
 	'ng.forms': forms,
 	'ng.router': router,
-	'ng.bootstrap': bootstrap,
+	ngBootstrap: bootstrap,
 	rxjs,
 	'rxjs.operators': rxop,
 	tslib,

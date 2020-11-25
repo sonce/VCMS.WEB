@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { Logger } from '@core/logger.service';
 import enUS from '../../translations/en-US.json';
-import frFR from '../../translations/cn-zh.json';
+import cnZH from '../../translations/cn-zh.json';
 
 const log = new Logger('I18nService');
 const languageKey = 'language';
@@ -15,7 +15,7 @@ const languageKey = 'language';
  * @param s The string to extract for translation.
  * @return The same string.
  */
-export function extract(s: string) {
+export function extract(s: string): string {
 	return s;
 }
 
@@ -31,7 +31,7 @@ export class I18nService {
 	constructor(private translateService: TranslateService) {
 		// Embed languages to avoid extra HTTP requests
 		translateService.setTranslation('en-US', enUS);
-		translateService.setTranslation('cn-zh', frFR);
+		translateService.setTranslation('cn-zh', cnZH);
 	}
 
 	/**
@@ -40,7 +40,7 @@ export class I18nService {
 	 * @param defaultLanguage The default language to use.
 	 * @param supportedLanguages The list of supported languages.
 	 */
-	init(defaultLanguage: string, supportedLanguages: string[]) {
+	init(defaultLanguage: string, supportedLanguages: string[]): void {
 		this.defaultLanguage = defaultLanguage;
 		this.supportedLanguages = supportedLanguages;
 		this.language = '';
@@ -54,7 +54,7 @@ export class I18nService {
 	/**
 	 * Cleans up language change subscription.
 	 */
-	destroy() {
+	destroy(): void {
 		if (this.langChangeSubscription) {
 			this.langChangeSubscription.unsubscribe();
 		}

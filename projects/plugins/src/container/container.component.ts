@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { IFrameChatService, ConfirmationDialogService } from 'shared';
 
 @Component({
-	selector: 'app-plugin-container',
 	template: ''
 })
 export class ContainerComponent implements IAddon {
 	constructor(
 		private iframeChatService: IFrameChatService,
-		private confirmationDialogService: ConfirmationDialogService
+		private confirmationDialogService: ConfirmationDialogService,
+		private translateService: TranslateService
 	) {}
 	IsContainer = true;
 	IsRootContainer = true;
@@ -29,12 +30,16 @@ export class ContainerComponent implements IAddon {
 	}
 
 	del(elementInfo: ElementInfo): boolean | PromiseLike<boolean> {
-		return this.confirmationDialogService.confirm('删除', '确定删除').then((result) => {
-			if (!result) {
-				return false;
-			}
-			this.iframeChatService.childAPI.Del(elementInfo.id);
-			return true;
-		});
+		return this.confirmationDialogService
+			.confirm(
+				this.translateService.instant('Please confirm'),
+				this.translateService.instant('Do you want to Del') + ' ' + elementInfo.type
+			)
+			.then((result) => {
+				if (!result) {
+					return false;
+				}
+				return this.iframeChatService.childAPI.Del(elementInfo.id);
+			});
 	}
 }

@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("ng.common"), require("shared"), require("ng.core"));
+		module.exports = factory(require("ng.common"), require("@ngx-translate/core"), require("shared"), require("ng.core"));
 	else if(typeof define === 'function' && define.amd)
-		define(["ng.common", "shared", "ng.core"], factory);
+		define(["ng.common", "@ngx-translate/core", "shared", "ng.core"], factory);
 	else if(typeof exports === 'object')
-		exports["container"] = factory(require("ng.common"), require("shared"), require("ng.core"));
+		exports["container"] = factory(require("ng.common"), require("@ngx-translate/core"), require("shared"), require("ng.core"));
 	else
-		root["container"] = factory(root["ng.common"], root["shared"], root["ng.core"]);
-})((typeof self !== 'undefined' ? self : this), function(__WEBPACK_EXTERNAL_MODULE__0S4P__, __WEBPACK_EXTERNAL_MODULE_cfyg__, __WEBPACK_EXTERNAL_MODULE_vOrQ__) {
+		root["container"] = factory(root["ng.common"], root["@ngx-translate/core"], root["shared"], root["ng.core"]);
+})((typeof self !== 'undefined' ? self : this), function(__WEBPACK_EXTERNAL_MODULE__0S4P__, __WEBPACK_EXTERNAL_MODULE_TGDj__, __WEBPACK_EXTERNAL_MODULE_cfyg__, __WEBPACK_EXTERNAL_MODULE_vOrQ__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -131,16 +131,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContainerComponent", function() { return ContainerComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "vOrQ");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_angular_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! shared */ "cfyg");
-/* harmony import */ var shared__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(shared__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ngx-translate/core */ "TGDj");
+/* harmony import */ var _ngx_translate_core__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_ngx_translate_core__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var shared__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! shared */ "cfyg");
+/* harmony import */ var shared__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(shared__WEBPACK_IMPORTED_MODULE_2__);
+
+
 
 
 
 
 class ContainerComponent {
-    constructor(iframeChatService, confirmationDialogService) {
+    constructor(iframeChatService, confirmationDialogService, translateService) {
         this.iframeChatService = iframeChatService;
         this.confirmationDialogService = confirmationDialogService;
+        this.translateService = translateService;
         this.IsContainer = true;
         this.IsRootContainer = true;
         this.Title = 'Container';
@@ -157,25 +162,36 @@ class ContainerComponent {
         alert('config');
     }
     del(elementInfo) {
-        return this.confirmationDialogService.confirm('删除', '确定删除').then((result) => {
+        return this.confirmationDialogService
+            .confirm(this.translateService.instant('Please confirm'), this.translateService.instant('Do you want to Del') + ' ' + elementInfo.type)
+            .then((result) => {
             if (!result) {
                 return false;
             }
-            this.iframeChatService.childAPI.Del(elementInfo.id);
-            return true;
+            return this.iframeChatService.childAPI.Del(elementInfo.id);
         });
     }
 }
-ContainerComponent.ɵfac = function ContainerComponent_Factory(t) { return new (t || ContainerComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](shared__WEBPACK_IMPORTED_MODULE_1__["IFrameChatService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](shared__WEBPACK_IMPORTED_MODULE_1__["ConfirmationDialogService"])); };
-ContainerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ContainerComponent, selectors: [["app-plugin-container"]], decls: 0, vars: 0, template: function ContainerComponent_Template(rf, ctx) { }, encapsulation: 2 });
+ContainerComponent.ɵfac = function ContainerComponent_Factory(t) { return new (t || ContainerComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](shared__WEBPACK_IMPORTED_MODULE_2__["IFrameChatService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](shared__WEBPACK_IMPORTED_MODULE_2__["ConfirmationDialogService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ngx_translate_core__WEBPACK_IMPORTED_MODULE_1__["TranslateService"])); };
+ContainerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ContainerComponent, selectors: [["ng-component"]], decls: 0, vars: 0, template: function ContainerComponent_Template(rf, ctx) { }, encapsulation: 2 });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ContainerComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
-                selector: 'app-plugin-container',
                 template: ''
             }]
-    }], function () { return [{ type: shared__WEBPACK_IMPORTED_MODULE_1__["IFrameChatService"] }, { type: shared__WEBPACK_IMPORTED_MODULE_1__["ConfirmationDialogService"] }]; }, null); })();
+    }], function () { return [{ type: shared__WEBPACK_IMPORTED_MODULE_2__["IFrameChatService"] }, { type: shared__WEBPACK_IMPORTED_MODULE_2__["ConfirmationDialogService"] }, { type: _ngx_translate_core__WEBPACK_IMPORTED_MODULE_1__["TranslateService"] }]; }, null); })();
 
+
+/***/ }),
+
+/***/ "TGDj":
+/*!**************************************!*\
+  !*** external "@ngx-translate/core" ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_TGDj__;
 
 /***/ }),
 
