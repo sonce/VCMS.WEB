@@ -1,4 +1,4 @@
-import { ElementUtil } from 'js-dom-utility';
+import { ElementUtil, ObjectUtil } from 'js-dom-utility';
 import { IChildIframeMethods } from 'shared';
 
 export class ChildAPIModel implements IChildIframeMethods {
@@ -116,6 +116,20 @@ export class ChildAPIModel implements IChildIframeMethods {
 			if (containAddon == null || typeof containAddon === 'undefined') p.remove();
 		});
 		return true;
+	};
+
+	moveToIndex = (addonId: string, toIndex: number): boolean => {
+		const targetElement = document.querySelector<HTMLElement>(`[data-addon-id="${addonId}"]`);
+		if (ObjectUtil.isNull(targetElement)) return false;
+		else {
+			const parentElement = targetElement.parentElement;
+			const refElement = targetElement.parentElement.children.item(toIndex);
+			if (ObjectUtil.isNull(refElement)) return false;
+			else {
+				parentElement.insertBefore(targetElement, refElement);
+				return true;
+			}
+		}
 	};
 	test = (): void => {
 		alert('a');

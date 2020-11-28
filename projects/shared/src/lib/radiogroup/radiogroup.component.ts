@@ -16,7 +16,7 @@ import { map, takeUntil } from 'rxjs/operators';
 
 type RadiogroupSkin = 'bg' | 'bg-radius' | 'bottomline';
 @Component({
-	selector: 'v-radiogroup',
+	selector: 'lib-radiogroup',
 	template: `
 		<div
 			class="btn-group btn-group-toggle radio-toggle-group d-flex"

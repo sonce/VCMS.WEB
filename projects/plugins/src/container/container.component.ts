@@ -15,21 +15,19 @@ export class ContainerComponent implements IAddon {
 	IsRootContainer = true;
 	Title = 'Container';
 
-	moveup(): boolean {
-		alert('move up');
-		return true;
+	async moveup(elementInfo: ElementInfo): Promise<boolean> {
+		return this.iframeChatService.childAPI.moveToIndex(elementInfo.id, elementInfo.parent.inParentIndex - 1);
 	}
 
-	movedown(): boolean {
-		alert('move down');
-		return true;
+	async movedown(elementInfo: ElementInfo): Promise<boolean> {
+		return this.iframeChatService.childAPI.moveToIndex(elementInfo.id, elementInfo.parent.inParentIndex + 1);
 	}
 
 	config(): void {
 		alert('config');
 	}
 
-	del(elementInfo: ElementInfo): boolean | PromiseLike<boolean> {
+	async del(elementInfo: ElementInfo): Promise<boolean> {
 		return this.confirmationDialogService
 			.confirm(
 				this.translateService.instant('Please confirm'),

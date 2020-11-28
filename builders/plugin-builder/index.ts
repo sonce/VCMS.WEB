@@ -1,6 +1,6 @@
 import { BrowserBuilderOutput, executeBrowserBuilder, ExecutionTransformer } from '@angular-devkit/build-angular';
-import { JsonObject } from '@angular-devkit/core';
 import { createBuilder, BuilderContext } from '@angular-devkit/architect';
+import { JsonObject } from '@angular-devkit/core';
 import * as fs from 'fs';
 import * as webpack from 'webpack';
 import { tap } from 'rxjs/operators';
@@ -43,7 +43,6 @@ function buildPlugin(
 		return originalWebpackConfigurationFn ? originalWebpackConfigurationFn(config) : config;
 	};
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const result = executeBrowserBuilder(options as any, context, transforms);
 
 	return result.pipe(
@@ -88,6 +87,7 @@ function patchWebpackConfig(config: webpack.Configuration, options: Options) {
 		'@angular/common': 'ng.common',
 		'@angular/forms': 'ng.forms',
 		'@angular/router': 'ng.router',
+		penpal: 'penpal',
 		tslib: 'tslib'
 		// put here other common dependencies
 	};

@@ -6,7 +6,7 @@
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
   (function webpackUniversalModuleDefinition(root, factory) {
-    if (typeof exports === 'object' && typeof module === 'object') module.exports = factory(require("ng.common"), require("ng.forms"), require("ng.bootstrap"), require("ngxtranslate"), require("rxjs"), require("rxjs.operators"), require("penpal"), require("ng.core"));else if (typeof define === 'function' && define.amd) define(["ng.common", "ng.forms", "ng.bootstrap", "ngxtranslate", "rxjs", "rxjs.operators", "penpal", "ng.core"], factory);else if (typeof exports === 'object') exports["shared"] = factory(require("ng.common"), require("ng.forms"), require("ng.bootstrap"), require("ngxtranslate"), require("rxjs"), require("rxjs.operators"), require("penpal"), require("ng.core"));else root["shared"] = factory(root["ng.common"], root["ng.forms"], root["ng.bootstrap"], root["ngxtranslate"], root["rxjs"], root["rxjs.operators"], root["penpal"], root["ng.core"]);
+    if (typeof exports === 'object' && typeof module === 'object') module.exports = factory(require("ng.common"), require("ng.forms"), require("ng.bootstrap"), require("ngxtranslate"), require("rxjs"), require("rxjs.operators"), require("penpal"), require("ng.core"));else if (typeof define === 'function' && define.amd) define(["ng.common", "ng.forms", "ng.bootstrap", "ngxtranslate", "rxjs", "rxjs.operators", "penpal", "ng.core"], factory);else if (typeof exports === 'object') exports["shared-lib"] = factory(require("ng.common"), require("ng.forms"), require("ng.bootstrap"), require("ngxtranslate"), require("rxjs"), require("rxjs.operators"), require("penpal"), require("ng.core"));else root["shared-lib"] = factory(root["ng.common"], root["ng.forms"], root["ng.bootstrap"], root["ngxtranslate"], root["rxjs"], root["rxjs.operators"], root["penpal"], root["ng.core"]);
   })(typeof self !== 'undefined' ? self : this, function (__WEBPACK_EXTERNAL_MODULE__0S4P__, __WEBPACK_EXTERNAL_MODULE__3xDq__, __WEBPACK_EXTERNAL_MODULE__7HMT__, __WEBPACK_EXTERNAL_MODULE_TGDj__, __WEBPACK_EXTERNAL_MODULE_Vgaj__, __WEBPACK_EXTERNAL_MODULE_aP7H__, __WEBPACK_EXTERNAL_MODULE_mBXr__, __WEBPACK_EXTERNAL_MODULE_vOrQ__) {
     return (
       /******/
@@ -322,15 +322,57 @@
         },
 
         /***/
-        "9hGb":
-        /*!*******************************************************************************!*\
-          !*** F:/d/Project/VSoft/VCMS.WEB/dist/shared/__ivy_ngcc__/fesm2015/shared.js ***!
-          \*******************************************************************************/
+        "TGDj":
+        /*!*******************************!*\
+          !*** external "ngxtranslate" ***!
+          \*******************************/
+
+        /*! no static exports found */
+
+        /***/
+        function TGDj(module, exports) {
+          module.exports = __WEBPACK_EXTERNAL_MODULE_TGDj__;
+          /***/
+        },
+
+        /***/
+        "Vgaj":
+        /*!***********************!*\
+          !*** external "rxjs" ***!
+          \***********************/
+
+        /*! no static exports found */
+
+        /***/
+        function Vgaj(module, exports) {
+          module.exports = __WEBPACK_EXTERNAL_MODULE_Vgaj__;
+          /***/
+        },
+
+        /***/
+        "aP7H":
+        /*!*********************************!*\
+          !*** external "rxjs.operators" ***!
+          \*********************************/
+
+        /*! no static exports found */
+
+        /***/
+        function aP7H(module, exports) {
+          module.exports = __WEBPACK_EXTERNAL_MODULE_aP7H__;
+          /***/
+        },
+
+        /***/
+        "m1yc":
+        /*!***************************************************************************************!*\
+          !*** F:/d/Project/VSoft/VCMS.WEB/dist/shared-lib/__ivy_ngcc__/fesm2015/shared-lib.js ***!
+          \***************************************************************************************/
 
         /*! exports provided: ButtonComponent, ChildIframeEvents, ConfirmationDialogComponent, ConfirmationDialogService, HelloComponent, IFrameChatService, RadiogroupComponent, RadiogroupItemComponent, SharedComponent, SharedModule, TabComponent, TabsComponent, TestService, ɵa, ɵb, ɵc */
 
         /***/
-        function hGb(module, __webpack_exports__, __webpack_require__) {
+        function m1yc(module, __webpack_exports__, __webpack_require__) {
           "use strict";
 
           __webpack_require__.r(__webpack_exports__);
@@ -1604,52 +1646,10 @@
           /**
            * Generated bundle index. Do not edit.
            */
-          //# sourceMappingURL=shared.js.map
+          //# sourceMappingURL=shared-lib.js.map
 
           /***/
 
-        },
-
-        /***/
-        "TGDj":
-        /*!*******************************!*\
-          !*** external "ngxtranslate" ***!
-          \*******************************/
-
-        /*! no static exports found */
-
-        /***/
-        function TGDj(module, exports) {
-          module.exports = __WEBPACK_EXTERNAL_MODULE_TGDj__;
-          /***/
-        },
-
-        /***/
-        "Vgaj":
-        /*!***********************!*\
-          !*** external "rxjs" ***!
-          \***********************/
-
-        /*! no static exports found */
-
-        /***/
-        function Vgaj(module, exports) {
-          module.exports = __WEBPACK_EXTERNAL_MODULE_Vgaj__;
-          /***/
-        },
-
-        /***/
-        "aP7H":
-        /*!*********************************!*\
-          !*** external "rxjs.operators" ***!
-          \*********************************/
-
-        /*! no static exports found */
-
-        /***/
-        function aP7H(module, exports) {
-          module.exports = __WEBPACK_EXTERNAL_MODULE_aP7H__;
-          /***/
         },
 
         /***/
@@ -1696,116 +1696,116 @@
           /* harmony import */
 
 
-          var shared__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-          /*! shared */
-          "9hGb");
+          var shared_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+          /*! shared-lib */
+          "m1yc");
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "ButtonComponent", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["ButtonComponent"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["ButtonComponent"];
           });
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "ChildIframeEvents", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["ChildIframeEvents"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["ChildIframeEvents"];
           });
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "ConfirmationDialogComponent", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["ConfirmationDialogComponent"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["ConfirmationDialogComponent"];
           });
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "ConfirmationDialogService", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["ConfirmationDialogService"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["ConfirmationDialogService"];
           });
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "HelloComponent", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["HelloComponent"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["HelloComponent"];
           });
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "IFrameChatService", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["IFrameChatService"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["IFrameChatService"];
           });
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "RadiogroupComponent", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["RadiogroupComponent"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["RadiogroupComponent"];
           });
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "RadiogroupItemComponent", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["RadiogroupItemComponent"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["RadiogroupItemComponent"];
           });
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "SharedComponent", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["SharedComponent"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["SharedComponent"];
           });
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "SharedModule", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["SharedModule"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["SharedModule"];
           });
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "TabComponent", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["TabComponent"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["TabComponent"];
           });
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "TabsComponent", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["TabsComponent"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["TabsComponent"];
           });
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "TestService", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["TestService"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["TestService"];
           });
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "ɵa", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["ɵa"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["ɵa"];
           });
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "ɵb", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["ɵb"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["ɵb"];
           });
           /* harmony reexport (safe) */
 
 
           __webpack_require__.d(__webpack_exports__, "ɵc", function () {
-            return shared__WEBPACK_IMPORTED_MODULE_0__["ɵc"];
+            return shared_lib__WEBPACK_IMPORTED_MODULE_0__["ɵc"];
           });
           /* harmony default export */
 
 
-          __webpack_exports__["default"] = shared__WEBPACK_IMPORTED_MODULE_0__["SharedModule"];
+          __webpack_exports__["default"] = shared_lib__WEBPACK_IMPORTED_MODULE_0__["SharedModule"];
           /***/
         }
         /******/
 
       })
     );
-  }); //# sourceMappingURL=shared.js.map
+  }); //# sourceMappingURL=shared-lib.js.map
 
 })();
-//# sourceMappingURL=shared.js.map
+//# sourceMappingURL=shared-lib.js.map

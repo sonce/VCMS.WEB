@@ -11,14 +11,14 @@ export class TabsComponent {
 
 	@Output() selected = new EventEmitter();
 
-	addTab(tabComponent: Tab) {
+	addTab(tabComponent: Tab): void {
 		if (!this.tabs.length) {
 			tabComponent.hidden = false;
 		}
 		this.tabs.push(tabComponent);
 	}
 
-	selectTab(tabComponent: Tab) {
+	selectTab(tabComponent: Tab): void {
 		this.tabs.map((tab) => (tab.hidden = true));
 		tabComponent.hidden = false;
 		this.selected.emit(tabComponent);

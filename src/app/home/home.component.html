@@ -41,13 +41,12 @@
 				</li>
 			</nav>
     </ng-template>
-    <lib-shared-tabs>
-      <lib-shared-tab title="Tab 1"> Tab 1 contents </lib-shared-tab>
-      <lib-shared-tab title="Tab 2"> Tab 2 contents </lib-shared-tab>
-      <lib-shared-tab title="Tab 3"> Tab 3 contents </lib-shared-tab>
+		<lib-shared-tabs>
+			<lib-shared-tab title="Tab 1"> Tab 1 contents </lib-shared-tab>
+			<lib-shared-tab title="Tab 2"> Tab 2 contents </lib-shared-tab>
+			<lib-shared-tab title="Tab 3"> Tab 3 contents </lib-shared-tab>
     </lib-shared-tabs>
-
-		<!--
+    <!--
     <button type="button" class="btn btn-outline-secondary" triggers="manual" #p1="ngbPopover"
       (click)="p1.open({haha:'Button 1'})" [popoverTitle]="popTitle" [ngbPopover]="popContent">
       Button 1
@@ -109,9 +108,9 @@
 
 		<div class="plugins">
 			<ng-template #targetRef></ng-template>
-		</div>
-		<v-radiogroup [name]="'aaa'" [value]="'a2'" [skin]="'bottomline'">
-			<v-radiogroup-item [value]="'a1'">
+    </div>
+		<lib-radiogroup [name]="'aaa'" [value]="'a2'" [skin]="'bottomline'">
+			<lib-radiogroup-item [value]="'a1'">
 				<i>
 					<svg width="24" height="18" viewBox="0 0 24 18">
 						<defs>
@@ -123,8 +122,8 @@
 						<use fill-rule="evenodd" xlink:href="#top-bar-desktop-icon-a"></use>
 					</svg>
 				</i>
-			</v-radiogroup-item>
-			<v-radiogroup-item [value]="'a2'">
+			</lib-radiogroup-item>
+			<lib-radiogroup-item [value]="'a2'">
 				<i>
 					<svg width="24" height="18" viewBox="0 0 24 18" class="symbol symbol-topBarNewMobile btn-symbol">
 						<defs>
@@ -136,8 +135,8 @@
 						<use fill-rule="evenodd" xlink:href="#top-bar-mobile-icon-a"></use>
 					</svg>
 				</i>
-			</v-radiogroup-item>
-		</v-radiogroup>
+			</lib-radiogroup-item>
+		</lib-radiogroup>
 		<q>{{ quote }}</q
 		><br />
 	</div>

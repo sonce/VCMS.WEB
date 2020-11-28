@@ -20,6 +20,14 @@ export interface IChildIframeMethods {
 	Del: (addonId: string, removeEmptyParent?: boolean) => boolean;
 	loadScript: (fileName: string, callback?: () => void, into?: keyof HTMLElementTagNameMap) => Promise<boolean>;
 	loadCSS: (fileName: string, callback?: () => void, into?: keyof HTMLElementTagNameMap) => Promise<boolean>;
+	/**
+	 * 移动位置
+	 *
+	 * @param addonId 插件Id
+	 * @param toIndex 在当前父元素中位置索引
+	 * @returns 移动成功返回true，否则false
+	 */
+	moveToIndex: (addonId: string, toIndex: number) => boolean;
 	test: () => void;
 }
 

@@ -12,9 +12,9 @@
 		"postinstall": "patch-package && npm run prettier -s && tsc -p builders/tsconfig.builders.json",
 		"build:template": "webpack --config projects/template/webpack.config.js --mode=development && ncp projects/template/dist/ src/assets/template",
 		"build:shared": "ng build shared && ng build --project plugins --aot --modulePath=shared#SharedModule --pluginName=shared  --outputPath=./src/assets/plugins",
-		"build:plugin1": "ng build --project plugins --aot --modulePath=./plugin1/plugin1.module#Plugin1Module --pluginName=plugin1 --sharedLibs=shared --outputPath=./src/assets/plugins",
-		"build:plugin2": "ng build --project plugins --aot --modulePath=./plugin2/plugin2.module#Plugin2Module --pluginName=plugin2 --sharedLibs=shared --outputPath=./src/assets/plugins",
-		"build:container": "ng build --project plugins --aot --modulePath=./container/container.module#ContainerModule --pluginName=container --sharedLibs=shared --outputPath=./src/assets/plugins",
+		"build:plugin1": "ng build --project plugins --aot --modulePath=./plugin1/plugin1.module#Plugin1Module --pluginName=plugin1 --sharedLibs=shared,penpal --outputPath=./src/assets/plugins",
+		"build:plugin2": "ng build --project plugins --aot --modulePath=./plugin2/plugin2.module#Plugin2Module --pluginName=plugin2 --sharedLibs=shared,penpal --outputPath=./src/assets/plugins",
+		"build:container": "ng build --project plugins --aot --modulePath=./container/container.module#ContainerModule --pluginName=container --sharedLibs=shared,penpal --outputPath=./src/assets/plugins",
 		"build:plugins": "node ./builders/plugin-builder/plugins.js --buildshared",
 		"serve:sw": "npm run build -s && npx http-server ./dist -p 4200",
 		"compile:server_bak": "webpack --config webpack.server.config.js --progress --colors",
@@ -115,10 +115,5 @@
 		"ts-node": "^9.0.0",
 		"typescript": "~4.0.3",
 		"webpack-cli": "^4.0.0"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
 	}
 }

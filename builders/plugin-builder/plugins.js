@@ -57,7 +57,7 @@ else {
             isProd ? '--prod' : '--aot',
             `--modulePath=./${cpconfig.name.toLowerCase()}/${cpconfig.name.toLowerCase()}.module#${cpconfig.moduleName}`,
             `--pluginName=${cpconfig.name.toLowerCase()}`,
-            '--sharedLibs=shared',
+            '--sharedLibs=shared,penpal',
             '--outputPath=./src/assets/plugins'
         ], { stdio: 'inherit' });
     });

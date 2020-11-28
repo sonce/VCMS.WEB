@@ -7,13 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ClickStopPropagationDirective, AutofocusDirective } from './directives';
 import { FormsModule } from '@angular/forms';
 import { SafePipe } from './pipes';
-import {
-	MultiLevelNavComponent,
-	MultiLevelNavitemDirective,
-	MultiLevelNavChildComponent,
-	RadiogroupComponent,
-	RadiogroupItemComponent
-} from './components';
+import { MultiLevelNavComponent, MultiLevelNavitemDirective, MultiLevelNavChildComponent } from './components';
 
 @NgModule({
 	imports: [CommonModule, NgbModule, TranslateModule, FormsModule],
@@ -24,8 +18,6 @@ import {
 		MultiLevelNavChildComponent,
 		ClickStopPropagationDirective,
 		AutofocusDirective,
-		RadiogroupComponent,
-		RadiogroupItemComponent,
 		SafePipe
 	],
 	exports: [
@@ -35,8 +27,6 @@ import {
 		MultiLevelNavChildComponent,
 		ClickStopPropagationDirective,
 		AutofocusDirective,
-		RadiogroupComponent,
-		RadiogroupItemComponent,
 		SafePipe
 	]
 })

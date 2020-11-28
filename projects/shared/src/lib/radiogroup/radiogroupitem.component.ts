@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, TemplateRef, Output, EventEmitter } from '@angular/core';
 
 @Component({
-	selector: 'v-radiogroup-item,[v-radiogroup-item]',
+	selector: 'lib-radiogroup-item,[lib-radiogroup-item]',
 	// encapsulation: ViewEncapsulation.None,
 	template: `
 		<ng-template #childComponentTemplate let-data>

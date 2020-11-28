@@ -7,6 +7,7 @@ import * as rxop from 'rxjs/operators';
 import * as tslib from 'tslib';
 import * as shared from 'shared';
 import * as bootstrap from '@ng-bootstrap/ng-bootstrap';
+import * as ngxtranslate from '@ngx-translate/core';
 
 export const PLUGIN_EXTERNALS_MAP = {
 	'ng.core': core,
@@ -17,6 +18,7 @@ export const PLUGIN_EXTERNALS_MAP = {
 	rxjs,
 	'rxjs.operators': rxop,
 	tslib,
+	ngxtranslate: ngxtranslate,
 	shared: { ...shared }
 };
 

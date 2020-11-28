@@ -24,14 +24,14 @@
 					(OnSelectChange)="SelectPageChanged($event)"
 				>
 				</sitepages-dropdown>
-				<span class="separator"></span>
-				<v-radiogroup
+        <span class="separator"></span>
+				<lib-radiogroup
 					[name]="'designmode'"
 					[value]="designerService.IsMobile"
 					(toggleCheck)="changeViewMode($event)"
 					[skin]="'bottomline'"
 				>
-					<v-radiogroup-item [value]="false">
+					<lib-radiogroup-item [value]="false">
 						<i>
 							<svg width="24" height="18" viewBox="0 0 24 18">
 								<defs>
@@ -43,8 +43,8 @@
 								<use fill-rule="evenodd" xlink:href="#top-bar-desktop-icon-a"></use>
 							</svg>
 						</i>
-					</v-radiogroup-item>
-					<v-radiogroup-item [value]="true">
+					</lib-radiogroup-item>
+					<lib-radiogroup-item [value]="true">
 						<i>
 							<svg width="24" height="18" viewBox="0 0 24 18" class="symbol symbol-topBarNewMobile btn-symbol">
 								<defs>
@@ -56,8 +56,8 @@
 								<use fill-rule="evenodd" xlink:href="#top-bar-mobile-icon-a"></use>
 							</svg>
 						</i>
-					</v-radiogroup-item>
-				</v-radiogroup>
+					</lib-radiogroup-item>
+        </lib-radiogroup>
 				<span class="separator"></span>
 				<app-multilevelnav [isVertical]="false" [showArrow]="true">
 					<ng-template multiLevelNavItem [fullTemplate]="true"

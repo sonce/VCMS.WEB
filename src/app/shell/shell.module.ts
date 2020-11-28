@@ -13,6 +13,7 @@ import { TreeModule } from '@circlon/angular-tree-component';
 import { SitePagesDropdownComponent } from './components';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-bootstrap-spinner';
+import { SharedModule as SharedLibModule } from 'shared';
 
 @NgModule({
 	imports: [
@@ -24,6 +25,7 @@ import { NgxSpinnerModule } from 'ngx-bootstrap-spinner';
 		RouterModule,
 		ReactiveFormsModule,
 		SharedModule,
+		SharedLibModule,
 		TreeModule,
 		NgxSpinnerModule
 	],
