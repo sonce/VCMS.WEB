@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-plugin-col',
-	template;''
+	template: ''
 })
 export class ColComponent implements IAddon {
 	IsContainer = true;

@@ -51,7 +51,7 @@
 		"@ngx-translate/core": "^13.0.0",
 		"bootstrap": "^4.5.3",
 		"express": "^4.17.1",
-		"js-dom-utility": "^0.1.7",
+		"js-dom-utility": "^0.1.10",
 		"lodash-es": "^4.17.15",
 		"ngx-bootstrap-spinner": "^10.0.5",
 		"penpal": "^5.3.0",
@@ -115,5 +115,10 @@
 		"ts-node": "^9.0.0",
 		"typescript": "~4.0.3",
 		"webpack-cli": "^4.0.0"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
 	}
 }

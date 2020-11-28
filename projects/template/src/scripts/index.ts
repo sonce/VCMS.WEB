@@ -3,7 +3,6 @@ import { AsyncMethodReturns } from 'penpal/lib/types';
 import { IParentWindowAPI } from 'shared';
 import { ChildAPIModel } from './ChildAPIModel';
 import { ElementUtil } from 'js-dom-utility';
-import { ElementAccessExpression } from 'ts-morph';
 
 let parentAPI: AsyncMethodReturns<IParentWindowAPI>;
 const apiModel = new ChildAPIModel();

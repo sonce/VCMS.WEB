@@ -120,14 +120,13 @@ export class ChildAPIModel implements IChildIframeMethods {
 
 	moveToIndex = (addonId: string, toIndex: number): boolean => {
 		const targetElement = document.querySelector<HTMLElement>(`[data-addon-id="${addonId}"]`);
+		debugger;
 		if (ObjectUtil.isNull(targetElement)) return false;
 		else {
-			const parentElement = targetElement.parentElement;
 			const refElement = targetElement.parentElement.children.item(toIndex);
 			if (ObjectUtil.isNull(refElement)) return false;
 			else {
-				parentElement.insertBefore(targetElement, refElement);
-				return true;
+				ElementUtil.swap(targetElement, refElement);
 			}
 		}
 	};

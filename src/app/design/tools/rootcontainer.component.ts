@@ -32,7 +32,7 @@ import { HtmlDesignService } from './html-design.service';
 
 				<div
 					class="icon-page-section-control-button iconfont icon-level-up"
-					(click)="currentAddon.moveup()"
+					(click)="currentAddon.moveup(CurrentElementInfo)"
 					[hidden]="CurrentElementInfo.parent.inParentIndex == 0"
 					data-bind="attr: {title: tip },css:icon"
 					title="向上移"
@@ -40,7 +40,7 @@ import { HtmlDesignService } from './html-design.service';
 
 				<div
 					class="icon-page-section-control-button iconfont icon-leveldown"
-					(click)="currentAddon.movedown()"
+					(click)="currentAddon.movedown(CurrentElementInfo)"
 					[hidden]="CurrentElementInfo.parent.inParentIndex == CurrentElementInfo.parent.childCount - 1"
 					data-bind="attr: {title: tip },css:icon"
 					title="向下移"
