@@ -9,20 +9,19 @@ import { TabsComponent } from './lib/tabs/tabs.component';
 import { TabComponent } from './lib/tabs/tab.component';
 import { ButtonComponent } from './lib/button/button.component';
 import { ConfirmationDialogComponent, ConfirmationDialogService } from './lib/confirmation-dialog';
-import { RadiogroupComponent, RadiogroupItemComponent } from './lib/radiogroup';
 
 import { TestService } from './services';
-import { HelloComponent } from './lib/hello.component';
+import { RadiogroupComponent } from './lib/radiogroup/radiogroup.component';
+import { RadiogroupItemComponent } from './lib/radiogroup/radiogroupitem.component';
 
 const sharedComponents = [
-	RadiogroupComponent,
-	RadiogroupItemComponent,
-	HelloComponent,
 	SharedComponent,
 	ButtonComponent,
 	TabComponent,
 	TabsComponent,
-	ConfirmationDialogComponent
+	ConfirmationDialogComponent,
+	RadiogroupComponent,
+	RadiogroupItemComponent
 ];
 
 @NgModule({

@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-	selector: 'lib-confirmation-dialog',
 	templateUrl: './confirmation-dialog.component.html'
 })
 export class ConfirmationDialogComponent {
