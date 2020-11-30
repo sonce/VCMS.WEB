@@ -28,9 +28,6 @@ export class IFrameChatService {
 	// 	if (parentAPI) parentAPI.iframeChatService = this;
 	// 	this.Init(iframe, parentAPI);
 	// }
-	constructor() {
-		debugger;
-	}
 
 	/**
 	 * 初始化Postmate，用于父子页面的交互

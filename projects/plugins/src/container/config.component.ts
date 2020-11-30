@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
 @Component({
-	template: ''
+	template: 'abcedefa'
 })
 export class ConfigComponent {}

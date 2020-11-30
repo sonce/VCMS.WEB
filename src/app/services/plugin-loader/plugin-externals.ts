@@ -14,7 +14,7 @@ export const PLUGIN_EXTERNALS_MAP = {
 	'ng.common': common,
 	'ng.forms': forms,
 	'ng.router': router,
-	ngBootstrap: bootstrap,
+	'ng.bootstrap': bootstrap,
 	rxjs,
 	'rxjs.operators': rxop,
 	tslib,

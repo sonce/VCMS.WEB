@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IFrameChatService, ConfirmationDialogService } from 'shared';
+import { IFrameChatService, ConfirmationDialogService, CommonModalService } from 'shared';
+import { ConfigComponent } from './config.component';
 
 @Component({
 	template: ''
@@ -9,7 +10,9 @@ export class ContainerComponent implements IAddon {
 	constructor(
 		private iframeChatService: IFrameChatService,
 		private confirmationDialogService: ConfirmationDialogService,
-		private translateService: TranslateService
+		private translateService: TranslateService,
+		private commonModalService: CommonModalService,
+		private injector: Injector
 	) {}
 	IsContainer = true;
 	IsRootContainer = true;
@@ -26,7 +29,8 @@ export class ContainerComponent implements IAddon {
 	}
 
 	config(): void {
-		alert('config');
+		// const commonModalService = this.injector.get(CommonModalService);
+		this.commonModalService.open(ConfigComponent, { title: 'Config Container', dragable: false });
 	}
 
 	del(elementInfo: ElementInfo): Promise<boolean> {
