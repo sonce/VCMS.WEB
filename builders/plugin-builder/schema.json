@@ -209,11 +209,6 @@
       "type": "string",
       "description": "How to handle missing translations for i18n."
     },
-    "extractCss": {
-      "type": "boolean",
-      "description": "Extract css from global styles into css files instead of js ones.",
-      "default": false
-    },
     "watch": {
       "type": "boolean",
       "description": "Run build when files change.",

@@ -19,7 +19,8 @@ import { Component, Input, ViewChild, TemplateRef, Output, EventEmitter } from '
 	`
 })
 export class RadiogroupItemComponent {
-	@ViewChild('childComponentTemplate') childComponentTemplate: TemplateRef<unknown>;
+	@ViewChild('childComponentTemplate')
+	childComponentTemplate: TemplateRef<unknown>;
 	// name: string;
 	@Input() value: unknown;
 

@@ -37,7 +37,8 @@ type RadiogroupSkin = 'bg' | 'bg-radius' | 'bottomline';
 export class RadiogroupComponent implements OnInit, AfterViewInit, OnDestroy {
 	@Output() public toggleCheck: EventEmitter<unknown> = new EventEmitter();
 
-	@ContentChildren(RadiogroupItemComponent) radios: QueryList<RadiogroupItemComponent> = null;
+	@ContentChildren(RadiogroupItemComponent)
+	radios: QueryList<RadiogroupItemComponent> = null;
 
 	@Input() name: string;
 	@Input() value: unknown;

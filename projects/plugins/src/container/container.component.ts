@@ -30,7 +30,10 @@ export class ContainerComponent implements IAddon {
 
 	config(): void {
 		// const commonModalService = this.injector.get(CommonModalService);
-		this.commonModalService.open(ConfigComponent, { title: 'Config Container', dragable: false });
+		this.commonModalService.open(ConfigComponent, {
+			title: 'Config Container',
+			dragable: false
+		});
 	}
 
 	del(elementInfo: ElementInfo): Promise<boolean> {

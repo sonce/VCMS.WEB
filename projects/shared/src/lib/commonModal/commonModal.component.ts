@@ -20,7 +20,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 		</div>`
 })
 export class CommonModalComponent {
-	@ViewChild('content', { static: true, read: ViewContainerRef }) vcRef: ViewContainerRef;
+	@ViewChild('content', { static: true, read: ViewContainerRef })
+	vcRef: ViewContainerRef;
 	@Input() showHtml = true;
 	@Input() content = 'Loading content...';
 	@Input() title = '';
